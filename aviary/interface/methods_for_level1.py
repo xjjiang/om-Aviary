@@ -11,6 +11,13 @@ from aviary.interface.methods_for_level2 import AviaryProblem
 from aviary.utils.functions import get_path
 
 
+def run_aviary(*args, **kwargs):
+    from warnings import warn
+    warn('run_aviary will be replaced by setup_and_run_aviary', DeprecationWarning)
+    exit()
+    setup_and_run_aviary(*args, **kwargs)
+
+
 def setup_and_run_aviary(
         aircraft_filename, phase_info, optimizer=None,
         analysis_scheme=AnalysisScheme.COLLOCATION, objective_type=None,
