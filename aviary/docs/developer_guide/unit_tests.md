@@ -54,9 +54,14 @@ data = prob.check_partials(out_stream=None)
 assert_check_partials(data, atol=1e-06, rtol=1e-06)
 ```
 
-It makes sure that the computed derivatives in the code match with the computed derivatives by using numerical differentiation in the given absolute tolerance and relative tolerance.
+This assert makes sure that the computed derivatives in the code match those computed numerically within the given absolute and relative tolerances.
 
-Apparently, it is important that we prepare good data. In Aviary, there are two ways to compute derivatives: analytically or numerically. If It is computed numerically, you must make sure that the computation in `check_partials` is different. Otherwise, you use exactly the same methods and the comparing result is not meaningful. For example, if the partial derivatives are computed using `cs` method, you need to use `fd` method, or use `cs` method but with a different stepsize (e.g. `step=1.01e-40`):
+In Aviary, there are two ways to compute a component's derivatives: analytically or numerically. When the derivatives are analytic, it is best practice to use `check_partials` to compare them against the complex step (`cs`) or finite difference (`fd`) estimates.
+Complex step is much more acurate, but all code in your component's `compute` method must be complex-safe to use this -- in other words, no calculation that squelches the imaginary part of the calculation (like `abs`.) 
+Note that there are some complex-safe alternatives to commonly-used calculations in the openmdao library. If your code is not complex-safe, or it wraps an external component that doesn't support complex numbers, then finite difference should be used.
+
+If your component computes its derivatives numerically, there is less reason to test it because you are testing one numerical method against another.  If you choose to do this, you will need to use a different method, form, or step. 
+For example, if the partial derivatives are computed using `cs` method, you need to use `fd` method, or use `cs` method but with a different stepsize (e.g. `step=1.01e-40`):
 
 ```
 data = prob.check_partials(out_stream=None, method="cs", step=1.01e-40)
@@ -73,7 +78,7 @@ In general, we really don't have to check partials that are computed with comple
 
 `check_partials` allows you to exclude some components in a group. For example `excludes=["*atmosphere*"]` means that atmosphere component will not be included.
 
-Sometimes, you may need to exclude a particular partial derivative. You need to write your own code to do so. One example is in `subsystems/propulsion/test/test_propeller_performance.py`.
+Sometimes, you may need to exclude a particular partial derivative, perhaps in cases where you did not define derivatives because you know an input won't change. In such a case, you will need to use `assert_near_equal` on inidividual derivatives. One example is in `subsystems/propulsion/test/test_propeller_performance.py`.
 
 ````{margin}
 ```{note}
