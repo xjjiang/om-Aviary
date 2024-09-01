@@ -57,6 +57,9 @@ class XunGASPOverrideTestCase(unittest.TestCase):
 
         prob.run_model()
 
+        x = prob[Aircraft.Fuselage.WETTED_AREA]
+        print(f"WETTED_AREA = {x}")
+
 
 if __name__ == '__main__':
     #unittest.main()
