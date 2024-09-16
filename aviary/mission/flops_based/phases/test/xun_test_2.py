@@ -20,7 +20,7 @@ class XunGASPOverrideTestCase(unittest.TestCase):
         aviary_inputs, initial_guesses = create_vehicle(
             'models/test_aircraft/xun_aircraft_for_bench_GwGm.csv')
         aviary_inputs.set_val(Aircraft.Engine.SCALED_SLS_THRUST, val=28690, units="lbf")
-        aviary_inputs.set_val(Aircraft.Fuselage.WETTED_AREA, val=4000, units="ft**2")
+        aviary_inputs.set_val(Aircraft.Fuselage.WETTED_AREA, val=4001, units="ft**2")
 
         engines = build_engine_deck(aviary_inputs)
         # don't need mass
@@ -42,6 +42,14 @@ class XunGASPOverrideTestCase(unittest.TestCase):
                            subsystems=subsystems),
             promotes_inputs=['aircraft:*', 'mission:*'],
             promotes_outputs=['aircraft:*', 'mission:*']
+        )
+
+        comp = om.ExecComp(['y = 2 * x'],
+                           x = {'units': 'ft*ft',})
+        prob.model.add_subsystem(
+            'comp',
+            comp,
+            promotes_inputs=[('x', Aircraft.Fuselage.WETTED_AREA)],
         )
 
         with warnings.catch_warnings():
