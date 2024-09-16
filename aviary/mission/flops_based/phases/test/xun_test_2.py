@@ -44,6 +44,10 @@ class XunGASPOverrideTestCase(unittest.TestCase):
             promotes_outputs=['aircraft:*', 'mission:*']
         )
 
+        # KM: After we override the wetted area calculation, wetted area doesn't exist 
+        # in the model anymore because it isn't an input to any component in the model.
+        # To get around this, i just add a component downstream of the premission 
+        # group, and give it wetted_area as an input. 
         comp = om.ExecComp(['y = 2 * x'],
                            x = {'units': 'ft*ft',})
         prob.model.add_subsystem(
@@ -51,6 +55,9 @@ class XunGASPOverrideTestCase(unittest.TestCase):
             comp,
             promotes_inputs=[('x', Aircraft.Fuselage.WETTED_AREA)],
         )
+        # KM: scale_factor is an input to a component. It is never an output, 
+        # so you technically can't "override" it. Overriding replaces a computed 
+        # output with aother value.
 
         with warnings.catch_warnings():
 
@@ -67,6 +74,8 @@ class XunGASPOverrideTestCase(unittest.TestCase):
 
         x = prob[Aircraft.Fuselage.WETTED_AREA]
         print(f"WETTED_AREA = {x}")
+        y = prob[Aircraft.Engine.SCALE_FACTOR]
+        print(f"SCALE_FACTOR = {y}")
 
 
 if __name__ == '__main__':
@@ -74,5 +83,6 @@ if __name__ == '__main__':
     thisClass = XunGASPOverrideTestCase()
     thisClass.setUp()
     # this run override:
-    # aircraft:engine:scale_factor
+    #   aircraft:engine:scale_factor
+    #   aircraft:fuselage:wetted_area
     thisClass.test_case1()

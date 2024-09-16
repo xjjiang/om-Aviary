@@ -20,7 +20,7 @@ class XunGASPOverrideTestCase(unittest.TestCase):
         aviary_inputs, initial_guesses = create_vehicle(
             'models/test_aircraft/xun_aircraft_for_bench_GwGm.csv')
         aviary_inputs.set_val(Aircraft.Engine.SCALED_SLS_THRUST, val=28690, units="lbf")
-        aviary_inputs.set_val(Aircraft.Fuselage.WETTED_AREA, val=4000, units="ft**2")
+        aviary_inputs.set_val(Aircraft.Fuselage.WETTED_AREA, val=4001, units="ft**2")
 
         engines = build_engine_deck(aviary_inputs)
 
@@ -59,6 +59,8 @@ class XunGASPOverrideTestCase(unittest.TestCase):
 
         x = prob[Aircraft.Fuselage.WETTED_AREA]
         print(f"WETTED_AREA = {x}")
+        y = prob[Aircraft.Engine.SCALE_FACTOR]
+        print(f"SCALE_FACTOR = {y}")
 
 
 if __name__ == '__main__':
