@@ -20,7 +20,7 @@ class CanardMass(om.ExplicitComponent):
     def setup(self):
         add_aviary_input(self, Mission.Design.GROSS_MASS, val=0.0)
         add_aviary_input(self, Aircraft.Canard.AREA, val=0.0)
-        add_aviary_input(self, Aircraft.Canard.TAPER_RATIO, val=00)
+        add_aviary_input(self, Aircraft.Canard.TAPER_RATIO, val=0.0)
         add_aviary_input(self, Aircraft.Canard.MASS_SCALER, val=1.0)
 
         add_aviary_output(self, Aircraft.Canard.MASS, val=0.0)
