@@ -30,13 +30,14 @@ from aviary.subsystems.geometry.flops_based.utils import (
     Names,
 )
 from aviary.subsystems.geometry.flops_based.wetted_area_total import (
-    _Prelim,
-    _Wing,
     _BWBWing,
-    _Tail,
     _BWBFuselage,
     _Fuselage,
+    _Prelim,
+    _Tail,
+    _Wing,
     TotalWettedArea,
+    WettedAreaGroup,
 )
 from aviary.subsystems.geometry.flops_based.wing import WingPrelim
 from aviary.subsystems.geometry.flops_based.wing_detailed_bwb import (
@@ -129,43 +130,15 @@ class PrepGeom(om.Group):
             )
 
         self.add_subsystem(
-            'prelim',
-            _Prelim(),
+            'wetted_area',
+            WettedAreaGroup(),
             promotes_inputs=['*'],
+            promotes_outputs=['*'],
         )
-
-        if design_type is AircraftTypes.BLENDED_WING_BODY:
-            self.add_subsystem('wing', _BWBWing(), promotes_inputs=['*'], promotes_outputs=['*'])
-        else:
-            self.add_subsystem(
-                'wing', _Wing(), promotes_inputs=['aircraft*'], promotes_outputs=['*']
-            )
-
-        if design_type is AircraftTypes.TRANSPORT:
-            self.connect(f'prelim.{Names.CROOT}', f'wing.{Names.CROOT}')
-            self.connect(f'prelim.{Names.CROOTB}', f'wing.{Names.CROOTB}')
-            self.connect(f'prelim.{Names.XDX}', f'wing.{Names.XDX}')
-            self.connect(f'prelim.{Names.XMULT}', f'wing.{Names.XMULT}')
-
-        self.add_subsystem('tail', _Tail(), promotes_inputs=['aircraft*'], promotes_outputs=['*'])
-
-        self.connect(f'prelim.{Names.XMULTH}', f'tail.{Names.XMULTH}')
-        self.connect(f'prelim.{Names.XMULTV}', f'tail.{Names.XMULTV}')
 
         self.add_subsystem(
             'fus_ratios', _FuselageRatios(), promotes_inputs=['aircraft*'], promotes_outputs=['*']
         )
-        if design_type is AircraftTypes.BLENDED_WING_BODY:
-            self.add_subsystem('fuselage', _BWBFuselage(), promotes_outputs=['*'])
-        elif design_type is AircraftTypes.TRANSPORT:
-            self.add_subsystem(
-                'fuselage', _Fuselage(), promotes_inputs=['aircraft*'], promotes_outputs=['*']
-            )
-
-        if design_type is AircraftTypes.TRANSPORT:
-            self.connect(f'prelim.{Names.CROOTB}', f'fuselage.{Names.CROOTB}')
-            self.connect(f'prelim.{Names.CROTVT}', f'fuselage.{Names.CROTVT}')
-            self.connect(f'prelim.{Names.CRTHTB}', f'fuselage.{Names.CRTHTB}')
 
         self.add_subsystem(
             'nacelles', Nacelles(), promotes_inputs=['aircraft*'], promotes_outputs=['*']
@@ -205,10 +178,6 @@ class PrepGeom(om.Group):
         )
 
         # self.connect(f'prelim.{Names.CROOT}', f'other_characteristic_lengths.{Names.CROOT}')
-
-        self.add_subsystem(
-            'total_wetted_area', TotalWettedArea(), promotes_inputs=['*'], promotes_outputs=['*']
-        )
 
 
 class _FuselageRatios(om.ExplicitComponent):

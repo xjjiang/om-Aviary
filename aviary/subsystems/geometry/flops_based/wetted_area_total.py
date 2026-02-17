@@ -14,6 +14,57 @@ from aviary.variable_info.functions import add_aviary_input, add_aviary_option, 
 from aviary.variable_info.variables import Aircraft, Settings
 
 
+class WettedAreaGroup(om.Group):
+    """Compute wetted area of various components of aircraft"""
+
+    def initialize(self):
+        add_aviary_option(self, Aircraft.Design.TYPE)
+        add_aviary_option(self, Aircraft.BWB.DETAILED_WING_PROVIDED)
+
+    def setup(self):
+        design_type = self.options[Aircraft.Design.TYPE]
+
+        self.add_subsystem(
+            'prelim',
+            _Prelim(),
+            promotes_inputs=['*'],
+        )
+
+        if design_type is AircraftTypes.BLENDED_WING_BODY:
+            self.add_subsystem('wing', _BWBWing(), promotes_inputs=['*'], promotes_outputs=['*'])
+        else:
+            self.add_subsystem(
+                'wing', _Wing(), promotes_inputs=['aircraft*'], promotes_outputs=['*']
+            )
+
+        if design_type is AircraftTypes.TRANSPORT:
+            self.connect(f'prelim.{Names.CROOT}', f'wing.{Names.CROOT}')
+            self.connect(f'prelim.{Names.CROOTB}', f'wing.{Names.CROOTB}')
+            self.connect(f'prelim.{Names.XDX}', f'wing.{Names.XDX}')
+            self.connect(f'prelim.{Names.XMULT}', f'wing.{Names.XMULT}')
+
+        self.add_subsystem('tail', _Tail(), promotes_inputs=['aircraft*'], promotes_outputs=['*'])
+
+        self.connect(f'prelim.{Names.XMULTH}', f'tail.{Names.XMULTH}')
+        self.connect(f'prelim.{Names.XMULTV}', f'tail.{Names.XMULTV}')
+
+        if design_type is AircraftTypes.BLENDED_WING_BODY:
+            self.add_subsystem('fuselage', _BWBFuselage(), promotes_outputs=['*'])
+        elif design_type is AircraftTypes.TRANSPORT:
+            self.add_subsystem(
+                'fuselage', _Fuselage(), promotes_inputs=['aircraft*'], promotes_outputs=['*']
+            )
+
+        if design_type is AircraftTypes.TRANSPORT:
+            self.connect(f'prelim.{Names.CROOTB}', f'fuselage.{Names.CROOTB}')
+            self.connect(f'prelim.{Names.CROTVT}', f'fuselage.{Names.CROTVT}')
+            self.connect(f'prelim.{Names.CRTHTB}', f'fuselage.{Names.CRTHTB}')
+
+        self.add_subsystem(
+            'total_wetted_area', TotalWettedArea(), promotes_inputs=['*'], promotes_outputs=['*']
+        )
+
+
 class _Prelim(om.ExplicitComponent):
     """Calculate internal derived values of aircraft geometry for FLOPS-based aerodynamics analysis."""
 
