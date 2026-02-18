@@ -10,7 +10,6 @@ import numpy as np
 import openmdao.api as om
 from numpy import pi
 
-from aviary.subsystems.geometry.flops_based.canard import Canard
 from aviary.subsystems.geometry.flops_based.characteristic_lengths import (
     BWBWingCharacteristicLength,
     NacelleCharacteristicLength,
@@ -25,20 +24,7 @@ from aviary.subsystems.geometry.flops_based.fuselage import (
     FuselagePrelim,
     SimpleCabinLayout,
 )
-from aviary.subsystems.geometry.flops_based.nacelle import Nacelles
-from aviary.subsystems.geometry.flops_based.utils import (
-    Names,
-)
-from aviary.subsystems.geometry.flops_based.wetted_area_total import (
-    _BWBWing,
-    _BWBFuselage,
-    _Fuselage,
-    _Prelim,
-    _Tail,
-    _Wing,
-    TotalWettedArea,
-    WettedAreaGroup,
-)
+from aviary.subsystems.geometry.flops_based.wetted_area_total import WettedAreaGroup
 from aviary.subsystems.geometry.flops_based.wing import WingPrelim
 from aviary.subsystems.geometry.flops_based.wing_detailed_bwb import (
     BWBUpdateDetailedWingDist,
