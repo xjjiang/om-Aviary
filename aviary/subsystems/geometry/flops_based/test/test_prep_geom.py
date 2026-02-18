@@ -17,11 +17,10 @@ from aviary.subsystems.geometry.flops_based.characteristic_lengths import (
 )
 from aviary.subsystems.geometry.flops_based.fuselage import FuselagePrelim
 from aviary.subsystems.geometry.flops_based.nacelle import Nacelles
-from aviary.subsystems.geometry.flops_based.prep_geom import (
+from aviary.subsystems.geometry.flops_based.prep_geom import _FuselageRatios, PrepGeom
+from aviary.subsystems.geometry.flops_based.wetted_area_total import (
     _BWBWing,
-    PrepGeom,
     _Fuselage,
-    _FuselageRatios,
     _Prelim,
     _Tail,
     _Wing,
