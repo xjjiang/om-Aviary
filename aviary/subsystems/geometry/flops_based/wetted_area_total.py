@@ -2,6 +2,8 @@ import numpy as np
 import openmdao.api as om
 from numpy import pi
 
+from aviary.subsystems.geometry.flops_based.canard import Canard
+from aviary.subsystems.geometry.flops_based.nacelle import Nacelles
 from aviary.subsystems.geometry.flops_based.utils import (
     Names,
     calc_fuselage_adjustment,
@@ -15,7 +17,7 @@ from aviary.variable_info.variables import Aircraft, Settings
 
 
 class WettedAreaGroup(om.Group):
-    """Compute wetted area of various components of aircraft"""
+    """Group for computing wetted areas of aircraft geometry components."""
 
     def initialize(self):
         add_aviary_option(self, Aircraft.Design.TYPE)
@@ -59,6 +61,14 @@ class WettedAreaGroup(om.Group):
             self.connect(f'prelim.{Names.CROOTB}', f'fuselage.{Names.CROOTB}')
             self.connect(f'prelim.{Names.CROTVT}', f'fuselage.{Names.CROTVT}')
             self.connect(f'prelim.{Names.CRTHTB}', f'fuselage.{Names.CRTHTB}')
+
+        self.add_subsystem(
+            'nacelles', Nacelles(), promotes_inputs=['aircraft*'], promotes_outputs=['*']
+        )
+
+        self.add_subsystem(
+            'canard', Canard(), promotes_inputs=['aircraft*'], promotes_outputs=['*']
+        )
 
         self.add_subsystem(
             'total_wetted_area', TotalWettedArea(), promotes_inputs=['*'], promotes_outputs=['*']

@@ -140,14 +140,6 @@ class PrepGeom(om.Group):
             'fus_ratios', _FuselageRatios(), promotes_inputs=['aircraft*'], promotes_outputs=['*']
         )
 
-        self.add_subsystem(
-            'nacelles', Nacelles(), promotes_inputs=['aircraft*'], promotes_outputs=['*']
-        )
-
-        self.add_subsystem(
-            'canard', Canard(), promotes_inputs=['aircraft*'], promotes_outputs=['*']
-        )
-
         if design_type is AircraftTypes.BLENDED_WING_BODY:
             self.add_subsystem(
                 'wing_characteristic_lengths',

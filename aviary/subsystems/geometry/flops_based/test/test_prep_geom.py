@@ -1300,7 +1300,4 @@ class BWBDetailedPrepGeomTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # unittest.main()
-    test = BWBSimplePrepGeomTest()
-    test.setUp()
-    test.test_case1()
+    unittest.main()
