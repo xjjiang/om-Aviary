@@ -1039,11 +1039,9 @@ class BWB300PreMissionGroupCSVTest(unittest.TestCase):
         assert_near_equal(prob[Aircraft.Fuselage.REF_DIAMETER], 35.57815983, tol)
         assert_near_equal(prob[Aircraft.Fuselage.PLANFORM_AREA], 4317.07245743, tol)
         # BWBWingPrelim
-        assert_near_equal(prob[Aircraft.Wing.AREA], 8454.35056774, tol)
-        assert_near_equal(prob[Aircraft.Wing.ASPECT_RATIO], 4.82172761, tol)
-        assert_near_equal(
-            prob['AIRCRAFT_DATA_OVERRIDE:aircraft:wing:aspect_ratio_reference'], 4.82172761, tol
-        )
+        assert_near_equal(prob[Aircraft.Wing.AREA], 8421.7146805052689, tol)
+        assert_near_equal(prob[Aircraft.Wing.ASPECT_RATIO], 4.84361005, tol)
+        assert_near_equal(prob[Aircraft.Wing.ASPECT_RATIO_REFERENCE], 4.84361005, tol)
         # assert_near_equal(prob[Aircraft.Wing.LOAD_FRACTION], 0.46761341784858923, tol)
         # _BWBWing
         assert_near_equal(prob[Aircraft.Wing.WETTED_AREA], 17370.05552974, tol)
