@@ -218,7 +218,4 @@ class BWB300ProblemPhaseTestCase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # unittest.main()
-    test = BWB300ProblemPhaseTestCase()
-    test.setUp()
-    test.test_bench_bwb300_FwFm_SNOPT()
+    unittest.main()
