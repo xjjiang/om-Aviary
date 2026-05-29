@@ -25,7 +25,7 @@ from aviary.validation_cases.validation_tests import (
 from aviary.variable_info.functions import setup_model_options
 from aviary.variable_info.variables import Aircraft, Mission, Settings
 
-bwb_cases = ['BWBsimpleFLOPS', 'BWBdetailedFLOPS']
+bwb_cases = ['BWBsimpleFLOPS', 'BWBdetailedFLOPS', 'BWB300FLOPS']
 
 
 @use_tempdirs
@@ -216,11 +216,8 @@ class BWBPreMissionGroupTest(unittest.TestCase):
     def setUp(self):
         self.prob = om.Problem()
 
-    # @parameterized.expand(get_flops_case_names(only=bwb_cases), name_func=print_case)
-    def test_case_all_subsystems(
-        self,
-    ):
-        case_name = 'BWBdetailedFLOPS'
+    @parameterized.expand(get_flops_case_names(only=bwb_cases), name_func=print_case)
+    def test_case_all_subsystems(self, case_name):
         flops_inputs = get_flops_inputs(case_name)
         flops_outputs = get_flops_outputs(case_name)
 
@@ -1109,7 +1106,7 @@ class BWB300PreMissionGroupCSVTest(unittest.TestCase):
         assert_near_equal(prob[Aircraft.CrewPayload.CARGO_MASS], 0.0, tol)
         assert_near_equal(prob[Aircraft.CrewPayload.TOTAL_PAYLOAD_MASS], 62700.0, tol)
         # TransportCargoContainersMass
-        assert_near_equal(prob[Aircraft.CrewPayload.CARGO_CONTAINER_MASS], 23500.0, tol)
+        assert_near_equal(prob[Aircraft.CrewPayload.CARGO_CONTAINER_MASS], 2450.00190713, tol)
         # TransportEngineCtrlsMass
         assert_near_equal(prob[Aircraft.Propulsion.TOTAL_ENGINE_CONTROLS_MASS], 153.81807436, tol)
         # TransportAvionicsMass
