@@ -1372,7 +1372,7 @@ add_meta_data(
 add_meta_data(
     Aircraft.Design.EXTERNAL_SUBSYSTEMS_MASS,
     historical_name={
-        'GASP': None,
+        'GASP': 'CW(16)',
         'FLOPS': None,
     },
     meta_data=_MetaData,
@@ -3090,15 +3090,6 @@ add_meta_data(
 #                                                                  __/ |
 #                                                                 |___/
 # ============================================================================
-
-add_meta_data(
-    Aircraft.Furnishings.ADDITIONAL_MASS,
-    meta_data=_MetaData,
-    historical_name={'GASP': 'CW(16)', 'FLOPS': None},
-    units='lbm',
-    desc='Other operating items (e.g. external tank, Pylon). Mass scaler does not apply.',
-    default_value=0.0,
-)
 
 add_meta_data(
     # Note user override
