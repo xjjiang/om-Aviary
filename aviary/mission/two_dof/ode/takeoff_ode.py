@@ -70,7 +70,8 @@ class TakeOffODE(TwoDOFODE):
             Dynamic.Mission.VELOCITY,
             Dynamic.Mission.FLIGHT_PATH_ANGLE,
         ] + ['aircraft:*']
-        if not self.options['ground_roll']:
+
+        if not ground_roll:
             EOM_inputs.append(Dynamic.Vehicle.ANGLE_OF_ATTACK)
         else:
             EOM_inputs.append(Mission.Takeoff.ROLLING_FRICTION_COEFFICIENT)
