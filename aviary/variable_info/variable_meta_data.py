@@ -15,6 +15,7 @@ from aviary.variable_info.enums import (
     ProblemType,
     Verbosity,
     AtmosphereModel,
+    Gravity,
 )
 from aviary.variable_info.variables import Aircraft, Dynamic, Mission, Settings
 
@@ -7729,7 +7730,7 @@ add_meta_data(
     'mars_equator_cold, mars_polar_hot, mars_polar_cold, venus_reference',
     option=True,
     types=AtmosphereModel,
-    default_value=AtmosphereModel.STANDARD,
+    # default_value=AtmosphereModel.STANDARD, # this default is executed and used before setup so it is in aviary_group.py
 )
 
 add_meta_data(
@@ -7740,6 +7741,17 @@ add_meta_data(
     option=True,
     types=EquationsOfMotion,
     default_value=None,
+)
+
+add_meta_data(
+    # Gravity model is set automatically based on Settings.ATMOSPHERE_MODEL
+    Settings.GRAVITY,
+    meta_data=_MetaData,
+    historical_name={'GASP': None, 'FLOPS': None},
+    desc='Gravitational acceleration of the planet.',
+    types=Gravity,
+    option=True,
+    default_value=Gravity.EARTH,
 )
 
 add_meta_data(

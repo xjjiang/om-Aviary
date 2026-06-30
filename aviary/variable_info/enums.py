@@ -1,5 +1,5 @@
 from enum import Enum, IntEnum, auto, unique
-
+import aviary.constants as constants
 
 class AircraftTypes(Enum):
     """Aircraft types."""
@@ -95,6 +95,12 @@ class EngineDeckType(Enum):
     def __str__(self):
         return self.value
 
+class Gravity(Enum):
+    """Set the gravitational constant based on planet."""
+    
+    EARTH = constants.GRAV_EARTH
+    MARS = constants.GRAV_MARS
+    VENUS = constants.GRAV_VENUS
 
 @unique
 class GASPEngineType(Enum):
