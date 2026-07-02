@@ -20,7 +20,7 @@ class LandingCalc(om.ExplicitComponent):
             desc='atmospheric density',
         )
 
-        add_aviary_input(self, Aircraft.Wing.AREA, val=700)
+        add_aviary_input(self, Aircraft.Wing.AREA, val=1370)
 
         add_aviary_input(self, Mission.Landing.LIFT_COEFFICIENT_MAX, val=3)
 
@@ -107,8 +107,8 @@ class LandingCalc(om.ExplicitComponent):
 
 class LandingGroup(om.Group):
     """
-    Calculate the distance covered over the ground and approach velocity
-    during landing with atmosphere is included.
+    Calculate the estimated Landing field length and velocity given the aircraft properties and atmospheric conditions.
+    Note this is not the actual distance covered over the ground.
     """
 
     def setup(self):

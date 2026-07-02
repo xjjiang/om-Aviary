@@ -13,10 +13,7 @@ class LandingPhaseTest(unittest.TestCase):
     """Test landing phase builder."""
 
     def test_case1(self):
-        landing_options = Landing(
-            ref_wing_area=1370.0,  # ft**2
-            Cl_max_ldg=3,  # no units
-        )
+        landing_options = Landing()
 
         use_detailed = False
         landing = landing_options.build_phase(use_detailed=use_detailed)
