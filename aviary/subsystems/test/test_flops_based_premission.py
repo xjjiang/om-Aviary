@@ -210,6 +210,75 @@ class PreMissionGroupTest(unittest.TestCase):
             flops_outputs=flops_outputs,
         )
 
+    def test_detailed_layout(self):
+        case_name = 'LargeSingleAisle1FLOPS'
+        flops_inputs = get_flops_inputs(case_name)
+        flops_outputs = get_flops_outputs(case_name)
+        flops_inputs.set_val(
+            Aircraft.Propulsion.TOTAL_NUM_WING_ENGINES,
+            flops_outputs.get_val(Aircraft.Propulsion.TOTAL_NUM_WING_ENGINES),
+        )
+        flops_inputs.set_val(Aircraft.Fuselage.SIMPLE_LAYOUT, True)
+        flops_inputs.set_val(Settings.VERBOSITY, 0)
+
+        engines = [build_engine_deck(flops_inputs)]
+        preprocess_options(flops_inputs, engine_models=engines)
+        default_premission_subsystems = get_default_premission_subsystems('FLOPS', engines)
+
+        prob = self.prob
+
+        prob.model.add_subsystem(
+            'pre_mission',
+            CorePreMission(
+                aviary_options=flops_inputs,
+                subsystems=default_premission_subsystems,
+                subsystem_options={},
+            ),
+            promotes_inputs=['*'],
+            promotes_outputs=['*'],
+        )
+
+        setup_model_options(prob, flops_inputs)
+
+        prob.setup(check=False, force_alloc_complex=True)
+        prob.set_solver_print(2)
+
+        # Initial guess for gross weight.
+        # We set it to an unconverged value to test convergence.
+        prob.set_val(Aircraft.Design.GROSS_MASS, val=1000.0)
+
+        set_aviary_initial_values(prob, flops_inputs)
+
+        # We set these so that their derivatives are defined.
+        # The ref values are not set in our test models.
+        prob[Aircraft.Wing.ASPECT_RATIO_REFERENCE] = prob[Aircraft.Wing.ASPECT_RATIO]
+        prob[Aircraft.Wing.THICKNESS_TO_CHORD_REFERENCE] = prob[Aircraft.Wing.THICKNESS_TO_CHORD]
+
+        prob[Aircraft.Propulsion.TOTAL_ENGINE_MASS] = flops_outputs.get_val(
+            Aircraft.Propulsion.TOTAL_ENGINE_MASS, units='lbm'
+        )
+        prob[Aircraft.Propulsion.TOTAL_ENGINE_CONTROLS_MASS] = flops_outputs.get_val(
+            Aircraft.Propulsion.TOTAL_ENGINE_CONTROLS_MASS, units='lbm'
+        )
+
+        flops_validation_test(
+            self,
+            prob,
+            case_name,
+            input_keys=[],
+            output_keys=[
+                Aircraft.Design.STRUCTURE_MASS,
+                Aircraft.Propulsion.MASS,
+                Aircraft.Design.SYSTEMS_AND_EQUIPMENT_MASS,
+                Aircraft.Design.EMPTY_MASS,
+                Mission.OPERATING_MASS,
+                Mission.ZERO_FUEL_MASS,
+            ],
+            step=1.01e-40,
+            atol=1e-8,
+            rtol=1e-10,
+        )
+
 
 @use_tempdirs
 class BWBPreMissionGroupTest(unittest.TestCase):
@@ -1233,4 +1302,7 @@ class BWB300PreMissionGroupCSVTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    # unittest.main()
+    test = PreMissionGroupTest()
+    test.setUp()
+    test.test_detailed_layout()
