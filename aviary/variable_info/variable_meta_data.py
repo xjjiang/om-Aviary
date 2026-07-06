@@ -17,7 +17,6 @@ from aviary.variable_info.enums import (
     AtmosphereModel,
 )
 from aviary.variable_info.variables import Aircraft, Dynamic, Mission, Settings
-import aviary.constants as constants
 
 # ---------------------------
 # Meta data associated with variables in the aircraft data hierarchy.
