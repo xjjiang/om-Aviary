@@ -17,7 +17,7 @@ from aviary.variable_info.enums import (
     AtmosphereModel,
 )
 from aviary.variable_info.variables import Aircraft, Dynamic, Mission, Settings
-import aviary.constants as constants 
+import aviary.constants as constants
 
 # ---------------------------
 # Meta data associated with variables in the aircraft data hierarchy.
@@ -6901,7 +6901,7 @@ add_meta_data(
     types=float,
     option=True,
     # The default gravity model is set based on Settings.ATMOSPHERE_MODEL
-    units='m/s**2'
+    units='m/s**2',
 )
 
 add_meta_data(

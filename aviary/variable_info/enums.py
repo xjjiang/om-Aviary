@@ -1,5 +1,6 @@
 from enum import Enum, IntEnum, auto, unique
 
+
 class AircraftTypes(Enum):
     """Aircraft types."""
 
@@ -93,6 +94,7 @@ class EngineDeckType(Enum):
 
     def __str__(self):
         return self.value
+
 
 @unique
 class GASPEngineType(Enum):

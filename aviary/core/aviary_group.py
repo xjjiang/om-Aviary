@@ -41,7 +41,6 @@ from aviary.variable_info.enums import (
     PhaseType,
     ProblemType,
     Verbosity,
-    AtmosphereModel,
 )
 from aviary.variable_info.functions import setup_trajectory_params
 from aviary.variable_info.variables import Aircraft, Mission, Settings

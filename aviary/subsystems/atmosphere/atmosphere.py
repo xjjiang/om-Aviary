@@ -6,6 +6,7 @@ from aviary.variable_info.enums import AtmosphereModel, SpeedType
 from aviary.variable_info.variables import Dynamic, Settings
 from aviary.subsystems.atmosphere.utils.get_atmosphere_data import get_atmosphere_data
 
+
 class Atmosphere(om.Group):
     """
     Group that contains atmospheric conditions for the aircraft's current flight
@@ -57,6 +58,7 @@ class Atmosphere(om.Group):
             promotes=['*'],
         )
 
+
 class AtmosphereComp(om.ExplicitComponent):
     """
     Component model for atmosphere tables.
@@ -102,17 +104,19 @@ class AtmosphereComp(om.ExplicitComponent):
 
         self._dt = self.options['delta_T_Celcius']
 
-        self.source_data, self.planet, planet_radius , _= get_atmosphere_data(self.options[Settings.ATMOSPHERE_MODEL])
+        self.source_data, self.planet, planet_radius, _ = get_atmosphere_data(
+            self.options[Settings.ATMOSPHERE_MODEL]
+        )
 
-        self._R0 = planet_radius[0] # in meters
+        self._R0 = planet_radius[0]  # in meters
 
         self._geometric = self.options['h_def'] == 'geometric'
         # From the U.S. Standard Atmosphere 1976 publication located here
         # https://www.ngdc.noaa.gov/stp/space-weather/online-publications/miscellaneous/us-standard-atmosphere-1976/us-standard-atmosphere_st76-1562_noaa.pdf
 
         Rs = 8314.32  # J/(kmol*K), Ideal Gas constant
-        M_air = 0 # 
-        gamma = 0 # 
+        M_air = 0  #
+        gamma = 0  #
 
         # The constants below are used as a simplification to enable calculation of properties not given by by source data tables
         if self.planet == 'Earth':

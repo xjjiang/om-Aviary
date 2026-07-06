@@ -12,7 +12,15 @@ from aviary.subsystems.atmosphere.data.MarsPolarHot import atm_data as MarsPolar
 from aviary.subsystems.atmosphere.data.MarsPolarCold import atm_data as MarsPolarCold
 from aviary.subsystems.atmosphere.data.VenusReference2021 import atm_data as VenusReference2021
 from aviary.variable_info.enums import AtmosphereModel
-from aviary.constants import RADIUS_EARTH, RADIUS_MARS, RADIUS_VENUS, GRAV_EARTH, GRAV_MARS, GRAV_VENUS
+from aviary.constants import (
+    RADIUS_EARTH,
+    RADIUS_MARS,
+    RADIUS_VENUS,
+    GRAV_EARTH,
+    GRAV_MARS,
+    GRAV_VENUS,
+)
+
 
 def get_atmosphere_data(atmosphere_model):
     """
@@ -30,44 +38,19 @@ def get_atmosphere_data(atmosphere_model):
         (source_data, planet, gravity)
     """
     atmosphere_lookup = {
-        AtmosphereModel.STANDARD:
-            (USatm1976, 'Earth', RADIUS_EARTH, GRAV_EARTH),
-
-        AtmosphereModel.TROPICAL:
-            (tropical_210A, 'Earth', RADIUS_EARTH, GRAV_EARTH),
-
-        AtmosphereModel.POLAR:
-            (polar_210A, 'Earth', RADIUS_EARTH, GRAV_EARTH),
-
-        AtmosphereModel.HOT:
-            (hot_210A, 'Earth', RADIUS_EARTH, GRAV_EARTH),
-
-        AtmosphereModel.COLD:
-            (cold_210A, 'Earth', RADIUS_EARTH, GRAV_EARTH),
-
-        AtmosphereModel.MARS_REFERENCE:
-            (MarsReference2024, 'Mars', RADIUS_MARS, GRAV_MARS),
-
-        AtmosphereModel.MARS_HELLAS_HOT:
-            (MarsHellasHot, 'Mars', RADIUS_MARS, GRAV_MARS),
-
-        AtmosphereModel.MARS_HELLAS_COLD:
-            (MarsHellasCold, 'Mars', RADIUS_MARS, GRAV_MARS),
-
-        AtmosphereModel.MARS_EQUATOR_HOT:
-            (MarsEquatorHot, 'Mars', RADIUS_MARS, GRAV_MARS),
-
-        AtmosphereModel.MARS_EQUATOR_COLD:
-            (MarsEquatorCold, 'Mars', RADIUS_MARS, GRAV_MARS),
-
-        AtmosphereModel.MARS_POLAR_HOT:
-            (MarsPolarHot, 'Mars', RADIUS_MARS, GRAV_MARS),
-
-        AtmosphereModel.MARS_POLAR_COLD:
-            (MarsPolarCold, 'Mars', RADIUS_MARS, GRAV_MARS),
-
-        AtmosphereModel.VENUS_REFERENCE:
-            (VenusReference2021, 'Venus', RADIUS_VENUS, GRAV_VENUS),
+        AtmosphereModel.STANDARD: (USatm1976, 'Earth', RADIUS_EARTH, GRAV_EARTH),
+        AtmosphereModel.TROPICAL: (tropical_210A, 'Earth', RADIUS_EARTH, GRAV_EARTH),
+        AtmosphereModel.POLAR: (polar_210A, 'Earth', RADIUS_EARTH, GRAV_EARTH),
+        AtmosphereModel.HOT: (hot_210A, 'Earth', RADIUS_EARTH, GRAV_EARTH),
+        AtmosphereModel.COLD: (cold_210A, 'Earth', RADIUS_EARTH, GRAV_EARTH),
+        AtmosphereModel.MARS_REFERENCE: (MarsReference2024, 'Mars', RADIUS_MARS, GRAV_MARS),
+        AtmosphereModel.MARS_HELLAS_HOT: (MarsHellasHot, 'Mars', RADIUS_MARS, GRAV_MARS),
+        AtmosphereModel.MARS_HELLAS_COLD: (MarsHellasCold, 'Mars', RADIUS_MARS, GRAV_MARS),
+        AtmosphereModel.MARS_EQUATOR_HOT: (MarsEquatorHot, 'Mars', RADIUS_MARS, GRAV_MARS),
+        AtmosphereModel.MARS_EQUATOR_COLD: (MarsEquatorCold, 'Mars', RADIUS_MARS, GRAV_MARS),
+        AtmosphereModel.MARS_POLAR_HOT: (MarsPolarHot, 'Mars', RADIUS_MARS, GRAV_MARS),
+        AtmosphereModel.MARS_POLAR_COLD: (MarsPolarCold, 'Mars', RADIUS_MARS, GRAV_MARS),
+        AtmosphereModel.VENUS_REFERENCE: (VenusReference2021, 'Venus', RADIUS_VENUS, GRAV_VENUS),
     }
 
     try:
