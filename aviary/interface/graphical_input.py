@@ -30,8 +30,8 @@ def _format_phase_info_value(value, indent_level):
             return '{}'
         lines = ['{\n']
         for k, v in value.items():
-            lines.append(f"{inner}{k!r}: {_format_phase_info_value(v, indent_level + 1)},\n")
-        lines.append(f"{indent}}}")
+            lines.append(f'{inner}{k!r}: {_format_phase_info_value(v, indent_level + 1)},\n')
+        lines.append(f'{indent}}}')
         return ''.join(lines)
 
     if isinstance(value, (list, tuple)):
@@ -42,7 +42,7 @@ def _format_phase_info_value(value, indent_level):
         one_line = open_b + ', '.join(items) + close_b
         if len(one_line) <= 60:
             return one_line
-        return open_b + '\n' + ''.join(f"{inner}{item},\n" for item in items) + f"{indent}{close_b}"
+        return open_b + '\n' + ''.join(f'{inner}{item},\n' for item in items) + f'{indent}{close_b}'
 
     return repr(value)
 
