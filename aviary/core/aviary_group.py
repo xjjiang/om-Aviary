@@ -454,13 +454,6 @@ class AviaryGroup(om.Group):
         # Other specific self.*** are defined in here as well that are specific to each builder
         self.configurator.initial_guesses(self)
 
-        # Set the gravity model based on the atmosphere model to enable calculation of weight from mass
-        from aviary.subsystems.atmosphere.utils.get_atmosphere_data import get_atmosphere_data
-        if Settings.ATMOSPHERE_MODEL not in aviary_inputs:
-            aviary_inputs.set_val(Settings.ATMOSPHERE_MODEL, AtmosphereModel.STANDARD) # set the default atmosphere model
-        _,_,_,planet_gravity= get_atmosphere_data(aviary_inputs.get_val(Settings.ATMOSPHERE_MODEL))
-        aviary_inputs.set_val(Settings.GRAVITY, val=planet_gravity) # contains both value and units as a tuple.
-
         # TODO this seems like the wrong place to define the core subsystems. Maybe move to
         # load_inputs?
         ## Set Up Core Subsystems ##
