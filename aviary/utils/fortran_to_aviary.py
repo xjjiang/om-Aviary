@@ -1270,7 +1270,7 @@ def update_flops_options(vehicle_data, cmts, verbosity=Verbosity.BRIEF):
     if Aircraft.CrewPayload.Design.NUM_BUSINESS_CLASS in input_values and design_type[0] != 3:
         if input_values.get_val(Aircraft.CrewPayload.Design.NUM_BUSINESS_CLASS)[0] > 0:
             cmts.append(
-                '# business class seats are included. Fuselage layout will be different from FLOPS.'
+                '# business class seats are included. Fuselage layout may be different from FLOPS.'
             )
 
     # if mission-wide fuel flow factor provided, combine into sub and supersonic fuel flow factors
