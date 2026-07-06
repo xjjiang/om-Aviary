@@ -67,8 +67,6 @@ class TaxiSegment(TwoDOFODE):
 
         self.add_subsystem('taxifuel', TaxiFuelComponent(), promotes=['*'])
 
-        self.set_input_defaults(Mission.Taxi.MACH, 0)
-
         # Throttle Idle
         num_engine_types = len(options.get_val(Aircraft.Engine.NUM_ENGINES))
         self.set_input_defaults(
