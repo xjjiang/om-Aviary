@@ -37,10 +37,7 @@ class LandingCalcTest(unittest.TestCase):
 
         tol = 1e-5
 
-        assert_near_equal(
-            self.prob[Mission.Landing.GROUND_DISTANCE], 6403.64963504, tol
-        )  # not actual value
-        # not actual value
+        assert_near_equal(self.prob[Mission.Landing.GROUND_DISTANCE], 6403.64963504, tol)
         assert_near_equal(
             self.prob.get_val(Mission.Landing.INITIAL_VELOCITY, units='kn'), 136.22914933, tol
         )
@@ -93,18 +90,12 @@ class LandingGroupTest(unittest.TestCase):
             promotes=['*'],
         )
 
-        self.prob.model.set_input_defaults(
-            Mission.FINAL_MASS, val=152800.0, units='lbm'
-        )  # check (this is the design landing mass)
-        self.prob.model.set_input_defaults(
-            Mission.Landing.INITIAL_ALTITUDE, val=35, units='ft'
-        )  # confirm initial altitude should be 35 ft.
-        self.prob.model.set_input_defaults(
-            Aircraft.Wing.AREA, val=1370.0, units='ft**2'
-        )  # check (this is the reference wing area)
+        self.prob.model.set_input_defaults(Mission.FINAL_MASS, val=152800.0, units='lbm')
+        self.prob.model.set_input_defaults(Mission.Landing.INITIAL_ALTITUDE, val=35, units='ft')
+        self.prob.model.set_input_defaults(Aircraft.Wing.AREA, val=1370.0, units='ft**2')
         self.prob.model.set_input_defaults(
             Mission.Landing.LIFT_COEFFICIENT_MAX, val=3, units='unitless'
-        )  # check
+        )
 
         self.prob.setup(check=False, force_alloc_complex=True)
 
@@ -113,10 +104,7 @@ class LandingGroupTest(unittest.TestCase):
 
         tol = 1e-5
 
-        assert_near_equal(
-            self.prob[Mission.Landing.GROUND_DISTANCE], 6407.65299289, tol
-        )  # not actual value
-        # not actual value
+        assert_near_equal(self.prob[Mission.Landing.GROUND_DISTANCE], 6407.65299289, tol)
         assert_near_equal(
             self.prob.get_val(Mission.Landing.INITIAL_VELOCITY, units='kn'), 136.29923391, tol
         )
