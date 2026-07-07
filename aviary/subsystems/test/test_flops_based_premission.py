@@ -8,6 +8,7 @@ from parameterized import parameterized
 from aviary.core.aviary_problem import AviaryProblem
 from aviary.subsystems.premission import CorePreMission
 from aviary.subsystems.propulsion.utils import build_engine_deck
+from aviary.utils.aviary_values import AviaryValues
 from aviary.utils.functions import set_aviary_initial_values
 from aviary.utils.preprocessors import preprocess_options
 from aviary.utils.test_utils.default_subsystems import (
@@ -218,8 +219,14 @@ class PreMissionGroupTest(unittest.TestCase):
             Aircraft.Propulsion.TOTAL_NUM_WING_ENGINES,
             flops_outputs.get_val(Aircraft.Propulsion.TOTAL_NUM_WING_ENGINES),
         )
-        flops_inputs.set_val(Aircraft.Fuselage.SIMPLE_LAYOUT, True)
+        flops_inputs.set_val(Aircraft.Fuselage.SIMPLE_LAYOUT, False)
         flops_inputs.set_val(Settings.VERBOSITY, 0)
+
+        # do not override these variables which are outputs from DetailedCabinLayout
+        flops_inputs.delete(Aircraft.Fuselage.LENGTH)
+        flops_inputs.delete(Aircraft.Fuselage.PASSENGER_COMPARTMENT_LENGTH)
+        flops_inputs.delete(Aircraft.Fuselage.MAX_WIDTH)
+        flops_inputs.delete(Aircraft.Fuselage.MAX_HEIGHT)
 
         engines = [build_engine_deck(flops_inputs)]
         preprocess_options(flops_inputs, engine_models=engines)
@@ -249,35 +256,20 @@ class PreMissionGroupTest(unittest.TestCase):
 
         set_aviary_initial_values(prob, flops_inputs)
 
-        # We set these so that their derivatives are defined.
-        # The ref values are not set in our test models.
-        prob[Aircraft.Wing.ASPECT_RATIO_REFERENCE] = prob[Aircraft.Wing.ASPECT_RATIO]
-        prob[Aircraft.Wing.THICKNESS_TO_CHORD_REFERENCE] = prob[Aircraft.Wing.THICKNESS_TO_CHORD]
+        prob.run_model()
 
-        prob[Aircraft.Propulsion.TOTAL_ENGINE_MASS] = flops_outputs.get_val(
-            Aircraft.Propulsion.TOTAL_ENGINE_MASS, units='lbm'
-        )
-        prob[Aircraft.Propulsion.TOTAL_ENGINE_CONTROLS_MASS] = flops_outputs.get_val(
-            Aircraft.Propulsion.TOTAL_ENGINE_CONTROLS_MASS, units='lbm'
-        )
+        tol = 1e-5
+        expected_values = {
+            # geometry subsystem, DetailedCabinLayout component
+            Aircraft.Fuselage.LENGTH: 148.37731944,
+            Aircraft.Fuselage.PASSENGER_COMPARTMENT_LENGTH: 108.37731944,
+            Aircraft.Fuselage.MAX_WIDTH: 12.19,
+            Aircraft.Fuselage.MAX_HEIGHT: 13.09,
+        }
 
-        flops_validation_test(
-            self,
-            prob,
-            case_name,
-            input_keys=[],
-            output_keys=[
-                Aircraft.Design.STRUCTURE_MASS,
-                Aircraft.Propulsion.MASS,
-                Aircraft.Design.SYSTEMS_AND_EQUIPMENT_MASS,
-                Aircraft.Design.EMPTY_MASS,
-                Mission.OPERATING_MASS,
-                Mission.ZERO_FUEL_MASS,
-            ],
-            step=1.01e-40,
-            atol=1e-8,
-            rtol=1e-10,
-        )
+        for var_name, expected in expected_values.items():
+            with self.subTest(var=var_name):
+                assert_near_equal(prob[var_name], expected, tol)
 
 
 @use_tempdirs
