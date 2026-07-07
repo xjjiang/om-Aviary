@@ -5,7 +5,7 @@ from openmdao.utils.assert_utils import assert_check_partials, assert_near_equal
 from openmdao.utils.testing_utils import use_tempdirs
 
 from aviary.mission.energy_state.phases.build_landing import Landing
-from aviary.variable_info.variables import Mission
+from aviary.variable_info.variables import Aircraft, Mission
 
 
 @use_tempdirs
@@ -20,6 +20,10 @@ class LandingPhaseTest(unittest.TestCase):
 
         prob = om.Problem()
         prob.model = landing
+        prob.model.set_input_defaults(Mission.FINAL_MASS, val=152800.0, units='lbm')
+        prob.model.set_input_defaults(Mission.Landing.INITIAL_ALTITUDE, val=35, units='ft')
+        prob.model.set_input_defaults(Aircraft.Wing.AREA, val=1370.0, units='ft**2')
+        prob.model.set_input_defaults(Mission.Landing.LIFT_COEFFICIENT_MAX, val=3, units='unitless')
         prob.setup(force_alloc_complex=True)
         prob.run_model()
         partial_data = prob.check_partials(
