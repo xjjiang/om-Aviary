@@ -21,20 +21,14 @@ class LandingCalcTest(unittest.TestCase):
             promotes=['*'],
         )
 
+        self.prob.model.set_input_defaults(Mission.FINAL_MASS, val=152800.0, units='lbm')
         self.prob.model.set_input_defaults(
-            Mission.FINAL_MASS, val=152800.0, units='lbm'
-        )  # check (this is the design landing mass)
-        self.prob.model.set_input_defaults(
-            Dynamic.Atmosphere.DENSITY,
-            val=constants.RHO_SEA_LEVEL_METRIC,
-            units='kg/m**3',
-        )  # not exact value but should be close enough
-        self.prob.model.set_input_defaults(
-            Aircraft.Wing.AREA, val=1370.0, units='ft**2'
-        )  # check (this is the reference wing area)
+            Dynamic.Atmosphere.DENSITY, val=constants.RHO_SEA_LEVEL_METRIC, units='kg/m**3'
+        )
+        self.prob.model.set_input_defaults(Aircraft.Wing.AREA, val=1370.0, units='ft**2')
         self.prob.model.set_input_defaults(
             Mission.Landing.LIFT_COEFFICIENT_MAX, val=3, units='unitless'
-        )  # check
+        )
 
         self.prob.setup(check=False, force_alloc_complex=True)
 
@@ -73,6 +67,12 @@ class LandingCalcTest2(unittest.TestCase):
             LandingCalc(),
             promotes=['*'],
         )
+        prob.model.set_input_defaults(Mission.FINAL_MASS, val=152800.0, units='lbm')
+        prob.model.set_input_defaults(
+            Dynamic.Atmosphere.DENSITY, val=constants.RHO_SEA_LEVEL_METRIC, units='kg/m**3'
+        )
+        prob.model.set_input_defaults(Aircraft.Wing.AREA, val=1370.0, units='ft**2')
+        prob.model.set_input_defaults(Mission.Landing.LIFT_COEFFICIENT_MAX, val=3, units='unitless')
         prob.setup(check=False, force_alloc_complex=True)
 
         partial_data = prob.check_partials(out_stream=None, method='cs')

@@ -10,23 +10,13 @@ class LandingCalc(om.ExplicitComponent):
     """Calculate the distance covered over the ground and approach velocity during landing."""
 
     def setup(self):
-        add_aviary_input(self, Mission.FINAL_MASS, val=150_000)
+        add_aviary_input(self, Mission.FINAL_MASS, units='lbm')
+        add_aviary_input(self, Dynamic.Atmosphere.DENSITY, units='kg/m**3')
+        add_aviary_input(self, Aircraft.Wing.AREA, units='ft**2')
+        add_aviary_input(self, Mission.Landing.LIFT_COEFFICIENT_MAX, units='unitless')
 
-        add_aviary_input(
-            self,
-            Dynamic.Atmosphere.DENSITY,
-            val=1.225,
-            units='kg/m**3',
-            desc='atmospheric density',
-        )
-
-        add_aviary_input(self, Aircraft.Wing.AREA, val=1370)
-
-        add_aviary_input(self, Mission.Landing.LIFT_COEFFICIENT_MAX, val=3)
-
-        add_aviary_output(self, Mission.Landing.GROUND_DISTANCE, val=0)
-
-        add_aviary_output(self, Mission.Landing.INITIAL_VELOCITY, val=0)
+        add_aviary_output(self, Mission.Landing.GROUND_DISTANCE, units='ft')
+        add_aviary_output(self, Mission.Landing.INITIAL_VELOCITY, units='kn')
 
         self.declare_partials(
             Mission.Landing.INITIAL_VELOCITY,
