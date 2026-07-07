@@ -8,7 +8,6 @@ from parameterized import parameterized
 from aviary.core.aviary_problem import AviaryProblem
 from aviary.subsystems.premission import CorePreMission
 from aviary.subsystems.propulsion.utils import build_engine_deck
-from aviary.utils.aviary_values import AviaryValues
 from aviary.utils.functions import set_aviary_initial_values
 from aviary.utils.preprocessors import preprocess_options
 from aviary.utils.test_utils.default_subsystems import (
@@ -212,13 +211,9 @@ class PreMissionGroupTest(unittest.TestCase):
         )
 
     def test_detailed_layout(self):
+        """Test DetailedCabinLayout component."""
         case_name = 'LargeSingleAisle1FLOPS'
         flops_inputs = get_flops_inputs(case_name)
-        flops_outputs = get_flops_outputs(case_name)
-        flops_inputs.set_val(
-            Aircraft.Propulsion.TOTAL_NUM_WING_ENGINES,
-            flops_outputs.get_val(Aircraft.Propulsion.TOTAL_NUM_WING_ENGINES),
-        )
         flops_inputs.set_val(Aircraft.Fuselage.SIMPLE_LAYOUT, False)
         flops_inputs.set_val(Settings.VERBOSITY, 0)
 
@@ -230,7 +225,8 @@ class PreMissionGroupTest(unittest.TestCase):
 
         engines = [build_engine_deck(flops_inputs)]
         preprocess_options(flops_inputs, engine_models=engines)
-        default_premission_subsystems = get_default_premission_subsystems('FLOPS', engines)
+        # get geom subsystem only
+        default_premission_subsystems = [get_default_premission_subsystems('FLOPS', engines)[1]]
 
         prob = self.prob
 
@@ -246,19 +242,10 @@ class PreMissionGroupTest(unittest.TestCase):
         )
 
         setup_model_options(prob, flops_inputs)
-
         prob.setup(check=False, force_alloc_complex=True)
-        prob.set_solver_print(2)
-
-        # Initial guess for gross weight.
-        # We set it to an unconverged value to test convergence.
-        prob.set_val(Aircraft.Design.GROSS_MASS, val=1000.0)
-
         set_aviary_initial_values(prob, flops_inputs)
-
         prob.run_model()
 
-        tol = 1e-5
         expected_values = {
             # geometry subsystem, DetailedCabinLayout component
             Aircraft.Fuselage.LENGTH: 148.37731944,
@@ -267,6 +254,7 @@ class PreMissionGroupTest(unittest.TestCase):
             Aircraft.Fuselage.MAX_HEIGHT: 13.09,
         }
 
+        tol = 1e-5
         for var_name, expected in expected_values.items():
             with self.subTest(var=var_name):
                 assert_near_equal(prob[var_name], expected, tol)
