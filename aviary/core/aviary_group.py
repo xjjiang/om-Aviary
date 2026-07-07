@@ -1162,7 +1162,7 @@ class AviaryGroup(om.Group):
             all_subsystem_options = phase_info.get('subsystem_options', {})
 
             link_vars = set()
-            for subsys in self.external_subsystems:
+            for subsys in self.subsystems:
                 sub_vars = subsys.get_linked_variables(
                     aviary_inputs=self.aviary_inputs,
                     user_options=self.mission_info[phase_name]['user_options'],
@@ -1296,7 +1296,7 @@ class AviaryGroup(om.Group):
                     **kwargs,
                 )
 
-        self.configurator.link_trajectory(self, phases)
+        self.configurator.configure_trajectory(self, phases)
 
         self.configurator.check_trajectory(self)
 

@@ -337,7 +337,7 @@ class TwoDOFProblemConfigurator(ProblemConfiguratorBase):
                 'aerodynamics', {}
             ).setdefault('method', 'low_speed')
 
-    def link_trajectory(self, aviary_group, phases):
+    def configure_trajectory(self, aviary_group, phases):
         """
         Link or configure phase connections to other upstream or downstream components.
 
