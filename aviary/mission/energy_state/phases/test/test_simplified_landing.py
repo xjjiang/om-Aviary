@@ -41,7 +41,9 @@ class LandingCalcTest(unittest.TestCase):
             self.prob[Mission.Landing.GROUND_DISTANCE], 6403.64963504, tol
         )  # not actual value
         # not actual value
-        assert_near_equal(self.prob[Mission.Landing.INITIAL_VELOCITY], 136.22914933, tol)
+        assert_near_equal(
+            self.prob.get_val(Mission.Landing.INITIAL_VELOCITY, units='kn'), 136.22914933, tol
+        )
 
         partial_data = self.prob.check_partials(out_stream=None, method='cs')
         assert_check_partials(partial_data, atol=1e-12, rtol=1e-12)
@@ -115,7 +117,9 @@ class LandingGroupTest(unittest.TestCase):
             self.prob[Mission.Landing.GROUND_DISTANCE], 6407.65299289, tol
         )  # not actual value
         # not actual value
-        assert_near_equal(self.prob[Mission.Landing.INITIAL_VELOCITY], 136.22914933, tol)
+        assert_near_equal(
+            self.prob.get_val(Mission.Landing.INITIAL_VELOCITY, units='kn'), 136.29923391, tol
+        )
 
         partial_data = self.prob.check_partials(
             out_stream=None, excludes=['*.standard_atmosphere'], method='cs'
