@@ -25,6 +25,10 @@ class LandingPhaseTest(unittest.TestCase):
         prob.model.set_input_defaults(Aircraft.Wing.AREA, val=1370.0, units='ft**2')
         prob.model.set_input_defaults(Mission.Landing.LIFT_COEFFICIENT_MAX, val=3, units='unitless')
         prob.setup(force_alloc_complex=True)
+        prob.set_val(
+            Mission.FINAL_MASS,
+            val=150_000,
+        )
         prob.run_model()
         partial_data = prob.check_partials(
             out_stream=None, method='cs', compact_print=False, excludes=['*atmosphere*']

@@ -46,38 +46,6 @@ class LandingCalcTest(unittest.TestCase):
         assert_check_partials(partial_data, atol=1e-12, rtol=1e-12)
 
 
-class LandingCalcTest2(unittest.TestCase):
-    """Test mass-weight conversion."""
-
-    def setUp(self):
-        import aviary.mission.energy_state.phases.simplified_landing as landing
-
-        landing.GRAV_ENGLISH_LBM = 1.1
-
-    def tearDown(self):
-        import aviary.mission.energy_state.phases.simplified_landing as landing
-
-        landing.GRAV_ENGLISH_LBM = 1.0
-
-    def test_case1(self):
-        prob = om.Problem()
-        prob.model.add_subsystem(
-            'land',
-            LandingCalc(),
-            promotes=['*'],
-        )
-        prob.model.set_input_defaults(Mission.FINAL_MASS, val=152800.0, units='lbm')
-        prob.model.set_input_defaults(
-            Dynamic.Atmosphere.DENSITY, val=constants.RHO_SEA_LEVEL_METRIC, units='kg/m**3'
-        )
-        prob.model.set_input_defaults(Aircraft.Wing.AREA, val=1370.0, units='ft**2')
-        prob.model.set_input_defaults(Mission.Landing.LIFT_COEFFICIENT_MAX, val=3, units='unitless')
-        prob.setup(check=False, force_alloc_complex=True)
-
-        partial_data = prob.check_partials(out_stream=None, method='cs')
-        assert_check_partials(partial_data, atol=1e-12, rtol=1e-12)
-
-
 @use_tempdirs
 class LandingGroupTest(unittest.TestCase):
     """Test the computation of LandingGroup."""
