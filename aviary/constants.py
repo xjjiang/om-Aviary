@@ -16,13 +16,13 @@ GRAV_VENUS = (
 )  # Venus Global Reference Atmospheric Model (Venus-GRAM): User Guide, NASA/TM-20210022168
 
 # RADIUS_EARTH = (6371009, 'm')  # Source: GRS80, mean earth radius (rounded to nearest meter)
-RADIUS_EARTH = (6356766, 'm') # TODO remove and replace with above
+RADIUS_EARTH = (6356766, 'm')  # TODO remove and replace with above
 
 # RADIUS_MARS = (
 #     3386200,
 #     'm',
 # )  # Mars Global Reference Atmospheric Model (Mars-GRAM) 2024: User Guide, NASA/TM-20240012934, avg of equatorial and polar radius
-RADIUS_MARS = (3396200, 'm') # TODO remove and replace with above
+RADIUS_MARS = (3396200, 'm')  # TODO remove and replace with above
 RADIUS_VENUS = (
     6051800,
     'm',
