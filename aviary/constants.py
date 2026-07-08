@@ -30,6 +30,7 @@ RADIUS_VENUS = (
 
 GNS = 9.8236930  # grav_accel_at_surface_earth # remove this asap
 GRAV_METRIC_GASP = 9.81  # m/s^2
+GRAV_METRIC_FLOPS = 9.80665  # m/s^2
 GRAV_ENGLISH_GASP = 32.2  # ft/s^2
 GRAV_ENGLISH_FLOPS = 32.17399  # ft/s^2
 GRAV_ENGLISH_LBM = 1.0  # lbf/lbm
