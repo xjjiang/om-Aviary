@@ -6974,6 +6974,17 @@ add_meta_data(
 )
 
 add_meta_data(
+    Mission.SEA_LEVEL_DENSITY,
+    meta_data=_MetaData,
+    historical_name={'GASP': None, 'FLOPS': None},
+    desc='Atmospheric density at seal level for this planet.',
+    types=float,
+    option=True,
+    # The default density model is set based on Settings.ATMOSPHERE_MODEL
+    units='kg/m**3',
+)
+
+add_meta_data(
     Mission.TOTAL_FUEL_MASS,
     meta_data=_MetaData,
     historical_name={'GASP': 'INGASP.WFA', 'FLOPS': None},
