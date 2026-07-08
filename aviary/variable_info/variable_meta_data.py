@@ -7202,8 +7202,9 @@ add_meta_data(
     Mission.Landing.INITIAL_VELOCITY,
     meta_data=_MetaData,
     historical_name={
-        'GASP': 'DLAND.VGL',
-        'FLOPS': 'SUMMARY.VAPP',
+        # 'GASP': 'DLAND.VGL', 'FLOPS': 'SUMMARY.VAPP',
+        'GASP': None,
+        'FLOPS': None,
     },
     units='ft/s',
     desc='approach velocity',
