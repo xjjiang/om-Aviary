@@ -17,7 +17,7 @@ GRAV_VENUS = (
 
 # RADIUS_EARTH = (6371009, 'm')  # Source: GRS80, mean earth radius (rounded to nearest meter)
 # TBD update in follow-on PR to above
-RADIUS_EARTH = 6_356_766
+RADIUS_EARTH = (6356766, 'm')
 
 RADIUS_MARS = (
     3386200,
