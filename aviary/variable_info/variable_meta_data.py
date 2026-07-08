@@ -6893,6 +6893,17 @@ add_meta_data(
 )
 
 add_meta_data(
+    Mission.GRAVITY,
+    meta_data=_MetaData,
+    historical_name={'GASP': None, 'FLOPS': None},
+    desc='Gravitational acceleration of the planet.',
+    types=float,
+    option=True,
+    # The default gravity model is set based on Settings.ATMOSPHERE_MODEL
+    units='m/s**2',
+)
+
+add_meta_data(
     Mission.GROSS_MASS,
     meta_data=_MetaData,
     historical_name={'GASP': None, 'FLOPS': None},
