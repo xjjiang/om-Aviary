@@ -730,42 +730,39 @@ class FuelComponents(om.ExplicitComponent):
 
         if smooth:
             J[Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX, Aircraft.Design.GROSS_MASS] = (
-                dMaxWFWt_dGTOW / (rho_fuel)
+                dMaxWFWt_dGTOW / rho_fuel
             )
-            J[Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX, Mission.OPERATING_MASS] = dMaxWFWt_dOEW / (
-                rho_fuel
+            J[Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX, Mission.OPERATING_MASS] = (
+                dMaxWFWt_dOEW / rho_fuel
             )
             J[Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX, Aircraft.Fuel.WING_VOLUME_GEOMETRIC_MAX] = (
-                dMaxWFWt_dGeomFuelVol / (rho_fuel)
+                dMaxWFWt_dGeomFuelVol / rho_fuel
             )
             J[Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX, Aircraft.Fuel.DENSITY] = (
-                dMaxWFWt_dRhoFuel / (rho_fuel) - max_wingfuel_wt / (rho_fuel**2)
+                dMaxWFWt_dRhoFuel / rho_fuel - max_wingfuel_wt / rho_fuel**2
             )
         else:
             if volume_wingfuel_wt > OEM_wingfuel_wt:
                 J[Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX, Aircraft.Design.GROSS_MASS] = (
-                    (J['OEM_wingfuel_mass', Aircraft.Design.GROSS_MASS]) / rho_fuel
+                    J['OEM_wingfuel_mass', Aircraft.Design.GROSS_MASS] / rho_fuel
                 )
                 J[Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX, Mission.OPERATING_MASS] = (
-                    (J['OEM_wingfuel_mass', Mission.OPERATING_MASS]) / rho_fuel
+                    J['OEM_wingfuel_mass', Mission.OPERATING_MASS] / rho_fuel
                 )
-
                 J[
                     Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX,
                     Aircraft.Fuel.WING_VOLUME_GEOMETRIC_MAX,
-                ] = (0.0) / rho_fuel * GRAV_ENGLISH_LBM
-
+                ] = 0.0
                 J[Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX, Aircraft.Fuel.DENSITY] = (
-                    0.0
-                ) / rho_fuel - max_wingfuel_wt / (rho_fuel**2)
+                    -max_wingfuel_wt / rho_fuel**2
+                )
             else:
                 J[Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX, Aircraft.Design.GROSS_MASS] = (
-                    (J['max_wingfuel_mass', Aircraft.Design.GROSS_MASS]) / rho_fuel
+                    J['max_wingfuel_mass', Aircraft.Design.GROSS_MASS] / rho_fuel
                 )
                 J[Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX, Mission.OPERATING_MASS] = (
-                    (J['max_wingfuel_mass', Mission.OPERATING_MASS]) / rho_fuel
+                    J['max_wingfuel_mass', Mission.OPERATING_MASS] / rho_fuel
                 )
-
                 J[
                     Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX,
                     Aircraft.Fuel.WING_VOLUME_GEOMETRIC_MAX,
@@ -774,10 +771,10 @@ class FuelComponents(om.ExplicitComponent):
                     / rho_fuel
                     * GRAV_ENGLISH_LBM
                 )
-
                 J[Aircraft.Fuel.WING_VOLUME_STRUCTURAL_MAX, Aircraft.Fuel.DENSITY] = (
-                    J['max_wingfuel_mass', Aircraft.Fuel.DENSITY]
-                ) / rho_fuel - max_wingfuel_wt / (rho_fuel**2)
+                    (J['max_wingfuel_mass', Aircraft.Fuel.DENSITY]) / rho_fuel
+                    - max_wingfuel_wt / rho_fuel**2
+                )
 
 
 class FuelSysAndFullFuselageMass(om.ExplicitComponent):
