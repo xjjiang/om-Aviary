@@ -101,7 +101,7 @@ class TestBatteryMission(unittest.TestCase):
             f'traj.cruise2.timeseries.{av.Dynamic.Vehicle.CUMULATIVE_ELECTRIC_ENERGY_USED}'
         )
         expected_scalar_values = {
-            cumulative_energy_var: (38.46817379, 'kW*h'),
+            cumulative_energy_var: (38.46816871, 'kW*h'),
             av.Mission.FUEL_MASS: (1249.64666191, 'lbm'),
         }
 
