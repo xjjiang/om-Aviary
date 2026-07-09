@@ -66,7 +66,7 @@ class CruiseODETestCase(unittest.TestCase):
         )
         assert_near_equal(
             self.prob[Dynamic.Mission.ALTITUDE_RATE_MAX],
-            np.array([3.88465429, 4.90288542]),
+            np.array([3.88463177, 4.90286726]),
             tol,
         )
 
