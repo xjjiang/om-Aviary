@@ -4,7 +4,6 @@ import openmdao.api as om
 from openmdao.utils.assert_utils import assert_check_partials, assert_near_equal
 from openmdao.utils.testing_utils import use_tempdirs
 
-from aviary.constants import RHO_SEA_LEVEL_ENGLISH
 from aviary.mission.two_dof.ode.landing_eom import (
     GlideConditionComponent,
     LandingAltitudeComponent,
@@ -47,7 +46,7 @@ class GlideTestCase(unittest.TestCase):
         self.prob.model.add_subsystem('group', GlideConditionComponent(), promotes=['*'])
 
         self.prob.model.set_input_defaults(
-            Dynamic.Atmosphere.DENSITY, RHO_SEA_LEVEL_ENGLISH, units='slug/ft**3'
+            Dynamic.Atmosphere.DENSITY, 0.0023769, units='slug/ft**3'
         )  # value from online calculator
 
         self.prob.model.set_input_defaults(Mission.Landing.MAXIMUM_SINK_RATE, 900, units='ft/min')
@@ -113,7 +112,7 @@ class GlideTestCase2(unittest.TestCase):
         prob = om.Problem()
         prob.model.add_subsystem('group', GlideConditionComponent(), promotes=['*'])
         prob.model.set_input_defaults(
-            Dynamic.Atmosphere.DENSITY, RHO_SEA_LEVEL_ENGLISH, units='slug/ft**3'
+            Dynamic.Atmosphere.DENSITY, 0.0023769, units='slug/ft**3'
         )
         prob.model.set_input_defaults(Mission.Landing.MAXIMUM_SINK_RATE, 900, units='ft/min')
         prob.model.set_input_defaults('mass', 165279, units='lbm')

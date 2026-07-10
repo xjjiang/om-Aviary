@@ -527,7 +527,7 @@ class PreHamiltonStandard(om.ExplicitComponent):
         tipspd = inputs[Dynamic.Vehicle.Propulsion.PROPELLER_TIP_SPEED]
         sos = inputs[Dynamic.Atmosphere.SPEED_OF_SOUND]
 
-        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY]
+        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
         # arbitrarily small number to keep advance ratio nonzero, which allows for static thrust prediction
         vtas[np.where(vtas <= 1e-6)] = 1e-6
@@ -564,7 +564,7 @@ class PreHamiltonStandard(om.ExplicitComponent):
         shp = inputs[Dynamic.Vehicle.Propulsion.SHAFT_POWER]
         sos = inputs[Dynamic.Atmosphere.SPEED_OF_SOUND]
 
-        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY]
+        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
         unit_conversion_const = 10.0e10 / (2 * 6966.0)
 
@@ -1036,7 +1036,7 @@ class PostHamiltonStandard(om.ExplicitComponent):
         )
 
     def compute(self, inputs, outputs):
-        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY]
+        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
         ctx = inputs['thrust_coefficient'] * inputs['comp_tip_loss_factor']
         outputs['thrust_coefficient_comp_loss'] = ctx
@@ -1070,7 +1070,7 @@ class PostHamiltonStandard(om.ExplicitComponent):
 
     def compute_partials(self, inputs, partials):
         nn = self.options['num_nodes']
-        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY]
+        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
         XFT = inputs['comp_tip_loss_factor']
         ctx = inputs['thrust_coefficient'] * XFT

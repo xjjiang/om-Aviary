@@ -9,6 +9,7 @@ import aviary.api as av
 from aviary.core.aviary_problem import reload_aviary_problem
 from aviary.models.missions.energy_state_default import phase_info, phase_info_parameterization
 from aviary.utils.functions import get_path
+from aviary.variable_info.variables import Mission
 
 
 @use_tempdirs
@@ -31,6 +32,7 @@ class TestSizingResults(unittest.TestCase):
             local_phase_info,
             phase_info_modifier=phase_info_parameterization,
         )
+        prob.aviary_inputs.set_val(Mission.SEA_LEVEL_DENSITY, 0.0023769, units='slug/ft**3')
 
         # Preprocess inputs
         prob.check_and_preprocess_inputs()

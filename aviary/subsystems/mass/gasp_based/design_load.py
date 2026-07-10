@@ -695,7 +695,7 @@ class LoadFactors(om.ExplicitComponent):
 
         ULF_from_maneuver = self.options[Aircraft.Design.ULF_CALCULATED_FROM_MANEUVER]
         smooth = self.options[Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES]
-        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY]
+        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
         mass_ratio = (
             2.0
@@ -746,7 +746,7 @@ class LoadFactors(om.ExplicitComponent):
 
         ULF_from_maneuver = self.options[Aircraft.Design.ULF_CALCULATED_FROM_MANEUVER]
         smooth = self.options[Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES]
-        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY]
+        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
         mass_ratio = (
             2.0
@@ -1638,7 +1638,7 @@ class BWBLoadFactors(om.ExplicitComponent):
             Cl_alpha = inputs[Aircraft.Design.LIFT_CURVE_SLOPE]
 
             smooth = self.options[Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES]
-            rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY]
+            rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
             mass_ratio = (
                 2.0
@@ -1707,7 +1707,7 @@ class BWBLoadFactors(om.ExplicitComponent):
             Cl_alpha = inputs[Aircraft.Design.LIFT_CURVE_SLOPE]
 
             smooth = self.options[Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES]
-            rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY]
+            rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
             mass_ratio = (
                 2.0

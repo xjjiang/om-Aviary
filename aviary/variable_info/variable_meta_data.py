@@ -6993,6 +6993,7 @@ add_meta_data(
     option=True,
     # The default density model is set based on Settings.ATMOSPHERE_MODEL
     units='kg/m**3',
+    default_value=1.225,
 )
 
 add_meta_data(

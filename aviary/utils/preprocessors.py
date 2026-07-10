@@ -112,7 +112,7 @@ def preprocess_options(
 
     if Mission.SEA_LEVEL_DENSITY not in aviary_options:
         aviary_options.set_val(
-            Mission.GRAVITY, val=sea_level_density[0], units=sea_level_density[1]
+            Mission.SEA_LEVEL_DENSITY, val=sea_level_density[0], units=sea_level_density[1]
         )
 
 

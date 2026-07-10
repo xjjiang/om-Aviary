@@ -176,7 +176,7 @@ class FlightConditions(om.ExplicitComponent):
 
     def compute(self, inputs, outputs):
         in_type = self.options['input_speed_type']
-        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY]
+        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
         rho = inputs[Dynamic.Atmosphere.DENSITY]
         sos = inputs[Dynamic.Atmosphere.SPEED_OF_SOUND]
@@ -208,7 +208,7 @@ class FlightConditions(om.ExplicitComponent):
 
         rho = inputs[Dynamic.Atmosphere.DENSITY]
         sos = inputs[Dynamic.Atmosphere.SPEED_OF_SOUND]
-        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY]
+        rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
         if in_type is SpeedType.TAS:
             TAS = inputs[Dynamic.Mission.VELOCITY]
