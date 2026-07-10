@@ -1402,7 +1402,7 @@ class BWBMassParametersTestCase(unittest.TestCase):
     """GASP BWB model"""
 
     def setUp(self):
-        options = get_option_defaults()
+        self.options = options = get_option_defaults()
         options.set_val(Settings.VERBOSITY, 0)
         options.set_val(Aircraft.Engine.NUM_FUSELAGE_ENGINES, 2, units='unitless')
 
@@ -1420,11 +1420,33 @@ class BWBMassParametersTestCase(unittest.TestCase):
         prob.model.set_input_defaults('max_mach', 0.9, units='unitless')
         prob.model.set_input_defaults(Aircraft.LandingGear.MAIN_GEAR_LOCATION, 0, units='unitless')
 
-        setup_model_options(self.prob, options)
-
-        self.prob.setup(check=False, force_alloc_complex=True)
-
     def test_case1(self):
+        """not to smooth mass discontinuties"""
+        setup_model_options(self.prob, self.options)
+        self.prob.setup(check=False, force_alloc_complex=True)
+        self.prob.run_model()
+
+        expected_values = {
+            Aircraft.Wing.MATERIAL_FACTOR: 1.19461189,
+            'c_strut_braced': 1,
+            'c_gear_loc': 0.95,
+            Aircraft.Engine.POSITION_FACTOR: 1.05,
+            'half_sweep': 0.47984874,
+        }
+        tol = 1e-7
+
+        for var_name, expected_val in expected_values.items():
+            with self.subTest(var=var_name):
+                assert_near_equal(self.prob[var_name], expected_val, tol)
+
+        data = self.prob.check_partials(out_stream=None, method='cs')
+        assert_check_partials(data, atol=1e-12, rtol=1e-12)
+
+    def test_case2(self):
+        """smooth mass discontinuties"""
+        self.options.set_val(Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES, True)
+        setup_model_options(self.prob, self.options)
+        self.prob.setup(check=False, force_alloc_complex=True)
         self.prob.run_model()
 
         expected_values = {
