@@ -87,13 +87,15 @@ class TestEngineDiameter(
 
         aviary_options = AviaryValues()
         aviary_options.set_val(Aircraft.Engine.NUM_ENGINES, np.array([2]))
-        aviary_options.set_val(Aircraft.Engine.INLET_AREA_COEFFICIENT, 0.000301265)
 
         self.prob.model.add_subsystem('engsz_diameter', GASPEngineDiameter(), promotes=['*'])
 
         self.prob.model.set_input_defaults(Aircraft.Design.GROSS_MASS, 175400.0, units='lbm')
         self.prob.model.set_input_defaults(
             Aircraft.Nacelle.CORE_DIAMETER_RATIO, 1.25, units='unitless'
+        )
+        self.prob.model.set_input_defaults(
+            Aircraft.Engine.INLET_AREA_COEFFICIENT, 0.000301265, units='unitless'
         )
 
         setup_model_options(self.prob, aviary_options)
@@ -126,6 +128,9 @@ class BWBTestEngineDiameter(unittest.TestCase):
         self.prob.model.set_input_defaults(
             Aircraft.Nacelle.CORE_DIAMETER_RATIO, 1.2205, units='unitless'
         )
+        self.prob.model.set_input_defaults(
+            Aircraft.Engine.INLET_AREA_COEFFICIENT, 0.0002, units='unitless'
+        )
 
         setup_model_options(self.prob, aviary_options)
 
@@ -147,13 +152,15 @@ class ElectricTestCaseMultiEngineDiameter(unittest.TestCase):
 
         aviary_options = AviaryValues()
         aviary_options.set_val(Aircraft.Engine.NUM_ENGINES, np.array([2, 4]))
-        aviary_options.set_val(Aircraft.Engine.INLET_AREA_COEFFICIENT, [0.0003, 0.0002])
 
         prob.model.add_subsystem('engsz_diameter', GASPEngineDiameter(), promotes=['*'])
 
         prob.model.set_input_defaults(Aircraft.Design.GROSS_MASS, 175400.0, units='lbm')
         prob.model.set_input_defaults(
             Aircraft.Nacelle.CORE_DIAMETER_RATIO, np.array([1.25, 1.02]), units='unitless'
+        )
+        prob.model.set_input_defaults(
+            Aircraft.Engine.INLET_AREA_COEFFICIENT, np.array([0.0003, 0.0002]), units='unitless'
         )
 
         prob.model_options['*'] = extract_options(aviary_options)
