@@ -43,7 +43,14 @@ class GlideTestCase(unittest.TestCase):
 
     def setUp(self):
         self.prob = om.Problem()
-        self.prob.model.add_subsystem('group', GlideConditionComponent(), promotes=['*'])
+        opts = {
+            Mission.SEA_LEVEL_DENSITY: (0.0023769, 'slug/ft**3'),
+        }
+        self.prob.model.add_subsystem(
+            'group',
+            GlideConditionComponent(**opts),
+            promotes=['*'],
+        )
 
         self.prob.model.set_input_defaults(
             Dynamic.Atmosphere.DENSITY, 0.0023769, units='slug/ft**3'

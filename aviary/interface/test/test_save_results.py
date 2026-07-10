@@ -32,10 +32,11 @@ class TestSizingResults(unittest.TestCase):
             local_phase_info,
             phase_info_modifier=phase_info_parameterization,
         )
-        prob.aviary_inputs.set_val(Mission.SEA_LEVEL_DENSITY, 0.0023769, units='slug/ft**3')
 
         # Preprocess inputs
         prob.check_and_preprocess_inputs()
+        prob.aviary_inputs.set_val(Mission.SEA_LEVEL_DENSITY, 0.0023769, units='slug/ft**3')
+
         prob.add_pre_mission_systems()
         prob.add_phases()
         prob.add_post_mission_systems()

@@ -16,7 +16,7 @@ from aviary.subsystems.mass.gasp_based.design_load import (
 )
 from aviary.variable_info.functions import setup_model_options
 from aviary.variable_info.options import get_option_defaults
-from aviary.variable_info.variables import Aircraft
+from aviary.variable_info.variables import Aircraft, Mission
 
 
 class LoadSpeedsTestCase1(unittest.TestCase):
@@ -1325,7 +1325,15 @@ class BWBLoadFactorsTestCaseNonsmooth(unittest.TestCase):
 
     def setUp(self):
         prob = self.prob = om.Problem()
-        self.prob.model.add_subsystem('factors', BWBLoadFactors(), promotes=['*'])
+
+        opts = {
+            Mission.SEA_LEVEL_DENSITY: (0.0023769, 'slug/ft**3'),
+        }
+        self.prob.model.add_subsystem(
+            'factors',
+            BWBLoadFactors(**opts),
+            promotes=['*']
+        )
 
         prob.model.set_input_defaults(Aircraft.Design.GROSS_MASS, 150000.0, units='lbm')
         prob.model.set_input_defaults(Aircraft.Wing.EXPOSED_AREA, 1352.1136, units='ft**2')
@@ -1470,9 +1478,12 @@ class BWBDesignLoadGroupTestCaseSmooth(unittest.TestCase):
 
         prob = self.prob = om.Problem()
 
+        opts = {
+            Mission.SEA_LEVEL_DENSITY: (0.0023769, 'slug/ft**3'),
+        }
         prob.model.add_subsystem(
             'Dload',
-            BWBDesignLoadGroup(),
+            BWBDesignLoadGroup(**opts),
             promotes=['*'],
         )
 
