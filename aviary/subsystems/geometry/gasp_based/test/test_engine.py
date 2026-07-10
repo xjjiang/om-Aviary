@@ -15,6 +15,7 @@ from aviary.variable_info.functions import extract_options, setup_model_options
 from aviary.variable_info.variables import Aircraft
 
 
+@use_tempdirs
 class TestPercentNotInFuselage(unittest.TestCase):
     def setUp(self):
         self.prob = om.Problem()
@@ -77,6 +78,7 @@ class TestPercentNotInFuselage(unittest.TestCase):
         assert_check_partials(partial_data, atol=1e-8, rtol=1e-8)
 
 
+@use_tempdirs
 class TestEngineDiameter(
     unittest.TestCase
 ):  # this is the GASP test case, input and output values based on large single aisle 1 v3 without bug fix
@@ -108,6 +110,7 @@ class TestEngineDiameter(
         assert_check_partials(partial_data, atol=1e-8, rtol=1e-8)
 
 
+@use_tempdirs
 class BWBTestEngineDiameter(unittest.TestCase):
     """Test engine size using GASPEngineSize class and BWB data"""
 
@@ -137,6 +140,7 @@ class BWBTestEngineDiameter(unittest.TestCase):
         assert_check_partials(partial_data, atol=1e-8, rtol=1e-8)
 
 
+@use_tempdirs
 class ElectricTestCaseMultiEngineDiameter(unittest.TestCase):
     def test_case_multiengine(self):
         prob = om.Problem()
