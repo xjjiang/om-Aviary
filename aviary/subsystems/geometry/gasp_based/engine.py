@@ -162,7 +162,7 @@ class PercentNotInFuselage(om.ExplicitComponent):
 class GASPEngineDiameter(om.ExplicitComponent):
     """
     Engine geometry calculation based on engine diameter. It returns Aircraft.Nacelle.AVG_DIAMETER,
-    Nacelle.AVG_LENGTH, and Aircraft.Nacelle.SURFACE_AREA. It follows the algorithm in GASP.
+    It follows the algorithm in GASP.
     """
 
     def initialize(self):
@@ -249,8 +249,8 @@ class GASPEngineDiameter(om.ExplicitComponent):
 
 class GASPEngineLength(om.ExplicitComponent):
     """
-    Engine geometry calculation based on engine diameter. It returns Aircraft.Nacelle.AVG_DIAMETER,
-    Nacelle.AVG_LENGTH, and Aircraft.Nacelle.SURFACE_AREA. It follows the algorithm in GASP.
+    Engine geometry calculation based on engine diameter. It returns Nacelle.AVG_LENGTH.
+    It follows the algorithm in GASP.
     """
 
     def initialize(self):
@@ -301,8 +301,8 @@ class GASPEngineLength(om.ExplicitComponent):
 
 class GASPEngineSurfaceArea(om.ExplicitComponent):
     """
-    Engine geometry calculation based on engine diameter. It returns Aircraft.Nacelle.AVG_DIAMETER,
-    Nacelle.AVG_LENGTH, and Aircraft.Nacelle.SURFACE_AREA. It follows the algorithm in GASP.
+    Engine geometry calculation based on engine diameter. It returns Aircraft.Nacelle.SURFACE_AREA.
+    It follows the algorithm in GASP.
     """
 
     def initialize(self):
