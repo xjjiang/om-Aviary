@@ -442,7 +442,7 @@ class BWBCabinLayout(om.ExplicitComponent):
         TC_seat_pitch, _ = options[Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY]
         TC_seat_width, _ = options[Aircraft.Fuselage.SEAT_WIDTH_ECONOMY]
         if TC_seat_width <= 0.0:
-            raise ValueError('fuselage seat width must be positive.')
+            raise ValueError(f'fuselage seat width must be positive, but it is {TC_seat_width}.')
         aisle_width, _ = options[Aircraft.Fuselage.AISLE_WIDTH]
         num_aisles = options[Aircraft.Fuselage.NUM_AISLES]
 
@@ -462,7 +462,8 @@ class BWBCabinLayout(om.ExplicitComponent):
                 print('Warning: No business class passengers or cabins are included.')
         if (pax_FC + pax_BC) > pax:
             raise ValueError(
-                'Number of first class passengers must not exceed the total number of passengers.'
+                f'Number of first {pax_FC} and business {pax_BC} class passengers must not exceed '
+                f'the total number of passengers {pax}.'
             )
         pax_TC = pax - pax_FC - pax_BC
 

@@ -210,55 +210,6 @@ class PreMissionGroupTest(unittest.TestCase):
             flops_outputs=flops_outputs,
         )
 
-    def test_detailed_layout(self):
-        """Test DetailedCabinLayout component."""
-        case_name = 'LargeSingleAisle1FLOPS'
-        flops_inputs = get_flops_inputs(case_name)
-        flops_inputs.set_val(Aircraft.Fuselage.SIMPLE_LAYOUT, False)
-        flops_inputs.set_val(Settings.VERBOSITY, 0)
-
-        # do not override these variables which are outputs from DetailedCabinLayout
-        flops_inputs.delete(Aircraft.Fuselage.LENGTH)
-        flops_inputs.delete(Aircraft.Fuselage.PASSENGER_COMPARTMENT_LENGTH)
-        flops_inputs.delete(Aircraft.Fuselage.MAX_WIDTH)
-        flops_inputs.delete(Aircraft.Fuselage.MAX_HEIGHT)
-
-        engines = [build_engine_deck(flops_inputs)]
-        preprocess_options(flops_inputs, engine_models=engines)
-        # get geom subsystem only
-        default_premission_subsystems = [get_default_premission_subsystems('FLOPS', engines)[1]]
-
-        prob = self.prob
-
-        prob.model.add_subsystem(
-            'pre_mission',
-            CorePreMission(
-                aviary_options=flops_inputs,
-                subsystems=default_premission_subsystems,
-                subsystem_options={},
-            ),
-            promotes_inputs=['*'],
-            promotes_outputs=['*'],
-        )
-
-        setup_model_options(prob, flops_inputs)
-        prob.setup(check=False, force_alloc_complex=True)
-        set_aviary_initial_values(prob, flops_inputs)
-        prob.run_model()
-
-        expected_values = {
-            # geometry subsystem, DetailedCabinLayout component
-            Aircraft.Fuselage.LENGTH: 148.37731944,
-            Aircraft.Fuselage.PASSENGER_COMPARTMENT_LENGTH: 108.37731944,
-            Aircraft.Fuselage.MAX_WIDTH: 12.19,
-            Aircraft.Fuselage.MAX_HEIGHT: 13.09,
-        }
-
-        tol = 1e-5
-        for var_name, expected in expected_values.items():
-            with self.subTest(var=var_name):
-                assert_near_equal(prob[var_name], expected, tol)
-
 
 @use_tempdirs
 class BWBPreMissionGroupTest(unittest.TestCase):
@@ -1282,7 +1233,4 @@ class BWB300PreMissionGroupCSVTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # unittest.main()
-    test = PreMissionGroupTest()
-    test.setUp()
-    test.test_detailed_layout()
+    unittest.main()

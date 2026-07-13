@@ -237,7 +237,10 @@ class DetailedCabinLayout(om.ExplicitComponent):
             if num_seat_abreast_economy <= 0:
                 num_seat_abreast_economy = 8
                 if verbosity > Verbosity.BRIEF:
-                    print('Set Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY = 8')
+                    print(
+                        'Set Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY ='
+                        f'{num_seat_abreast_economy}'
+                    )
             if num_first_class_pax > 0 and num_seat_abreast_first <= 0:
                 num_seat_abreast_first = num_seat_abreast_economy - 2
                 if verbosity > Verbosity.BRIEF:
