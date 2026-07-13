@@ -118,10 +118,12 @@ def preprocess_options(
         if num > 0:
             if Aircraft.Fuselage.SEAT_WIDTH_BUSINESS not in aviary_options:
                 if mass_method == LegacyCode.FLOPS:
-                    raise UserWarning('Aircraft.Fuselage.SEAT_WIDTH_BUSINESS is not set.')
+                    if verbosity > Verbosity.BRIEF:
+                        warnings.warn('Aircraft.Fuselage.SEAT_WIDTH_BUSINESS is not set.')
                 elif mass_method is LegacyCode.GASP:
                     if design_type == AircraftTypes.BLENDED_WING_BODY:
-                        raise UserWarning('Aircraft.Fuselage.SEAT_WIDTH_BUSINESS is not set.')
+                        if verbosity > Verbosity.BRIEF:
+                            raise warnings.warn('Aircraft.Fuselage.SEAT_WIDTH_BUSINESS is not set.')
 
     if Aircraft.Fuselage.SEAT_WIDTH_FIRST not in aviary_options:
         if mass_method == LegacyCode.FLOPS:
