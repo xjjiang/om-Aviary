@@ -26,7 +26,7 @@ RADIUS_VENUS = (
     'm',
 )  # Venus Global Reference Atmospheric Model (Venus-GRAM): User Guide, NASA/TM-20210022168, avg of equatorial and polar radius
 
-GNS = 9.8236930  # grav_accel_at_surface_earth # remove this asap
+# GNS = 9.8236930  # grav_accel_at_surface_earth # TODO: Remove this from other parts of Aviary
 GRAV_METRIC_GASP = 9.81  # m/s^2
 GRAV_METRIC_FLOPS = 9.80665  # m/s^2
 GRAV_ENGLISH_GASP = 32.2  # ft/s^2
