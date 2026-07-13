@@ -1134,6 +1134,18 @@
         "aircraft:fuselage:seat_width_first",
         25.0,
         "inch",
+        "<class 'float'>",
+    ],
+    [
+        "settings:atmosphere_model",
+        "STANDARD",
+        "unitless",
+        "<enum 'AtmosphereModel'>"
+    ],
+    [
+        "mission:gravity",
+        9.80665,
+        "m/s**2",
         "<class 'float'>"
     ],
     [
