@@ -1134,7 +1134,7 @@
         "aircraft:fuselage:seat_width_first",
         25.0,
         "inch",
-        "<class 'float'>",
+        "<class 'float'>"
     ],
     [
         "settings:atmosphere_model",
