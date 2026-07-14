@@ -31,7 +31,6 @@ class MassParametersTestCase1(unittest.TestCase):
         options = get_option_defaults()
         options.set_val(Settings.VERBOSITY, 0)
         options.set_val(Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED, val=True, units='unitless')
-        options.set_val(Aircraft.Engine.NUM_FUSELAGE_ENGINES, val=0)
 
         self.prob = om.Problem()
         self.prob.model.add_subsystem(
@@ -83,7 +82,7 @@ class MassParametersTestCase1(unittest.TestCase):
 class MassParametersTestCase2(unittest.TestCase):
     def setUp(self):
         options = get_option_defaults()
-        options.set_val(Aircraft.Engine.NUM_FUSELAGE_ENGINES, val=2, units='unitless')
+        options.set_val(Aircraft.Engine.NUM_WING_ENGINES, val=0, units='unitless')
 
         self.prob = om.Problem()
         self.prob.model.add_subsystem(
@@ -131,8 +130,7 @@ class MassParametersTestCase2(unittest.TestCase):
 class MassParametersTestCase3(unittest.TestCase):
     def setUp(self):
         options = get_option_defaults()
-        options.set_val(Aircraft.Propulsion.TOTAL_NUM_ENGINES, val=3, units='unitless')
-        options.set_val(Aircraft.Engine.NUM_FUSELAGE_ENGINES, val=0, units='unitless')
+        options.set_val(Aircraft.Engine.NUM_WING_ENGINES, val=3, units='unitless')
 
         self.prob = om.Problem()
         self.prob.model.add_subsystem(
@@ -180,8 +178,7 @@ class MassParametersTestCase3(unittest.TestCase):
 class MassParametersTestCase4(unittest.TestCase):
     def setUp(self):
         options = get_option_defaults()
-        options.set_val(Aircraft.Propulsion.TOTAL_NUM_ENGINES, val=4, units='unitless')
-        options.set_val(Aircraft.Engine.NUM_FUSELAGE_ENGINES, val=0, units='unitless')
+        options.set_val(Aircraft.Engine.NUM_WING_ENGINES, val=4, units='unitless')
 
         self.prob = om.Problem()
         self.prob.model.add_subsystem(
@@ -229,8 +226,7 @@ class MassParametersTestCase4(unittest.TestCase):
 class MassParametersTestCase5(unittest.TestCase):
     def setUp(self):
         options = get_option_defaults()
-        options.set_val(Aircraft.Propulsion.TOTAL_NUM_ENGINES, val=4, units='unitless')
-        options.set_val(Aircraft.Engine.NUM_FUSELAGE_ENGINES, val=0, units='unitless')
+        options.set_val(Aircraft.Engine.NUM_WING_ENGINES, val=4, units='unitless')
 
         self.prob = om.Problem()
         self.prob.model.add_subsystem(
@@ -956,7 +952,7 @@ class FixedMassGroupTestCase2(unittest.TestCase):
         options = get_option_defaults()
         options.set_val(Aircraft.CrewPayload.NUM_PASSENGERS, val=180, units='unitless')
         options.set_val(Aircraft.CrewPayload.Design.NUM_PASSENGERS, val=180, units='unitless')
-        options.set_val(Aircraft.Engine.NUM_FUSELAGE_ENGINES, val=2, units='unitless')
+        options.set_val(Aircraft.Engine.NUM_WING_ENGINES, val=0, units='unitless')
         options.set_val(Aircraft.Wing.HAS_STRUT, val=True, units='unitless')
         options.set_val(Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED, val=False, units='unitless')
         options.set_val(
@@ -1289,7 +1285,7 @@ class FixedMassGroupTestCase3(unittest.TestCase):
                 Aircraft.Engine.NUM_ENGINES: (np.array([2]), 'unitless'),
                 Aircraft.Propulsion.TOTAL_NUM_WING_ENGINES: (2, 'unitless'),
                 Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES: (False, 'unitless'),
-                Aircraft.Engine.NUM_FUSELAGE_ENGINES: (np.array([0]), 'unitless'),
+                Aircraft.Engine.NUM_WING_ENGINES: (np.array([2]), 'unitless'),
                 Aircraft.CrewPayload.NUM_PASSENGERS: (150, 'unitless'),
                 Aircraft.CrewPayload.Design.NUM_PASSENGERS: (150, 'unitless'),
                 Aircraft.Electrical.HAS_HYBRID_SYSTEM: (False, 'unitless'),
@@ -1404,7 +1400,7 @@ class BWBMassParametersTestCase(unittest.TestCase):
     def setUp(self):
         self.options = options = get_option_defaults()
         options.set_val(Settings.VERBOSITY, 0)
-        options.set_val(Aircraft.Engine.NUM_FUSELAGE_ENGINES, 2, units='unitless')
+        options.set_val(Aircraft.Engine.NUM_WING_ENGINES, 0, units='unitless')
 
         prob = self.prob = om.Problem()
         self.prob.model.add_subsystem(

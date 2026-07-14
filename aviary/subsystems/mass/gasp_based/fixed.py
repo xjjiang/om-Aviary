@@ -1,5 +1,6 @@
 import numpy as np
 import openmdao.api as om
+import warnings
 
 from aviary.constants import GRAV_ENGLISH_LBM, RHO_SEA_LEVEL_ENGLISH
 from aviary.subsystems.mass.gasp_based.control import ControlMassGroup
@@ -20,15 +21,11 @@ class MassParameters(om.ExplicitComponent):
     """
 
     def initialize(self):
-        add_aviary_option(self, Aircraft.Engine.NUM_ENGINES)
-        add_aviary_option(self, Aircraft.Engine.NUM_FUSELAGE_ENGINES)
-        add_aviary_option(self, Aircraft.Propulsion.TOTAL_NUM_ENGINES)
+        add_aviary_option(self, Aircraft.Engine.NUM_WING_ENGINES)
         add_aviary_option(self, Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES)
         add_aviary_option(self, Settings.VERBOSITY)
 
     def setup(self):
-        num_engine_type = len(self.options[Aircraft.Engine.NUM_ENGINES])
-
         add_aviary_input(self, Aircraft.Wing.SWEEP, units='rad')
         add_aviary_input(self, Aircraft.Wing.TAPER_RATIO, units='unitless')
         add_aviary_input(self, Aircraft.Wing.ASPECT_RATIO, units='unitless')
@@ -58,7 +55,6 @@ class MassParameters(om.ExplicitComponent):
         add_aviary_output(
             self,
             Aircraft.Engine.POSITION_FACTOR,
-            shape=num_engine_type,
             units='unitless',
         )
         self.add_output('half_sweep', units='rad', desc='SWC2: wing chord half sweep angle')
@@ -98,14 +94,12 @@ class MassParameters(om.ExplicitComponent):
         taper_ratio = inputs[Aircraft.Wing.TAPER_RATIO]
         AR = inputs[Aircraft.Wing.ASPECT_RATIO]
         wingspan = inputs[Aircraft.Wing.SPAN]
-        num_engines = self.options[Aircraft.Propulsion.TOTAL_NUM_ENGINES]
-        num_fuselage_engines = self.options[Aircraft.Engine.NUM_FUSELAGE_ENGINES]
-        num_wing_engines = num_engines - num_fuselage_engines
-        if num_wing_engines > 4 or num_wing_engines < 0:
+        num_wing_engines = self.options[Aircraft.Engine.NUM_WING_ENGINES]
+        if num_wing_engines > 4:
             if verbosity > Verbosity.BRIEF:
-                print(
-                    f'The case num_wing_engines = {num_wing_engines} is not curretly '
-                    'supported in Aviary.'
+                warnings.warn(
+                    f'The case num_wing_engines = {num_wing_engines} is not currently '
+                    'supported in Aviary. Will set Aircraft.Engine.POSITION_FACTOR using default.'
                 )
         max_mach = inputs['max_mach']
         strut_x = inputs[Aircraft.Strut.ATTACHMENT_LOCATION_DIMENSIONLESS]
@@ -177,9 +171,7 @@ class MassParameters(om.ExplicitComponent):
         taper_ratio = inputs[Aircraft.Wing.TAPER_RATIO]
         AR = inputs[Aircraft.Wing.ASPECT_RATIO]
         wingspan = inputs[Aircraft.Wing.SPAN]
-        num_engines = self.options[Aircraft.Propulsion.TOTAL_NUM_ENGINES]
-        num_fuselage_engines = self.options[Aircraft.Engine.NUM_FUSELAGE_ENGINES]
-        num_wing_engines = num_engines - num_fuselage_engines
+        num_wing_engines = self.options[Aircraft.Engine.NUM_WING_ENGINES]
         max_mach = inputs['max_mach']
         strut_x = inputs[Aircraft.Strut.ATTACHMENT_LOCATION_DIMENSIONLESS]
         loc_main_gear = inputs[Aircraft.LandingGear.MAIN_GEAR_LOCATION]

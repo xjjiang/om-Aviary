@@ -28,7 +28,7 @@ class WingMassSolve(om.ImplicitComponent):
         add_aviary_input(self, Aircraft.Wing.ULTIMATE_LOAD_FACTOR, units='unitless')
         add_aviary_input(self, Aircraft.Wing.MASS_COEFFICIENT, units='unitless')
         add_aviary_input(self, Aircraft.Wing.MATERIAL_FACTOR, units='unitless')
-        add_aviary_input(self, Aircraft.Engine.POSITION_FACTOR, shape=num_engine_type)
+        add_aviary_input(self, Aircraft.Engine.POSITION_FACTOR)
         self.add_input(
             'c_gear_loc',
             units='unitless',
@@ -418,7 +418,7 @@ class BWBWingMassSolve(om.ImplicitComponent):
         add_aviary_input(self, Aircraft.Wing.ULTIMATE_LOAD_FACTOR, units='unitless')
         add_aviary_input(self, Aircraft.Wing.MASS_COEFFICIENT, units='unitless')
         add_aviary_input(self, Aircraft.Wing.MATERIAL_FACTOR, units='unitless')
-        add_aviary_input(self, Aircraft.Engine.POSITION_FACTOR, shape=num_engine_type)
+        add_aviary_input(self, Aircraft.Engine.POSITION_FACTOR)
         self.add_input(
             'c_gear_loc',
             units='unitless',
