@@ -16,6 +16,7 @@ GRAV_VENUS = (
 )  # Venus Global Reference Atmospheric Model (Venus-GRAM): User Guide, NASA/TM-20210022168
 
 RADIUS_EARTH = (6371009, 'm')  # Source: GRS80, mean earth radius (rounded to nearest meter)
+# convert_geopotential_altitude() is a python utility function that require RADIUS_EARTH to be specified in meters!
 
 RADIUS_MARS = (
     3386200,
@@ -37,4 +38,3 @@ RHO_SEA_LEVEL_METRIC = 1.225  # kg/m^3
 PSLS_PSF = 2116.22
 # sea level standard temperature in deg R
 TSLS_DEGR = 518.67
-RADIUS_EARTH_METRIC = 6367533.0  # m (meridional)

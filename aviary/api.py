@@ -59,7 +59,6 @@ from aviary.constants import (
     GRAV_ENGLISH_LBM,
     GRAV_METRIC_GASP,
     PSLS_PSF,
-    RADIUS_EARTH_METRIC,
     RHO_SEA_LEVEL_ENGLISH,
     RHO_SEA_LEVEL_METRIC,
     TSLS_DEGR,
