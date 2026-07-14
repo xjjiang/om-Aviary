@@ -1475,15 +1475,13 @@ class BWBDesignLoadGroupTestCaseSmooth(unittest.TestCase):
         options = get_option_defaults()
         options.set_val(Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES, val=True, units='unitless')
         options.set_val(Aircraft.Design.CRUISE_ALTITUDE, val=37500, units='ft')
+        options.set_val(Mission.SEA_LEVEL_DENSITY, val=0.0023769, units='slug/ft**3')
 
         prob = self.prob = om.Problem()
 
-        opts = {
-            Mission.SEA_LEVEL_DENSITY: (0.0023769, 'slug/ft**3'),
-        }
         prob.model.add_subsystem(
             'Dload',
-            BWBDesignLoadGroup(**opts),
+            BWBDesignLoadGroup(),
             promotes=['*'],
         )
 

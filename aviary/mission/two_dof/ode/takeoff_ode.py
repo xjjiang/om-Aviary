@@ -3,6 +3,7 @@ import openmdao.api as om
 
 from aviary.mission.two_dof.ode.takeoff_eom import TakeoffEOM
 from aviary.mission.two_dof.ode.two_dof_ode import TwoDOFODE
+from aviary.mission.two_dof.ode.v_rotate_comp import VRotateComp
 from aviary.subsystems.aerodynamics.aerodynamics_builder import AerodynamicsBuilder
 from aviary.subsystems.mass.mass_to_weight import MassToWeight
 from aviary.subsystems.propulsion.propulsion_builder import PropulsionBuilder
@@ -255,6 +256,42 @@ class TakeOffODE(TwoDOFODE):
                     ('mass_rate', Dynamic.Vehicle.Propulsion.FUEL_MASS_FLOW_RATE_NEGATIVE_TOTAL),
                     'dt_dv',
                 ],
+            )
+
+            # Calculate speed at which to initiate rotation
+            self.add_subsystem(
+                'vrot',
+                VRotateComp(),
+                promotes_inputs=[
+                    Aircraft.Wing.AREA,
+                    ('dV1', Mission.Takeoff.DECISION_SPEED_INCREMENT),
+                    ('dVR', Mission.Takeoff.ROTATION_SPEED_INCREMENT),
+                    ('CL_max', Mission.Takeoff.LIFT_COEFFICIENT_MAX),
+                ],
+                promotes_outputs=[('Vrot', Mission.Takeoff.ROTATION_VELOCITY)],
+            )
+            self.connect(
+                Dynamic.Vehicle.MASS, 'vrot.mass', src_indices=[-1], flat_src_indices=True
+            )
+            self.connect(
+                Dynamic.Atmosphere.DENSITY, 'vrot.density', src_indices=[-1], flat_src_indices=True
+            )
+
+            self.add_subsystem(
+                'groundroll_boundary',
+                om.EQConstraintComp(
+                    'velocity',
+                    eq_units='ft/s',
+                    normalize=True,
+                    add_constraint=True,
+                ),
+            )
+            self.connect(Mission.Takeoff.ROTATION_VELOCITY, 'groundroll_boundary.rhs:velocity')
+            self.connect(
+                Dynamic.Mission.VELOCITY,
+                'groundroll_boundary.lhs:velocity',
+                src_indices=[-1],
+                flat_src_indices=True,
             )
 
         if not (ground_roll or rotation):

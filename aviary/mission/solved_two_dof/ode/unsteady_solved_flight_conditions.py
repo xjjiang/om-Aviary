@@ -2,7 +2,6 @@ import numpy as np
 import openmdao.api as om
 from aviary.variable_info.functions import add_aviary_input, add_aviary_output
 
-from aviary import constants
 from aviary.variable_info.enums import SpeedType
 from aviary.variable_info.variables import Dynamic
 
@@ -302,7 +301,7 @@ class UnsteadySolvedFlightConditions(om.ExplicitComponent):
         ground_roll = self.options['ground_roll']
 
         rho = inputs[Dynamic.Atmosphere.DENSITY]
-        rho_sl = constants.RHO_SEA_LEVEL_METRIC
+        rho_sl = 1.225  # kg/m**3
         sqrt_rho_rho_sl = np.sqrt(rho / rho_sl)
         sos = inputs[Dynamic.Atmosphere.SPEED_OF_SOUND]
 
@@ -345,7 +344,7 @@ class UnsteadySolvedFlightConditions(om.ExplicitComponent):
         ground_roll = self.options['ground_roll']
 
         rho = inputs[Dynamic.Atmosphere.DENSITY]
-        rho_sl = constants.RHO_SEA_LEVEL_METRIC
+        rho_sl = 1.225  # kg/m**3
         sqrt_rho_rho_sl = np.sqrt(rho / rho_sl)
         dsqrt_rho_rho_sl_drho = 0.5 / sqrt_rho_rho_sl / rho_sl
         sos = inputs[Dynamic.Atmosphere.SPEED_OF_SOUND]
