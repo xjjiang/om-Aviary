@@ -29,7 +29,6 @@ RADIUS_VENUS = (
 # GNS = 9.8236930  # grav_accel_at_surface_earth # TODO: Remove this from other parts of Aviary
 GRAV_METRIC_GASP = 9.81  # m/s^2
 GRAV_ENGLISH_GASP = 32.2  # ft/s^2
-GRAV_ENGLISH_FLOPS = 32.17399  # ft/s^2
 GRAV_ENGLISH_LBM = 1.0  # lbf/lbm
 # See issue 1169 for the value of RHO_SEA_LEVEL_ENGLISH
 RHO_SEA_LEVEL_ENGLISH = 0.0023769  # slug/ft^3
