@@ -28,7 +28,7 @@ class FlareEOM(om.Group):
 
         self.add_subsystem(
             'distance_rates',
-            DistanceRates(num_nodes= nn, climbing=True),
+            DistanceRates(num_nodes=nn, climbing=True),
             promotes_inputs=inputs,
             promotes_outputs=outputs,
         )
@@ -45,7 +45,10 @@ class FlareEOM(om.Group):
         outputs = ['forces_horizontal', 'forces_vertical']
 
         self.add_subsystem(
-            'sum_forces', FlareSumForces(num_nodes = nn), promotes_inputs=inputs, promotes_outputs=outputs
+            'sum_forces',
+            FlareSumForces(num_nodes=nn),
+            promotes_inputs=inputs,
+            promotes_outputs=outputs,
         )
 
         inputs = ['forces_horizontal', 'forces_vertical', Dynamic.Vehicle.MASS]
@@ -271,7 +274,7 @@ class FlareSumForces(om.ExplicitComponent):
 
     def initialize(self):
         self.options.declare('num_nodes', default=1, types=int, lower=0)
-        
+
         add_aviary_option(self, Mission.GRAVITY, units='m/s**2')
         add_aviary_option(self, Mission.Takeoff.ANGLE_OF_ATTACK_RUNWAY, units='rad')
         add_aviary_option(self, Mission.Takeoff.THRUST_INCIDENCE, units='rad')

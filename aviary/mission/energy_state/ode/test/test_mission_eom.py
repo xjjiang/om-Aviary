@@ -12,6 +12,7 @@ from aviary.variable_info.variables import Dynamic, Mission
 from aviary.variable_info.functions import setup_model_options
 from aviary.utils.aviary_values import AviaryValues
 
+
 @use_tempdirs
 class MissionEOMTest(unittest.TestCase):
     """Test energy-method equations of motion."""

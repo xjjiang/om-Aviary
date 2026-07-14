@@ -29,6 +29,7 @@ from aviary.utils.preprocessors import preprocess_options
 
 inputs.set_val(Aircraft.Engine.NUM_ENGINES, np.array([2]))
 
+
 @use_tempdirs
 class TakeoffEOMTest(unittest.TestCase):
     """Test detailed takeoff equation of motion."""
@@ -267,7 +268,7 @@ class TakeoffEOMTest(unittest.TestCase):
         prob = om.Problem()
         options = {
             Mission.GRAVITY: (9.80665, 'm/s**2'),
-            Mission.Takeoff.ANGLE_OF_ATTACK_RUNWAY: (0 , 'rad'),
+            Mission.Takeoff.ANGLE_OF_ATTACK_RUNWAY: (0, 'rad'),
             Mission.Takeoff.THRUST_INCIDENCE: (0, 'rad'),
         }
         prob.model.add_subsystem(
@@ -303,7 +304,7 @@ class TakeoffEOMTest(unittest.TestCase):
         prob = om.Problem()
         options = {
             Mission.GRAVITY: (9.80665, 'm/s**2'),
-            Mission.Takeoff.ANGLE_OF_ATTACK_RUNWAY: (0 , 'rad'),
+            Mission.Takeoff.ANGLE_OF_ATTACK_RUNWAY: (0, 'rad'),
             Mission.Takeoff.THRUST_INCIDENCE: (0, 'rad'),
         }
         prob.model.add_subsystem(
@@ -339,7 +340,7 @@ class TakeoffEOMTest(unittest.TestCase):
         prob = om.Problem()
         options = {
             Mission.GRAVITY: (9.80665, 'm/s**2'),
-            Mission.Takeoff.ANGLE_OF_ATTACK_RUNWAY: (0 , 'rad'),
+            Mission.Takeoff.ANGLE_OF_ATTACK_RUNWAY: (0, 'rad'),
             Mission.Takeoff.THRUST_INCIDENCE: (0, 'rad'),
         }
         prob.model.add_subsystem(

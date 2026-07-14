@@ -108,7 +108,9 @@ class LiftEqualsWeightTest(unittest.TestCase):
         options = {
             Mission.GRAVITY: (9.80665, 'm/s**2'),
         }
-        model.add_subsystem('lift_equals_weight', LiftEqualsWeight(num_nodes=nn, **options), promotes=['*'])
+        model.add_subsystem(
+            'lift_equals_weight', LiftEqualsWeight(num_nodes=nn, **options), promotes=['*']
+        )
 
         prob.setup(force_alloc_complex=True)
 

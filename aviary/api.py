@@ -58,7 +58,6 @@ from aviary.constants import (
     GRAV_ENGLISH_FLOPS,
     GRAV_ENGLISH_GASP,
     GRAV_ENGLISH_LBM,
-    GRAV_METRIC_FLOPS,
     GRAV_METRIC_GASP,
     PSLS_PSF,
     RADIUS_EARTH_METRIC,

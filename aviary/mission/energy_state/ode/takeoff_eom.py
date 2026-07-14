@@ -114,10 +114,10 @@ class TakeoffEOM(om.Group):
         )
 
         options.declare(
-             'aviary_options',
-             types=AviaryValues,
-             desc='collection of Aircraft/Mission specific options',
-         )
+            'aviary_options',
+            types=AviaryValues,
+            desc='collection of Aircraft/Mission specific options',
+        )
 
     def setup(self):
         options = self.options
@@ -603,7 +603,6 @@ class SumForces(om.ExplicitComponent):
                 cols=rows_cols,
             )
 
-            
             val = np.cos(t_inc) + np.sin(t_inc) * mu
 
             self.declare_partials(
@@ -737,7 +736,7 @@ class ClimbGradientForces(om.ExplicitComponent):
 
     def initialize(self):
         self.options.declare('num_nodes', default=1, types=int, lower=0)
-        
+
         add_aviary_option(self, Mission.GRAVITY, units='m/s**2')
         add_aviary_option(self, Mission.Takeoff.ANGLE_OF_ATTACK_RUNWAY, units='rad')
         add_aviary_option(self, Mission.Takeoff.THRUST_INCIDENCE, units='rad')

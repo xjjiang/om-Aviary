@@ -97,7 +97,7 @@ def convert_geopotential_altitude(altitude):
     except TypeError:
         altitude = [altitude]
 
-    g = constants.GRAV_METRIC_FLOPS
+    g = constants.GRAV_EARTH
     radius_earth = constants.RADIUS_EARTH_METRIC
     CM1 = 0.99850  # Center of mass (Earth)? Unknown
     OC2 = 26.76566e-10  # Unknown

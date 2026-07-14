@@ -6902,7 +6902,7 @@ add_meta_data(
     'This ensures the gravity model matches the planet.',
     types=float,
     option=True,
-    # 
+    #
     units=Constants.GRAV_EARTH[1],
     default_value=Constants.GRAV_EARTH[0],
 )

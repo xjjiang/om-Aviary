@@ -114,7 +114,7 @@ class LiftEqualsWeight(om.ExplicitComponent):
 
     def compute_partials(self, inputs, partials, discrete_inputs=None):
         grav_metric = self.options[Mission.GRAVITY][0]
-        
+
         S = inputs[Aircraft.Wing.AREA]
         q = inputs[Dynamic.Atmosphere.DYNAMIC_PRESSURE]
         weight = grav_metric * inputs[Dynamic.Vehicle.MASS]

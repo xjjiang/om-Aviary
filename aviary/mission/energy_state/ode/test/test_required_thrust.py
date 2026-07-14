@@ -19,7 +19,9 @@ class RequiredThrustTest(unittest.TestCase):
         options = {
             Mission.GRAVITY: (9.80665, 'm/s**2'),
         }
-        prob.model.add_subsystem('req_thrust', RequiredThrust(num_nodes=2, **options), promotes=['*'])
+        prob.model.add_subsystem(
+            'req_thrust', RequiredThrust(num_nodes=2, **options), promotes=['*']
+        )
         prob.model.set_input_defaults(
             Dynamic.Vehicle.DRAG, np.array([47447.13138523, 44343.01567596]), units='N'
         )
