@@ -2314,7 +2314,6 @@ add_meta_data(
     units='unitless',
     desc='engine position factor',
     default_value=0,
-    multivalue=True,
 )
 
 add_meta_data(
