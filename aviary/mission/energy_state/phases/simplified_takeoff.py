@@ -88,7 +88,7 @@ class FinalTakeoffConditions(om.ExplicitComponent):
     """
 
     def initialize(self):
-        add_aviary_option(self, Mission.SEA_LEVEL_DENSITY, units='slug/ft**3')
+        add_aviary_option(self, Mission.SEA_LEVEL_DENSITY, units='kg/m**3')
 
     def setup(self):
         self.add_input(
