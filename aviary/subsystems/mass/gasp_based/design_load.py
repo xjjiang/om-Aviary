@@ -766,9 +766,7 @@ class LoadFactors(om.ExplicitComponent):
             -2.0 * wing_loading / (density_ratio * rho_sea_level * avg_chord**2 * Cl_alpha * 32.2)
         )
         dmass_ratio_dCl_alpha = (
-            -2.0
-            * wing_loading
-            / (density_ratio * rho_sea_level * avg_chord * Cl_alpha**2 * 32.2)
+            -2.0 * wing_loading / (density_ratio * rho_sea_level * avg_chord * Cl_alpha**2 * 32.2)
         )
 
         dk_load_factor_dwing_loading = dquotient(
@@ -1731,7 +1729,9 @@ class BWBLoadFactors(om.ExplicitComponent):
                 / (density_ratio * rho_sea_level * avg_chord**2 * Cl_alpha * 32.2)
             )
             dmass_ratio_dCl_alpha = (
-                -2.0 * wing_loading / (density_ratio * rho_sea_level * avg_chord * Cl_alpha**2 * 32.2)
+                -2.0
+                * wing_loading
+                / (density_ratio * rho_sea_level * avg_chord * Cl_alpha**2 * 32.2)
             )
 
             dk_load_factor_dgross_mass = dquotient(

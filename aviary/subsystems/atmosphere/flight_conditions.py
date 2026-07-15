@@ -245,7 +245,7 @@ class FlightConditions(om.ExplicitComponent):
             )
             J[Dynamic.Mission.VELOCITY, Dynamic.Atmosphere.SPEED_OF_SOUND] = mach
             J[Dynamic.Mission.VELOCITY, Dynamic.Atmosphere.MACH] = sos
-            J['EAS', Dynamic.Atmosphere.SPEED_OF_SOUND] = (mach * (rho / rho_sea_level) ** 0.5)
+            J['EAS', Dynamic.Atmosphere.SPEED_OF_SOUND] = mach * (rho / rho_sea_level) ** 0.5
             J['EAS', Dynamic.Atmosphere.MACH] = sos * (rho / rho_sea_level) ** 0.5
             J['EAS', Dynamic.Atmosphere.DENSITY] = (
                 TAS * (1 / rho_sea_level) ** 0.5 * 0.5 * rho ** (-0.5)
