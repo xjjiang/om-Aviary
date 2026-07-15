@@ -15,10 +15,7 @@ class CargoTestCase1(unittest.TestCase):
     """this is the large single aisle 1 V3 test case."""
 
     def setUp(self):
-        options = get_option_defaults()
-        options.set_val(
-            Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER, val=0, units='lbm'
-        )  # generic_BWB_GASP
+        self.options = options = get_option_defaults()
         options.set_val(
             Aircraft.CrewPayload.Design.NUM_PASSENGERS, val=180, units='unitless'
         )  # large_single_aisle_1_GASP.csv
@@ -30,11 +27,13 @@ class CargoTestCase1(unittest.TestCase):
             promotes=['*'],
         )
 
-        setup_model_options(self.prob, options)
-
-        self.prob.setup(check=False, force_alloc_complex=True)
+        self.prob.model.set_input_defaults(
+            Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER, val=0.0, units='lbm'
+        )
 
     def test_case1(self):
+        setup_model_options(self.prob, self.options)
+        self.prob.setup(check=False, force_alloc_complex=True)
         self.prob.run_model()
 
         tol = 1e-7
@@ -51,9 +50,6 @@ class CargoTestCase2(unittest.TestCase):
     def setUp(self):
         options = get_option_defaults()
         options.set_val(
-            Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER, val=0, units='lbm'
-        )  # generic_BWB_GASP
-        options.set_val(
             Aircraft.CrewPayload.Design.NUM_PASSENGERS, val=180, units='unitless'
         )  # large_single_aisle_1_GASP.csv
 
@@ -68,6 +64,9 @@ class CargoTestCase2(unittest.TestCase):
 
         cargo_containers.GRAV_ENGLISH_LBM = 1.1
 
+        self.prob.model.set_input_defaults(
+            Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER, val=0.0, units='lbm'
+        )
         setup_model_options(self.prob, options)
 
         self.prob.setup(check=False, force_alloc_complex=True)
@@ -94,9 +93,6 @@ class CargoTestCase3(unittest.TestCase):
     def setUp(self):
         options = get_option_defaults()
         options.set_val(
-            Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER, val=0, units='lbm'
-        )  # generic_BWB_GASP
-        options.set_val(
             Aircraft.CrewPayload.Design.NUM_PASSENGERS, val=5, units='unitless'
         )  # large_single_aisle_1_GASP.csv
 
@@ -107,6 +103,9 @@ class CargoTestCase3(unittest.TestCase):
             promotes=['*'],
         )
 
+        self.prob.model.set_input_defaults(
+            Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER, val=0.0, units='lbm'
+        )
         setup_model_options(self.prob, options)
 
         self.prob.setup(check=False, force_alloc_complex=True)
@@ -119,6 +118,51 @@ class CargoTestCase3(unittest.TestCase):
 
         partial_data = self.prob.check_partials(out_stream=None, method='cs')
         assert_check_partials(partial_data, atol=8e-12, rtol=1e-12)
+
+
+@use_tempdirs
+class CargoTestCase4(unittest.TestCase):
+    """Non zero Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER case"""
+
+    def setUp(self):
+        self.options = options = get_option_defaults()
+        options.set_val(Aircraft.CrewPayload.Design.NUM_PASSENGERS, val=180, units='unitless')
+
+        self.prob = om.Problem()
+        self.prob.model.add_subsystem(
+            'cargo',
+            CargoContainerMass(),
+            promotes=['*'],
+        )
+
+        self.prob.model.set_input_defaults(
+            Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER, val=0.01, units='lbm'
+        )
+
+    def test_case1(self):
+        setup_model_options(self.prob, self.options)
+        self.prob.setup(check=False, force_alloc_complex=True)
+        self.prob.run_model()
+
+        tol = 1e-5
+        assert_near_equal(self.prob[Aircraft.CrewPayload.CARGO_CONTAINER_MASS], 330.0, tol)
+
+        partial_data = self.prob.check_partials(out_stream=None, method='cs')
+        assert_check_partials(partial_data, atol=1e-8, rtol=1e-8)
+
+    def test_case2(self):
+        self.options.set_val(
+            Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES, val=True, units='unitless'
+        )
+        setup_model_options(self.prob, self.options)
+        self.prob.setup(check=False, force_alloc_complex=True)
+        self.prob.run_model()
+
+        tol = 1e-5
+        assert_near_equal(self.prob[Aircraft.CrewPayload.CARGO_CONTAINER_MASS], 379.5, tol)
+
+        partial_data = self.prob.check_partials(out_stream=None, method='cs')
+        assert_check_partials(partial_data, atol=1e-8, rtol=1e-8)
 
 
 if __name__ == '__main__':
