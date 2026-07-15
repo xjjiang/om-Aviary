@@ -64,7 +64,7 @@ class FinalConditionsTest(unittest.TestCase):
         self.prob.model.add_subsystem(
             'comp',
             FinalTakeoffConditions(**opts),
-            promotes=['*']
+            promotes=['*'],
         )
 
         self.prob.model.set_input_defaults('v_stall', val=100, units='m/s')  # not actual value

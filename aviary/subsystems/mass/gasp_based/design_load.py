@@ -698,9 +698,7 @@ class LoadFactors(om.ExplicitComponent):
         rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
         mass_ratio = (
-            2.0
-            * wing_loading
-            / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
+            2.0 * wing_loading / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
         )
         k_load_factor = 0.88 * mass_ratio / (5.3 + mass_ratio)
         cruise_load_factor = 1.0 + ((k_load_factor * 50.0 * V9 * Cl_alpha) / (498.0 * wing_loading))
@@ -749,9 +747,7 @@ class LoadFactors(om.ExplicitComponent):
         rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
         mass_ratio = (
-            2.0
-            * wing_loading
-            / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
+            2.0 * wing_loading / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
         )
         k_load_factor = 0.88 * mass_ratio / (5.3 + mass_ratio)
         cruise_load_factor = 1.0 + ((k_load_factor * 50.0 * V9 * Cl_alpha) / (498.0 * wing_loading))
@@ -1641,9 +1637,7 @@ class BWBLoadFactors(om.ExplicitComponent):
             rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
             mass_ratio = (
-                2.0
-                * wing_loading
-                / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
+                2.0 * wing_loading / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
             )
             k_load_factor = 0.88 * mass_ratio / (5.3 + mass_ratio)
             cruise_load_factor = 1.0 + (
@@ -1710,9 +1704,7 @@ class BWBLoadFactors(om.ExplicitComponent):
             rho_sea_level = self.options[Mission.SEA_LEVEL_DENSITY][0]
 
             mass_ratio = (
-                2.0
-                * wing_loading
-                / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
+                2.0 * wing_loading / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
             )
             k_load_factor = 0.88 * mass_ratio / (5.3 + mass_ratio)
             cruise_load_factor = 1.0 + (
@@ -1723,14 +1715,10 @@ class BWBLoadFactors(om.ExplicitComponent):
             )
 
             dmass_ratio_dgross_mass = (
-                2.0
-                * dwing_loading_dgross_mass
-                / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
+                2.0 * dwing_loading_dgross_mass / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
             )
             dmass_ratio_dexp_wing_area = (
-                2.0
-                * dwing_loading_dexp_wing_area
-                / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
+                2.0 * dwing_loading_dexp_wing_area / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
             )
             dmass_ratio_ddensity_ratio = (
                 -2.0

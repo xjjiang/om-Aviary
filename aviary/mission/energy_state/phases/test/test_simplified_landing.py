@@ -21,9 +21,7 @@ class LandingCalcTest(unittest.TestCase):
         )
 
         self.prob.model.set_input_defaults(Mission.FINAL_MASS, val=152800.0, units='lbm')
-        self.prob.model.set_input_defaults(
-            Dynamic.Atmosphere.DENSITY, val=1.225, units='kg/m**3'
-        )
+        self.prob.model.set_input_defaults(Dynamic.Atmosphere.DENSITY, val=1.225, units='kg/m**3')
         self.prob.model.set_input_defaults(Aircraft.Wing.AREA, val=1370.0, units='ft**2')
         self.prob.model.set_input_defaults(
             Mission.Landing.LIFT_COEFFICIENT_MAX, val=3, units='unitless'

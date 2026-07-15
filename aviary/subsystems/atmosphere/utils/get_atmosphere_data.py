@@ -63,7 +63,7 @@ def get_atmosphere_data(atmosphere_model=AtmosphereModel.STANDARD):
     # Lookup sea level density in the atmosphere model.
     source_data = data[0]
     altitudes = source_data.alt
-    idx = np.argwhere(altitudes==0.0)[0][0] + 1
+    idx = np.argwhere(altitudes == 0.0)[0][0] + 1
     sea_level_density = (float(source_data.akima_rho[idx][0]), 'kg/m**3')
 
     return tuple([*data, sea_level_density])

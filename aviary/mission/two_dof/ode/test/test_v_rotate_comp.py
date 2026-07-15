@@ -22,7 +22,7 @@ class TestVRotateComp(unittest.TestCase):
         prob.set_val('dV1', val=10, units='kn')
         prob.set_val('dVR', val=5, units='kn')
         prob.set_val(Aircraft.Wing.AREA, val=1370, units='ft**2')
-        prob.set_val('density', val=0.0023769 , units='slug/ft**3')
+        prob.set_val('density', val=0.0023769, units='slug/ft**3')
         prob.set_val('CL_max', val=2.1886, units='unitless')
         prob.set_val('mass', val=175_000, units='lbm')
 
@@ -55,7 +55,7 @@ class TestVRotateComp2(unittest.TestCase):
         prob.set_val('dV1', val=10, units='kn')
         prob.set_val('dVR', val=5, units='kn')
         prob.set_val(Aircraft.Wing.AREA, val=1370, units='ft**2')
-        prob.set_val('density', val=0.0023769 , units='slug/ft**3')
+        prob.set_val('density', val=0.0023769, units='slug/ft**3')
         prob.set_val('CL_max', val=2.1886, units='unitless')
         prob.set_val('mass', val=175_000, units='lbm')
 

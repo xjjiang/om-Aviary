@@ -270,9 +270,7 @@ class TakeOffODE(TwoDOFODE):
                 ],
                 promotes_outputs=[('Vrot', Mission.Takeoff.ROTATION_VELOCITY)],
             )
-            self.connect(
-                Dynamic.Vehicle.MASS, 'vrot.mass', src_indices=[-1], flat_src_indices=True
-            )
+            self.connect(Dynamic.Vehicle.MASS, 'vrot.mass', src_indices=[-1], flat_src_indices=True)
             self.connect(
                 Dynamic.Atmosphere.DENSITY, 'vrot.density', src_indices=[-1], flat_src_indices=True
             )

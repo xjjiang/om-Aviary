@@ -579,24 +579,13 @@ class PreHamiltonStandard(om.ExplicitComponent):
             unit_conversion_const * rho_sea_level / (rho * tipspd**3 * diam_prop**2)
         )
         partials['power_coefficient', Dynamic.Atmosphere.DENSITY] = (
-            -unit_conversion_const
-            * shp
-            * rho_sea_level
-            / (rho * rho * tipspd**3 * diam_prop**2)
+            -unit_conversion_const * shp * rho_sea_level / (rho * rho * tipspd**3 * diam_prop**2)
         )
         partials['power_coefficient', Dynamic.Vehicle.Propulsion.PROPELLER_TIP_SPEED] = (
-            -3
-            * unit_conversion_const
-            * shp
-            * rho_sea_level
-            / (rho * tipspd**4 * diam_prop**2)
+            -3 * unit_conversion_const * shp * rho_sea_level / (rho * tipspd**4 * diam_prop**2)
         )
         partials['power_coefficient', Aircraft.Engine.Propeller.DIAMETER] = (
-            -2
-            * unit_conversion_const
-            * shp
-            * rho_sea_level
-            / (rho * tipspd**3 * diam_prop**3)
+            -2 * unit_conversion_const * shp * rho_sea_level / (rho * tipspd**3 * diam_prop**3)
         )
 
 

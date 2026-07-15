@@ -102,7 +102,7 @@ def preprocess_options(
         )
     _, _, _, planet_gravity, sea_level_density = get_atmosphere_data(
         aviary_options.get_val(Settings.ATMOSPHERE_MODEL)
-        )
+    )
 
     if Mission.GRAVITY not in aviary_options:  # Check to see if the user has set a gravity profile.
         # No gravity profile is set, set it now.
