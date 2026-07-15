@@ -760,14 +760,10 @@ class LoadFactors(om.ExplicitComponent):
             density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2
         )
         dmass_ratio_ddensity_ratio = (
-            -2.0
-            * wing_loading
-            / (density_ratio**2 * rho_sea_level * avg_chord * Cl_alpha * 32.2)
+            -2.0 * wing_loading / (density_ratio**2 * rho_sea_level * avg_chord * Cl_alpha * 32.2)
         )
         dmass_ratio_davg_chord = (
-            -2.0
-            * wing_loading
-            / (density_ratio * rho_sea_level * avg_chord**2 * Cl_alpha * 32.2)
+            -2.0 * wing_loading / (density_ratio * rho_sea_level * avg_chord**2 * Cl_alpha * 32.2)
         )
         dmass_ratio_dCl_alpha = (
             -2.0
@@ -1715,10 +1711,14 @@ class BWBLoadFactors(om.ExplicitComponent):
             )
 
             dmass_ratio_dgross_mass = (
-                2.0 * dwing_loading_dgross_mass / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
+                2.0
+                * dwing_loading_dgross_mass
+                / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
             )
             dmass_ratio_dexp_wing_area = (
-                2.0 * dwing_loading_dexp_wing_area / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
+                2.0
+                * dwing_loading_dexp_wing_area
+                / (density_ratio * rho_sea_level * avg_chord * Cl_alpha * 32.2)
             )
             dmass_ratio_ddensity_ratio = (
                 -2.0
@@ -1731,9 +1731,7 @@ class BWBLoadFactors(om.ExplicitComponent):
                 / (density_ratio * rho_sea_level * avg_chord**2 * Cl_alpha * 32.2)
             )
             dmass_ratio_dCl_alpha = (
-                -2.0
-                * wing_loading
-                / (density_ratio * rho_sea_level * avg_chord * Cl_alpha**2 * 32.2)
+                -2.0 * wing_loading / (density_ratio * rho_sea_level * avg_chord * Cl_alpha**2 * 32.2)
             )
 
             dk_load_factor_dgross_mass = dquotient(

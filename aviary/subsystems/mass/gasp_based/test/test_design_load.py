@@ -1329,7 +1329,7 @@ class BWBLoadFactorsTestCaseNonsmooth(unittest.TestCase):
         opts = {
             Mission.SEA_LEVEL_DENSITY: (0.0023769, 'slug/ft**3'),
         }
-        self.prob.model.add_subsystem('factors', BWBLoadFactors(**opts), promotes=['*'] )
+        self.prob.model.add_subsystem('factors', BWBLoadFactors(**opts), promotes=['*'])
 
         prob.model.set_input_defaults(Aircraft.Design.GROSS_MASS, 150000.0, units='lbm')
         prob.model.set_input_defaults(Aircraft.Wing.EXPOSED_AREA, 1352.1136, units='ft**2')
