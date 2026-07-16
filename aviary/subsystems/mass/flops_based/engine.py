@@ -16,13 +16,14 @@ class EngineMass(om.ExplicitComponent):
     def initialize(self):
         add_aviary_option(self, Aircraft.Engine.ADDITIONAL_MASS_FRACTION)
         add_aviary_option(self, Aircraft.Engine.NUM_ENGINES)
-        add_aviary_option(self, Aircraft.Engine.REFERENCE_MASS, units='lbm')
+        # add_aviary_option(self, Aircraft.Engine.REFERENCE_MASS, units='lbm')
         add_aviary_option(self, Aircraft.Engine.REFERENCE_SLS_THRUST, units='lbf')
         add_aviary_option(self, Aircraft.Engine.SCALE_MASS)
 
     def setup(self):
         num_engine_type = len(self.options[Aircraft.Engine.NUM_ENGINES])
 
+        add_aviary_input(self, Aircraft.Engine.REFERENCE_MASS, shape=num_engine_type, units='lbm')
         add_aviary_input(
             self, Aircraft.Engine.SCALED_SLS_THRUST, shape=num_engine_type, units='lbf'
         )
@@ -37,9 +38,10 @@ class EngineMass(om.ExplicitComponent):
         num_engines = options[Aircraft.Engine.NUM_ENGINES]
         scale_mass = options[Aircraft.Engine.SCALE_MASS]
         addtl_mass_fraction = options[Aircraft.Engine.ADDITIONAL_MASS_FRACTION]
-        ref_engine_mass, _ = options[Aircraft.Engine.REFERENCE_MASS]
+        # ref_engine_mass = options[Aircraft.Engine.REFERENCE_MASS]
         ref_sls_thrust, _ = options[Aircraft.Engine.REFERENCE_SLS_THRUST]
 
+        ref_engine_mass = np.array(inputs[Aircraft.Engine.REFERENCE_MASS])
         scaled_sls_thrust = np.array(inputs[Aircraft.Engine.SCALED_SLS_THRUST])
         scaling_parameter = np.array(inputs[Aircraft.Engine.MASS_SCALER])
 
@@ -85,15 +87,17 @@ class EngineMass(om.ExplicitComponent):
 
         scale_mass = options[Aircraft.Engine.SCALE_MASS]
         addtl_mass_fraction = options[Aircraft.Engine.ADDITIONAL_MASS_FRACTION]
-        ref_engine_mass, _ = options[Aircraft.Engine.REFERENCE_MASS]
+        # ref_engine_mass, _ = options[Aircraft.Engine.REFERENCE_MASS]
         ref_sls_thrust, _ = options[Aircraft.Engine.REFERENCE_SLS_THRUST]
 
+        ref_engine_mass = np.array(inputs[Aircraft.Engine.REFERENCE_MASS])
         scaled_sls_thrust = np.array(inputs[Aircraft.Engine.SCALED_SLS_THRUST])
         scaling_parameter = np.array(inputs[Aircraft.Engine.MASS_SCALER])
 
         thrust_ratio = scaled_sls_thrust / ref_sls_thrust
 
         # if the engine mass is not scaled, derivatives default to zero
+        ref_mass_deriv = np.zeros(num_engine_type, dtype=scaled_sls_thrust.dtype)
         thrust_deriv = np.zeros(num_engine_type, dtype=scaled_sls_thrust.dtype)
         scale_deriv = np.zeros(num_engine_type, dtype=scaled_sls_thrust.dtype)
 
@@ -137,4 +141,18 @@ class EngineMass(om.ExplicitComponent):
 
         J[Aircraft.Engine.ADDITIONAL_MASS, Aircraft.Engine.MASS_SCALER] = (
             addtl_mass_fraction * scale_deriv
+        )
+
+        ref_mass_deriv = np.ones(num_engine_type)
+
+        ref_mass_deriv[param_idx] = thrust_ratio[param_idx] ** scaling_parameter[param_idx]
+
+        J[Aircraft.Engine.MASS, Aircraft.Engine.REFERENCE_MASS] = ref_mass_deriv
+
+        J[Aircraft.Propulsion.TOTAL_ENGINE_MASS, Aircraft.Engine.REFERENCE_MASS] = (
+            ref_mass_deriv * num_engines
+        )
+
+        J[Aircraft.Engine.ADDITIONAL_MASS, Aircraft.Engine.REFERENCE_MASS] = (
+            addtl_mass_fraction * ref_mass_deriv
         )

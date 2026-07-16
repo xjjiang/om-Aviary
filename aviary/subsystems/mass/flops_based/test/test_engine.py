@@ -44,15 +44,20 @@ class EngineMassTest(unittest.TestCase):
 
         prob.setup(check=False, force_alloc_complex=True)
         prob.set_val(Aircraft.Engine.MASS_SCALER, val=np.zeros(1))
+        prob.set_val(
+            Aircraft.Engine.REFERENCE_MASS,
+            prob.get_val(Aircraft.Engine.REFERENCE_MASS),
+            units='lbm',
+        )
 
         flops_validation_test(
             self,
             prob,
             case_name,
             input_keys=[
+                Aircraft.Engine.REFERENCE_MASS,
                 Aircraft.Engine.SCALED_SLS_THRUST,
-                Aircraft.Engine.MASS,
-                Aircraft.Engine.ADDITIONAL_MASS,
+                Aircraft.Engine.MASS_SCALER,
             ],
             output_keys=[
                 Aircraft.Engine.MASS,
@@ -71,7 +76,7 @@ class EngineMassTest(unittest.TestCase):
         options = AviaryValues()
 
         options.set_val(Settings.VERBOSITY, 0)
-        options.set_val(Aircraft.Engine.REFERENCE_MASS, 6000, units='lbm')
+        # options.set_val(Aircraft.Engine.REFERENCE_MASS, 6000, units='lbm')
         options.set_val(Aircraft.Engine.NUM_ENGINES, 2)
         options.set_val(Aircraft.Engine.SCALE_MASS, True)
         options.set_val(Aircraft.Engine.MASS_SCALER, 1.15)
@@ -99,7 +104,7 @@ class EngineMassTest(unittest.TestCase):
                 Aircraft.Engine.ADDITIONAL_MASS_FRACTION
             ),
             Aircraft.Engine.NUM_ENGINES: options.get_val(Aircraft.Engine.NUM_ENGINES),
-            Aircraft.Engine.REFERENCE_MASS: options.get_item(Aircraft.Engine.REFERENCE_MASS),
+            # Aircraft.Engine.REFERENCE_MASS: options.get_item(Aircraft.Engine.REFERENCE_MASS),
             Aircraft.Engine.REFERENCE_SLS_THRUST: options.get_item(
                 Aircraft.Engine.REFERENCE_SLS_THRUST
             ),
@@ -110,6 +115,9 @@ class EngineMassTest(unittest.TestCase):
 
         prob.setup(force_alloc_complex=True)
 
+        prob.set_val(
+            Aircraft.Engine.REFERENCE_MASS, np.array([6000.0, 6000.0, 6000.0]), units='lbm'
+        )
         prob.set_val(
             Aircraft.Engine.SCALED_SLS_THRUST, np.array([28000.0, 28000.0, 28000.0]), units='lbf'
         )
@@ -135,6 +143,48 @@ class EngineMassTest(unittest.TestCase):
             out_stream=None, compact_print=True, show_only_incorrect=True, method='cs'
         )
         assert_check_partials(partial_data, atol=1e-10, rtol=1e-10)
+
+    # this test is temp
+    def test_case_3(self):
+        case_name = 'LargeSingleAisle1FLOPS'
+        # case_name = 'LargeSingleAisle2FLOPS'
+        prob = self.prob
+
+        prob.model.add_subsystem(
+            'engine_mass',
+            EngineMass(),
+            promotes_inputs=['*'],
+            promotes_outputs=['*'],
+        )
+
+        prob.model_options['*'] = get_flops_options(case_name, preprocess=True)
+
+        prob.setup(check=False, force_alloc_complex=True)
+        prob.set_val(Aircraft.Engine.MASS_SCALER, val=np.zeros(1))
+        prob.set_val(
+            Aircraft.Engine.REFERENCE_MASS,
+            prob.get_val(Aircraft.Engine.REFERENCE_MASS),
+            units='lbm',
+        )
+
+        flops_validation_test(
+            self,
+            prob,
+            case_name,
+            input_keys=[
+                Aircraft.Engine.REFERENCE_MASS,
+                Aircraft.Engine.SCALED_SLS_THRUST,
+                Aircraft.Engine.MASS_SCALER,
+            ],
+            output_keys=[
+                Aircraft.Engine.MASS,
+                Aircraft.Engine.ADDITIONAL_MASS,
+                Aircraft.Propulsion.TOTAL_ENGINE_MASS,
+            ],
+            list_inputs=True,
+            list_outputs=True,
+            rtol=1e-10,
+        )
 
     def test_IO(self):
         assert_match_varnames(self.prob.model)
@@ -168,8 +218,9 @@ class BWBEngineMassTest(unittest.TestCase):
             prob,
             case_name,
             input_keys=[
+                Aircraft.Engine.REFERENCE_MASS,
                 Aircraft.Engine.SCALED_SLS_THRUST,
-                Aircraft.Engine.ADDITIONAL_MASS,
+                Aircraft.Engine.MASS_SCALER,
             ],
             output_keys=[
                 Aircraft.Engine.MASS,
@@ -184,4 +235,7 @@ class BWBEngineMassTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    # unittest.main()
+    test = EngineMassTest()
+    test.setUp()
+    test.test_case_3()
