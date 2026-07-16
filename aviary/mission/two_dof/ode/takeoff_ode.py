@@ -258,7 +258,7 @@ class TakeOffODE(TwoDOFODE):
                 ],
             )
 
-            # Calculate speed at which to initiate rotation
+            # Calculate speed at which to initiate rotation.
             self.add_subsystem(
                 'vrot',
                 VRotateComp(),
