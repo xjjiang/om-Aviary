@@ -17,6 +17,7 @@ from aviary.variable_info.enums import (
     AtmosphereModel,
 )
 from aviary.variable_info.variables import Aircraft, Dynamic, Mission, Settings
+import aviary.constants as Constants
 
 # ---------------------------
 # Meta data associated with variables in the aircraft data hierarchy.
@@ -6896,11 +6897,14 @@ add_meta_data(
     Mission.GRAVITY,
     meta_data=_MetaData,
     historical_name={'GASP': None, 'FLOPS': None},
-    desc='Gravitational acceleration of the planet.',
+    desc='Gravitational acceleration of the planet. This model is updated'
+    'in preprocess_options() based on which atmosphere is selected.'
+    'This ensures the gravity model matches the planet.',
     types=float,
     option=True,
-    # The default gravity model is set based on Settings.ATMOSPHERE_MODEL
-    units='m/s**2',
+    #
+    units=Constants.GRAV_EARTH[1],
+    default_value=Constants.GRAV_EARTH[0],
 )
 
 add_meta_data(
