@@ -26,15 +26,17 @@ class LandingPhaseTest(unittest.TestCase):
         prob.model.set_input_defaults(Mission.Landing.INITIAL_ALTITUDE, val=0, units='ft')
         prob.model.set_input_defaults(Aircraft.Wing.AREA, val=1370.0, units='ft**2')
         prob.model.set_input_defaults(Mission.Landing.LIFT_COEFFICIENT_MAX, val=3, units='unitless')
+
+        options = get_option_defaults()
+        options.set_val(Mission.SEA_LEVEL_DENSITY, 0.0023769, units='slug/ft**3')
+        setup_model_options(prob, options)
         prob.setup(force_alloc_complex=True)
+
         prob.set_val(
             Mission.FINAL_MASS,
             val=150_000,
         )
 
-        options = get_option_defaults()
-        options.set_val(Mission.SEA_LEVEL_DENSITY, 0.0023769, units='slug/ft**3')
-        setup_model_options(prob, options)
         prob.run_model()
 
         partial_data = prob.check_partials(
