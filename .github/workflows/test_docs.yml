@@ -38,10 +38,7 @@ jobs:
         with:
           NAME: 'latest'
           OPENMDAO_PIXI_ENVIRONMENT: 'py313'
-          #OPENMDAO_INSTALL_FROM: 'pypi'
-          #OPENMDAO: ''
-          # Bug fix on dev.
-          OPENMDAO_INSTALL_FROM: 'github'
+          OPENMDAO_INSTALL_FROM: 'pypi'
           OPENMDAO: ''
           SNOPT: '7.7'
           DYMOS: 'latest'
