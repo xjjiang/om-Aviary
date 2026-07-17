@@ -2342,7 +2342,6 @@ add_meta_data(
     desc='Unscaled mass of a single engine. See Aircraft.Engine.MASS for breakdown of what is '
     'included in engine mass.',
     default_value=0.0,
-    option=False,
     multivalue=True,
 )
 
