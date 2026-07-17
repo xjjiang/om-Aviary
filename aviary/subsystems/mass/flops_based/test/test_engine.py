@@ -190,6 +190,7 @@ class BWBEngineMassTest(unittest.TestCase):
             list_outputs=True,
             version=Version.BWB,
             rtol=1e-10,
+            atol=1e-10,
         )
 
 
