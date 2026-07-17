@@ -67,6 +67,7 @@ class EngineMassTest(unittest.TestCase):
             list_inputs=True,
             list_outputs=True,
             rtol=1e-10,
+            atol=1e-10,  # default tolerance 1e-12 is too tight for large numbers
         )
 
     def test_case_2(self):
@@ -144,48 +145,6 @@ class EngineMassTest(unittest.TestCase):
         )
         assert_check_partials(partial_data, atol=1e-10, rtol=1e-10)
 
-    # this test is temp
-    def test_case_3(self):
-        case_name = 'LargeSingleAisle1FLOPS'
-        # case_name = 'LargeSingleAisle2FLOPS'
-        prob = self.prob
-
-        prob.model.add_subsystem(
-            'engine_mass',
-            EngineMass(),
-            promotes_inputs=['*'],
-            promotes_outputs=['*'],
-        )
-
-        prob.model_options['*'] = get_flops_options(case_name, preprocess=True)
-
-        prob.setup(check=False, force_alloc_complex=True)
-        prob.set_val(Aircraft.Engine.MASS_SCALER, val=np.zeros(1))
-        prob.set_val(
-            Aircraft.Engine.REFERENCE_MASS,
-            prob.get_val(Aircraft.Engine.REFERENCE_MASS),
-            units='lbm',
-        )
-
-        flops_validation_test(
-            self,
-            prob,
-            case_name,
-            input_keys=[
-                Aircraft.Engine.REFERENCE_MASS,
-                Aircraft.Engine.SCALED_SLS_THRUST,
-                Aircraft.Engine.MASS_SCALER,
-            ],
-            output_keys=[
-                Aircraft.Engine.MASS,
-                Aircraft.Engine.ADDITIONAL_MASS,
-                Aircraft.Propulsion.TOTAL_ENGINE_MASS,
-            ],
-            list_inputs=True,
-            list_outputs=True,
-            rtol=1e-10,
-        )
-
     def test_IO(self):
         assert_match_varnames(self.prob.model)
 
@@ -235,7 +194,4 @@ class BWBEngineMassTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # unittest.main()
-    test = EngineMassTest()
-    test.setUp()
-    test.test_case_3()
+    unittest.main()
