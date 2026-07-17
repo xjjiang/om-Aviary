@@ -161,7 +161,7 @@ class PostHamiltonStandardTest(unittest.TestCase):
         )
         prob.set_val(
             Dynamic.Atmosphere.DENSITY,
-            np.array([1.0001, 1.0001, 0.4482]) * 0.0023769,
+            np.array([1.0001, 1.0001, 0.4482]) * 0.0023769,  # Sea level
             units='slug/ft**3',
         )
         prob.set_val(Aircraft.Engine.Propeller.DIAMETER, 10.0, units='ft')
