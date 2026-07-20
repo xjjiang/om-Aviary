@@ -16,7 +16,6 @@ class EngineMass(om.ExplicitComponent):
     def initialize(self):
         add_aviary_option(self, Aircraft.Engine.ADDITIONAL_MASS_FRACTION)
         add_aviary_option(self, Aircraft.Engine.NUM_ENGINES)
-        # add_aviary_option(self, Aircraft.Engine.REFERENCE_MASS, units='lbm')
         add_aviary_option(self, Aircraft.Engine.REFERENCE_SLS_THRUST, units='lbf')
         add_aviary_option(self, Aircraft.Engine.SCALE_MASS)
 
@@ -38,7 +37,6 @@ class EngineMass(om.ExplicitComponent):
         num_engines = options[Aircraft.Engine.NUM_ENGINES]
         scale_mass = options[Aircraft.Engine.SCALE_MASS]
         addtl_mass_fraction = options[Aircraft.Engine.ADDITIONAL_MASS_FRACTION]
-        # ref_engine_mass = options[Aircraft.Engine.REFERENCE_MASS]
         ref_sls_thrust, _ = options[Aircraft.Engine.REFERENCE_SLS_THRUST]
 
         ref_engine_mass = np.array(inputs[Aircraft.Engine.REFERENCE_MASS])
@@ -87,7 +85,6 @@ class EngineMass(om.ExplicitComponent):
 
         scale_mass = options[Aircraft.Engine.SCALE_MASS]
         addtl_mass_fraction = options[Aircraft.Engine.ADDITIONAL_MASS_FRACTION]
-        # ref_engine_mass, _ = options[Aircraft.Engine.REFERENCE_MASS]
         ref_sls_thrust, _ = options[Aircraft.Engine.REFERENCE_SLS_THRUST]
 
         ref_engine_mass = np.array(inputs[Aircraft.Engine.REFERENCE_MASS])

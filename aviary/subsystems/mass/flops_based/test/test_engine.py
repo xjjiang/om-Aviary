@@ -44,11 +44,6 @@ class EngineMassTest(unittest.TestCase):
 
         prob.setup(check=False, force_alloc_complex=True)
         prob.set_val(Aircraft.Engine.MASS_SCALER, val=np.zeros(1))
-        prob.set_val(
-            Aircraft.Engine.REFERENCE_MASS,
-            prob.get_val(Aircraft.Engine.REFERENCE_MASS),
-            units='lbm',
-        )
 
         flops_validation_test(
             self,
@@ -77,7 +72,6 @@ class EngineMassTest(unittest.TestCase):
         options = AviaryValues()
 
         options.set_val(Settings.VERBOSITY, 0)
-        # options.set_val(Aircraft.Engine.REFERENCE_MASS, 6000, units='lbm')
         options.set_val(Aircraft.Engine.NUM_ENGINES, 2)
         options.set_val(Aircraft.Engine.SCALE_MASS, True)
         options.set_val(Aircraft.Engine.MASS_SCALER, 1.15)
@@ -105,7 +99,6 @@ class EngineMassTest(unittest.TestCase):
                 Aircraft.Engine.ADDITIONAL_MASS_FRACTION
             ),
             Aircraft.Engine.NUM_ENGINES: options.get_val(Aircraft.Engine.NUM_ENGINES),
-            # Aircraft.Engine.REFERENCE_MASS: options.get_item(Aircraft.Engine.REFERENCE_MASS),
             Aircraft.Engine.REFERENCE_SLS_THRUST: options.get_item(
                 Aircraft.Engine.REFERENCE_SLS_THRUST
             ),
