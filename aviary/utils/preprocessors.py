@@ -156,15 +156,6 @@ def preprocess_options(
                             'assuming default 28.0 inches.'
                         )
 
-    if Aircraft.Fuselage.SEAT_WIDTH_FIRST not in aviary_options:
-        if mass_method == LegacyCode.FLOPS:
-            if design_type == AircraftTypes.TRANSPORT:
-                aviary_options.set_val(Aircraft.Fuselage.SEAT_WIDTH_FIRST, 25.0, 'inch')
-        elif mass_method is LegacyCode.GASP:
-            if design_type == AircraftTypes.BLENDED_WING_BODY:
-                aviary_options.set_val(Aircraft.Fuselage.SEAT_WIDTH_FIRST, 28.0, 'inch')
-                if verbosity >= Verbosity.BRIEF:
-                    warnings.warn('set Aircraft.Fuselage.SEAT_WIDTH_FIRST = 28.0 inches.')
     # preprocess atmosphere / GRAV??
     # Set the gravity model based on the atmosphere model to enable calculation of weight from mass
     from aviary.subsystems.atmosphere.utils.get_atmosphere_data import get_atmosphere_data
