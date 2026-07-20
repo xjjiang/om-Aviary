@@ -1131,12 +1131,6 @@
         "<class 'bool'>"
     ],
     [
-        "aircraft:fuselage:seat_width_economy",
-        20.0,
-        "inch",
-        "<class 'float'>"
-    ],
-    [
         "aircraft:fuselage:seat_width_first",
         25.0,
         "inch",
