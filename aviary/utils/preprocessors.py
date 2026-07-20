@@ -104,6 +104,9 @@ def preprocess_options(
         if verbosity > Verbosity.BRIEF:
             warnings.warn('Setting Aircraft.Design.TYPE = AircraftTypes.TRANSPORT.')
 
+    if Aircraft.Fuselage.SIMPLE_LAYOUT not in aviary_options:
+        aviary_options.set_val(Aircraft.Fuselage.SIMPLE_LAYOUT, True, 'unitless')
+
     if aviary_options.get_val(Aircraft.Fuselage.SIMPLE_LAYOUT) == False:
         # Check seat widths are set
         if mass_method == LegacyCode.FLOPS:
