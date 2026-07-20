@@ -104,26 +104,54 @@ def preprocess_options(
         if verbosity > Verbosity.BRIEF:
             warnings.warn('Setting Aircraft.Design.TYPE = AircraftTypes.TRANSPORT.')
 
-    if Aircraft.Fuselage.SEAT_WIDTH_ECONOMY not in aviary_options:
+    if aviary_options.get_val(Aircraft.Fuselage.SIMPLE_LAYOUT) == False:
+        # Check seat widths are set
         if mass_method == LegacyCode.FLOPS:
             if design_type == AircraftTypes.TRANSPORT:
-                aviary_options.set_val(Aircraft.Fuselage.SEAT_WIDTH_ECONOMY, 20.0, 'inch')
-        elif mass_method is LegacyCode.GASP:
+                if Aircraft.Fuselage.SEAT_WIDTH_ECONOMY not in aviary_options:
+                    aviary_options.set_val(Aircraft.Fuselage.SEAT_WIDTH_ECONOMY, 20.0, 'inch')
+                    if verbosity >= Verbosity.BRIEF:
+                        warnings.warn(
+                            'Aircraft.Fuselage.SEAT_WIDTH_ECONOMY not set, '
+                            'assuming default 20.0 inches.'
+                        )
+                if Aircraft.Fuselage.SEAT_WIDTH_BUSINESS not in aviary_options:
+                    aviary_options.set_val(Aircraft.Fuselage.SEAT_WIDTH_BUSINESS, 22.0, 'inch')
+                    if verbosity >= Verbosity.BRIEF:
+                        warnings.warn(
+                            'Aircraft.Fuselage.SEAT_WIDTH_BUSINESS not set, '
+                            'assuming default 22.0 inches.'
+                        )
+                if Aircraft.Fuselage.SEAT_WIDTH_FIRST not in aviary_options:
+                    aviary_options.set_val(Aircraft.Fuselage.SEAT_WIDTH_FIRST, 25.0, 'inch')
+                    if verbosity >= Verbosity.BRIEF:
+                        warnings.warn(
+                            'Aircraft.Fuselage.SEAT_WIDTH_FIRST not set, '
+                            'assuming default 25.0 inches.'
+                        )
+        elif mass_method == LegacyCode.GASP:
             if design_type == AircraftTypes.BLENDED_WING_BODY:
-                if verbosity >= Verbosity.BRIEF:
-                    raise UserWarning('Aircraft.Fuselage.SEAT_WIDTH_ECONOMY is not set.')
-
-    if Aircraft.CrewPayload.NUM_BUSINESS_CLASS in aviary_options:
-        num = aviary_options.get_val(Aircraft.CrewPayload.NUM_BUSINESS_CLASS)
-        if num > 0:
-            if Aircraft.Fuselage.SEAT_WIDTH_BUSINESS not in aviary_options:
-                if mass_method == LegacyCode.FLOPS:
-                    if verbosity > Verbosity.BRIEF:
-                        warnings.warn('Aircraft.Fuselage.SEAT_WIDTH_BUSINESS is not set.')
-                elif mass_method is LegacyCode.GASP:
-                    if design_type == AircraftTypes.BLENDED_WING_BODY:
-                        if verbosity > Verbosity.BRIEF:
-                            raise warnings.warn('Aircraft.Fuselage.SEAT_WIDTH_BUSINESS is not set.')
+                if Aircraft.Fuselage.SEAT_WIDTH_ECONOMY not in aviary_options:
+                    aviary_options.set_val(Aircraft.Fuselage.SEAT_WIDTH_ECONOMY, 20.0, 'inch')
+                    if verbosity >= Verbosity.BRIEF:
+                        warnings.warn(
+                            'Aircraft.Fuselage.SEAT_WIDTH_ECONOMY not set, '
+                            'assuming default 20.0 inches.'
+                        )
+                if Aircraft.Fuselage.SEAT_WIDTH_BUSINESS not in aviary_options:
+                    aviary_options.set_val(Aircraft.Fuselage.SEAT_WIDTH_BUSINESS, 22.0, 'inch')
+                    if verbosity >= Verbosity.BRIEF:
+                        warnings.warn(
+                            'Aircraft.Fuselage.SEAT_WIDTH_BUSINESS not set, '
+                            'assuming default 22.0 inches.'
+                        )
+                if Aircraft.Fuselage.SEAT_WIDTH_FIRST not in aviary_options:
+                    aviary_options.set_val(Aircraft.Fuselage.SEAT_WIDTH_FIRST, 28.0, 'inch')
+                    if verbosity >= Verbosity.BRIEF:
+                        warnings.warn(
+                            'Aircraft.Fuselage.SEAT_WIDTH_FIRST not set, '
+                            'assuming default 28.0 inches.'
+                        )
 
     if Aircraft.Fuselage.SEAT_WIDTH_FIRST not in aviary_options:
         if mass_method == LegacyCode.FLOPS:
