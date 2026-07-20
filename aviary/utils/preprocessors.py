@@ -105,9 +105,18 @@ def preprocess_options(
             warnings.warn('Setting Aircraft.Design.TYPE = AircraftTypes.TRANSPORT.')
 
     if Aircraft.Fuselage.SIMPLE_LAYOUT not in aviary_options:
-        aviary_options.set_val(Aircraft.Fuselage.SIMPLE_LAYOUT, True, 'unitless')
+        if mass_method == LegacyCode.FLOPS:
+            aviary_options.set_val(Aircraft.Fuselage.SIMPLE_LAYOUT, True, 'unitless')
+            simple_layout = True
+        elif mass_method == LegacyCode.GASP:
+            if design_type == AircraftTypes.BLENDED_WING_BODY:
+                simple_layout = False
+            else:
+                simple_layout = True
+    else:
+        simple_layout = aviary_options.get_val(Aircraft.Fuselage.SIMPLE_LAYOUT)
 
-    if aviary_options.get_val(Aircraft.Fuselage.SIMPLE_LAYOUT) == False:
+    if simple_layout == False:
         # Check seat widths are set
         if mass_method == LegacyCode.FLOPS:
             if design_type == AircraftTypes.TRANSPORT:
