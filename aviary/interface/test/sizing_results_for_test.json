@@ -1125,6 +1125,12 @@
         "<class 'float'>"
     ],
     [
+        "aircraft:fuselage:simple_layout",
+        true,
+        "unitless",
+        "<class 'bool'>"
+    ],
+    [
         "aircraft:fuselage:seat_width_economy",
         20.0,
         "inch",
