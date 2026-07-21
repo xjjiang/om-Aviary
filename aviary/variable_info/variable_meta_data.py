@@ -769,7 +769,6 @@ add_meta_data(
     historical_name={'GASP': 'INGASP.UWPAX', 'FLOPS': None},
     units='lbm',
     desc='total mass of one passenger and their bags',
-    option=True,
     default_value=200,
 )
 
