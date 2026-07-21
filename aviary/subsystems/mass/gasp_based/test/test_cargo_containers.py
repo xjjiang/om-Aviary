@@ -150,20 +150,6 @@ class CargoTestCase4(unittest.TestCase):
         partial_data = self.prob.check_partials(out_stream=None, method='cs')
         assert_check_partials(partial_data, atol=1e-8, rtol=1e-8)
 
-    def test_case2(self):
-        self.options.set_val(
-            Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES, val=True, units='unitless'
-        )
-        setup_model_options(self.prob, self.options)
-        self.prob.setup(check=False, force_alloc_complex=True)
-        self.prob.run_model()
-
-        tol = 1e-5
-        assert_near_equal(self.prob[Aircraft.CrewPayload.CARGO_CONTAINER_MASS], 379.5, tol)
-
-        partial_data = self.prob.check_partials(out_stream=None, method='cs')
-        assert_check_partials(partial_data, atol=1e-8, rtol=1e-8)
-
 
 if __name__ == '__main__':
     unittest.main()
