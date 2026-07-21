@@ -836,6 +836,22 @@ class EngineDeck(EngineModel):
 
         return engine
 
+    def needs_mission_solver(self, aviary_inputs, user_options, subsystem_options):
+        """
+        Return True if the mission subsystem needs to be in the solver loop in mission, otherwise
+        return False. Aviary will only place it in the solver loop when True. The default is
+        True.
+
+        Parameters
+        ----------
+        aviary_inputs : dict
+            Dictionary containing the aircraft definition.
+        subsystem_options : dict
+            Dictionary of optional arguments for this subsystem in this phase.
+
+        """
+        return True
+
     def build_mission(self, num_nodes, aviary_inputs, user_options, subsystem_options) -> om.Group:
         """
         Creates interpolator objects to be added to mission-level propulsion subsystem.
@@ -1688,9 +1704,9 @@ class EngineDeck(EngineModel):
 # UTILITY FUNCTIONS #
 #####################
 """
-Functions that do not directly use attributes of EngineDeck (do not require self) are located here. 
-These functions are currently only used for EngineDecks and are not applicable to other 
-EngineModels. If any of these functions become useful to other EngineModels besides EngineDeck, move 
+Functions that do not directly use attributes of EngineDeck (do not require self) are located here.
+These functions are currently only used for EngineDecks and are not applicable to other
+EngineModels. If any of these functions become useful to other EngineModels besides EngineDeck, move
 them to propulsion utils.
 """
 
