@@ -107,10 +107,6 @@ class EngineMass(om.ExplicitComponent):
 
         scale_deriv[is_linear] = scaled_sls_thrust[is_linear] - ref_sls_thrust[is_linear]
 
-        scale_deriv[is_power] = (
-            ref_engine_mass[is_power] * thrust_ratio[is_power] ** scaling_parameter[is_power]
-        )
-
         scale_deriv[is_power] = scaled_mass * np.log(thrust_ratio[is_power])
 
         J[Aircraft.Engine.MASS, Aircraft.Engine.SCALED_SLS_THRUST] = thrust_deriv
