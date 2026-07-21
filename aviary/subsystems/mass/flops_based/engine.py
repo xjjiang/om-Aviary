@@ -94,7 +94,7 @@ class EngineMass(om.ExplicitComponent):
         thrust_ratio = scaled_sls_thrust / ref_sls_thrust
 
         # if the engine mass is not scaled, derivatives default to zero
-        ref_mass_deriv = np.zeros(num_engine_type, dtype=scaled_sls_thrust.dtype)
+        ref_mass_deriv = np.ones(num_engine_type, dtype=scaled_sls_thrust.dtype)
         thrust_deriv = np.zeros(num_engine_type, dtype=scaled_sls_thrust.dtype)
         scale_deriv = np.zeros(num_engine_type, dtype=scaled_sls_thrust.dtype)
 
@@ -139,8 +139,6 @@ class EngineMass(om.ExplicitComponent):
         J[Aircraft.Engine.ADDITIONAL_MASS, Aircraft.Engine.MASS_SCALER] = (
             addtl_mass_fraction * scale_deriv
         )
-
-        ref_mass_deriv = np.ones(num_engine_type)
 
         ref_mass_deriv[param_idx] = thrust_ratio[param_idx] ** scaling_parameter[param_idx]
 
