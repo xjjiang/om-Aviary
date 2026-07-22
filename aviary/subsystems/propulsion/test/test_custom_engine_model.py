@@ -182,7 +182,7 @@ phase_info = {
 
 @use_tempdirs
 class CustomEngineTest(unittest.TestCase):
-    def tzzest_custom_engine(self):
+    def test_custom_engine(self):
         prob = AviaryProblem(reports=False)
 
         # Load aircraft and options data from user
