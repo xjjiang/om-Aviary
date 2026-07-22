@@ -130,7 +130,7 @@ class EngineMass(om.ExplicitComponent):
             addtl_mass_fraction * scale_deriv
         )
 
-        ref_mass_deriv[param_idx] = thrust_ratio[param_idx] ** scaling_parameter[param_idx]
+        ref_mass_deriv[is_power] = thrust_ratio[is_power] ** scaling_parameter[is_power]
 
         J[Aircraft.Engine.MASS, Aircraft.Engine.REFERENCE_MASS] = ref_mass_deriv
 
