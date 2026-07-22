@@ -8,6 +8,7 @@ import numpy as np
 import openmdao.api as om
 
 from aviary.constants import GRAV_ENGLISH_LBM
+from aviary.utils.math import sin_int4, dydx_sin_int4
 from aviary.variable_info.functions import add_aviary_input, add_aviary_option, add_aviary_output
 from aviary.variable_info.variables import Aircraft
 
@@ -17,6 +18,7 @@ class CargoContainerMass(om.ExplicitComponent):
 
     def initialize(self):
         add_aviary_option(self, Aircraft.CrewPayload.Design.NUM_PASSENGERS)
+        add_aviary_option(self, Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES)
 
     def setup(self):
         add_aviary_input(self, Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER)
@@ -24,11 +26,10 @@ class CargoContainerMass(om.ExplicitComponent):
         add_aviary_output(self, Aircraft.CrewPayload.CARGO_CONTAINER_MASS, units='lbm')
 
     def setup_partials(self):
-        self.declare_partials(
-            Aircraft.CrewPayload.CARGO_CONTAINER_MASS, Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER
-        )
+        self.declare_partials(of='*', wrt='*', method='fd')
 
     def compute(self, inputs, outputs):
+        smooth = self.options[Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES]
         PAX = self.options[Aircraft.CrewPayload.Design.NUM_PASSENGERS]
         uld_per_pax = inputs[Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER][0]
         uld_per_pax = uld_per_pax.real
@@ -36,6 +37,31 @@ class CargoContainerMass(om.ExplicitComponent):
         # weight of a single ULD (LD-3 type)
         unit_weight_cargo_handling = 165.0
 
-        cargo_handling_wt = (int(PAX * uld_per_pax) + 1) * unit_weight_cargo_handling
+        if smooth:
+            temp = PAX * uld_per_pax
+            uld_count = sin_int4(temp)
+            cargo_handling_wt = (uld_count + 1) * unit_weight_cargo_handling
+        else:
+            cargo_handling_wt = (int(PAX * uld_per_pax) + 1) * unit_weight_cargo_handling
 
         outputs[Aircraft.CrewPayload.CARGO_CONTAINER_MASS] = cargo_handling_wt / GRAV_ENGLISH_LBM
+
+    def compute_partials(self, inputs, J):
+        smooth = self.options[Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES]
+        PAX = self.options[Aircraft.CrewPayload.Design.NUM_PASSENGERS]
+        uld_per_pax = inputs[Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER][0]
+        uld_per_pax = uld_per_pax.real
+        unit_weight_cargo_handling = 165.0
+
+        if smooth:
+            temp = PAX * uld_per_pax
+            partial = dydx_sin_int4(temp) * PAX
+            J[
+                Aircraft.CrewPayload.CARGO_CONTAINER_MASS,
+                Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER,
+            ] = partial * unit_weight_cargo_handling
+        else:
+            J[
+                Aircraft.CrewPayload.CARGO_CONTAINER_MASS,
+                Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER,
+            ] = 0.0

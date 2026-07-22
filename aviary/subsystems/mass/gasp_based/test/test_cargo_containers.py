@@ -136,20 +136,88 @@ class CargoTestCase4(unittest.TestCase):
         )
 
         self.prob.model.set_input_defaults(
-            Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER, val=0.01, units='lbm'
+            Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER, val=0.11, units='lbm'
         )
 
     def test_case1(self):
+        """SMOOTH_MASS_DISCONTINUITIES=False"""
         setup_model_options(self.prob, self.options)
         self.prob.setup(check=False, force_alloc_complex=True)
         self.prob.run_model()
 
         tol = 1e-5
-        assert_near_equal(self.prob[Aircraft.CrewPayload.CARGO_CONTAINER_MASS], 330.0, tol)
+        assert_near_equal(self.prob[Aircraft.CrewPayload.CARGO_CONTAINER_MASS], 3300.0, tol)
 
         partial_data = self.prob.check_partials(out_stream=None, method='cs')
         assert_check_partials(partial_data, atol=1e-8, rtol=1e-8)
 
+    def test_case2(self):
+        """SMOOTH_MASS_DISCONTINUITIES=True"""
+        self.options.set_val(
+            Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES, val=True, units='unitless'
+        )
+        setup_model_options(self.prob, self.options)
+        self.prob.setup(check=False, force_alloc_complex=True)
+        self.prob.run_model()
+
+        tol = 1e-5
+        assert_near_equal(self.prob[Aircraft.CrewPayload.CARGO_CONTAINER_MASS], 3300.0, tol)
+
+        partial_data = self.prob.check_partials(out_stream=None, compact_print=False, method='cs')
+        print(partial_data)
+        assert_check_partials(partial_data, atol=1e-7, rtol=1e-7)
+
+
+@use_tempdirs
+class CargoTestCase5(unittest.TestCase):
+    """zero Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER case"""
+
+    def setUp(self):
+        self.options = options = get_option_defaults()
+        options.set_val(Aircraft.CrewPayload.Design.NUM_PASSENGERS, val=180, units='unitless')
+
+        self.prob = om.Problem()
+        self.prob.model.add_subsystem(
+            'cargo',
+            CargoContainerMass(),
+            promotes=['*'],
+        )
+
+        self.prob.model.set_input_defaults(
+            Aircraft.CrewPayload.ULD_MASS_PER_PASSENGER, val=0.00013888888, units='lbm'
+        )
+
+    def test_case1(self):
+        """SMOOTH_MASS_DISCONTINUITIES=False"""
+        setup_model_options(self.prob, self.options)
+        self.prob.setup(check=False, force_alloc_complex=True)
+        self.prob.run_model()
+
+        tol = 1e-5
+        assert_near_equal(self.prob[Aircraft.CrewPayload.CARGO_CONTAINER_MASS], 165.0, tol)
+
+        partial_data = self.prob.check_partials(out_stream=None)
+        assert_check_partials(partial_data, atol=1e-8, rtol=1e-8)
+
+    def test_case2(self):
+        """SMOOTH_MASS_DISCONTINUITIES=True"""
+        self.options.set_val(
+            Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES, val=True, units='unitless'
+        )
+        setup_model_options(self.prob, self.options)
+        self.prob.setup(check=False, force_alloc_complex=True)
+        self.prob.run_model()
+
+        tol = 1e-5
+        # assert_near_equal(self.prob[Aircraft.CrewPayload.CARGO_CONTAINER_MASS], 165.00749065, tol)
+
+        partial_data = self.prob.check_partials(out_stream=None, compact_print=False, method='cs')
+        print(partial_data)
+        assert_check_partials(partial_data, atol=1e-7, rtol=1e-7)
+
 
 if __name__ == '__main__':
-    unittest.main()
+    # unittest.main()
+    test = CargoTestCase5()
+    test.setUp()
+    test.test_case2()
