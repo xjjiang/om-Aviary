@@ -113,6 +113,7 @@ def preprocess_options(
                 simple_layout = False
             else:
                 simple_layout = True
+            aviary_options.set_val(Aircraft.Fuselage.SIMPLE_LAYOUT, simple_layout, 'unitless')
     else:
         simple_layout = aviary_options.get_val(Aircraft.Fuselage.SIMPLE_LAYOUT)
 
