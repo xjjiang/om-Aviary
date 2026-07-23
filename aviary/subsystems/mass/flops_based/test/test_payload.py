@@ -54,8 +54,6 @@ class PayloadGroupTest(unittest.TestCase):
         )
 
         prob.model_options['*'] = {
-            # Aircraft.CrewPayload.BAGGAGE_MASS_PER_PASSENGER: (50, 'lbm'),
-            # Aircraft.CrewPayload.MASS_PER_PASSENGER: (180.0, 'lbm'),
             Aircraft.CrewPayload.NUM_PASSENGERS: 184,  # custom
         }
 
