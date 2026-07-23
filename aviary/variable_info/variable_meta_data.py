@@ -978,6 +978,7 @@ add_meta_data(
     'Aicraft.CrewPayload.CARGO_CONTAINER_MASS',
     default_value=0.0,
     types=float,
+    option=True,
 )
 
 add_meta_data(
