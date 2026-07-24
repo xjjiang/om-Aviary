@@ -2152,8 +2152,7 @@ add_meta_data(
     meta_data=_MetaData,
     historical_name={'GASP': None, 'FLOPS': None},
     units='unitless',
-    option=True,
-    default_value=0.0002,  # default in GASP
+    default_value=0.0002,  # default in GASP (AE = .3 * WG/1500./ENP = 0.0002*WG/ENP)
     types=float,
     desc='engine inlet area coefficient. Suggested values: 0.000375 for modern engines.',
     multivalue=True,
