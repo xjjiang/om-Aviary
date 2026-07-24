@@ -3452,7 +3452,7 @@ class BWBStructMassTestCase(unittest.TestCase):
     def test_case1(self):
         self.prob.run_model()
 
-        tol = 1e-7
+        tol = 1e-8
         assert_near_equal(self.prob[Aircraft.Design.STRUCTURE_MASS], 45110.93189329, tol)
 
         partial_data = self.prob.check_partials(out_stream=None, method='cs')
