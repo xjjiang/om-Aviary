@@ -767,12 +767,12 @@ Total number of inequality constraints...............:       61
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations....: 15
 
                                    (scaled)                 (unscaled)
-Objective...............:   1.3813949090359194e+00    1.3813949090359194e+00
-Dual infeasibility......:   3.1079080348245297e-08    3.1079080348245297e-08
-Constraint violation....:   7.4645942468118156e-15    7.4645942468118156e-15
+Objective...............:   1.3813949090359223e+00    1.3813949090359223e+00
+Dual infeasibility......:   3.1079083651158795e-08    3.1079083651158795e-08
+Constraint violation....:   5.5176749980343758e-15    5.5176749980343758e-15
 Variable bound violation:   0.0000000000000000e+00    0.0000000000000000e+00
-Complementarity.........:   9.0922309819254099e-08    9.0922309819254099e-08
-Overall NLP error.......:   9.0922309819254099e-08    9.0922309819254099e-08
+Complementarity.........:   9.0922309819266619e-08    9.0922309819266619e-08
+Overall NLP error.......:   9.0922309819266619e-08    9.0922309819266619e-08
 
 
 Number of objective function evaluations             = 16
@@ -782,7 +782,10 @@ Number of inequality constraint evaluations          = 16
 Number of equality constraint Jacobian evaluations   = 16
 Number of inequality constraint Jacobian evaluations = 16
 Number of Lagrangian Hessian evaluations             = 0
-Total seconds in IPOPT       
+Total seconds in IPOPT                               = 7.095
+
+EXIT: Optimal Solution Found.
+
 
 Optimization Problem -- Optimization using pyOpt_sparse
 ================================================================================
@@ -800,10 +803,6 @@ Optimization Problem -- Optimization using pyOpt_sparse
    Constraints (i - inequality, e - equality)
       Index  Name                                                 Type          Lower           Value           Upper    Status  Lagrange Multiplier (N/A)
         154  traj.descent.throttle[path]                             i   0.000000E+00    5.220413E-07    1.000000E+00         l    9.00000E+100
-
-                        = 6.836
-
-EXIT: Optimal Solution Found.
 </pre></div>
 </div>
 <div class="output text_html">
