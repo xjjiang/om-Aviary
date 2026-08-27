@@ -729,12 +729,12 @@ Total number of inequality constraints...............:      105
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations....: 43
 
                                    (scaled)                 (unscaled)
-Objective...............:   1.8536025661285052e+00    1.8536025661285052e+00
-Dual infeasibility......:   2.5914088894015635e-07    2.5914088894015635e-07
-Constraint violation....:   2.4104609393307207e-09    2.4104609393307207e-09
+Objective...............:   1.8536025661663809e+00    1.8536025661663809e+00
+Dual infeasibility......:   2.5892396185275218e-07    2.5892396185275218e-07
+Constraint violation....:   2.4102883445846060e-09    2.4102883445846060e-09
 Variable bound violation:   0.0000000000000000e+00    0.0000000000000000e+00
-Complementarity.........:   1.0177125711084585e-07    1.0177125711084585e-07
-Overall NLP error.......:   2.5914088894015635e-07    2.5914088894015635e-07
+Complementarity.........:   1.0177180654509887e-07    1.0177180654509887e-07
+Overall NLP error.......:   2.5892396185275218e-07    2.5892396185275218e-07
 
 
 Number of objective function evaluations             = 45
@@ -744,7 +744,10 @@ Number of inequality constraint evaluations          = 45
 Number of equality constraint Jacobian evaluations   = 44
 Number of inequality constraint Jacobian evaluations = 44
 Number of Lagrangian Hessian evaluations             = 0
-Total seconds in IPOPT       
+Total seconds in IPOPT                               = 36.861
+
+EXIT: Optimal Solution Found.
+
 
 Optimization Problem -- Optimization using pyOpt_sparse
 ================================================================================
@@ -764,10 +767,6 @@ Optimization Problem -- Optimization using pyOpt_sparse
    Constraints (i - inequality, e - equality)
       Index  Name                                                                    Type          Lower           Value           Upper    Status  Lagrange Multiplier (N/A)
         275  traj.descent.throttle[path]                                                i   0.000000E+00    5.130921E-07    1.000000E+00         l    9.00000E+100
-
-                        = 32.299
-
-EXIT: Optimal Solution Found.
 </pre></div>
 </div>
 <div class="output text_html">
