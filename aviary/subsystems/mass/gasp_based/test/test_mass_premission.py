@@ -16,7 +16,7 @@ from aviary.validation_cases.validation_data.test_data.V3_bug_fixed_IO import (
 from aviary.variable_info.enums import AircraftTypes, GASPEngineType
 from aviary.variable_info.functions import override_aviary_vars, setup_model_options
 from aviary.variable_info.variable_meta_data import CoreMetaData
-from aviary.variable_info.variables import Aircraft, Mission
+from aviary.variable_info.variables import Aircraft, Mission, Settings
 
 
 @use_tempdirs
@@ -626,33 +626,16 @@ class MassPremissionTestCase2a(unittest.TestCase):
                 override_aviary_vars(self, aviary_options)
 
         options = AviaryValues()
-        # options.set_val(Aircraft.Electrical.HAS_HYBRID_SYSTEM, val=False, units='unitless')
-        # options.set_val(Aircraft.CrewPayload.Design.NUM_PASSENGERS, val=180, units='unitless')
-        # options.set_val(Aircraft.CrewPayload.NUM_PASSENGERS, val=180, units='unitless')
-        # options.set_val(Aircraft.Design.CRUISE_ALTITUDE, val=37500, units='ft')
-        # options.set_val(Aircraft.Wing.CHOOSE_FOLD_LOCATION, val=False, units='unitless')
-        # options.set_val(
-        #     Aircraft.Wing.FOLD_DIMENSIONAL_LOCATION_SPECIFIED, val=True, units='unitless'
-        # )
-        # options.set_val(Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED, val=True, units='unitless')
-        # options.set_val(Aircraft.LandingGear.FIXED_GEAR, val=False, units='unitless')
-        # options.set_val(Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY, 6)
-        # options.set_val(Aircraft.Fuselage.NUM_AISLES, 1)
-        # options.set_val(Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY, 29, units='inch')
-        # options.set_val(Aircraft.Engine.ADDITIONAL_MASS_FRACTION, 0.14, units='unitless')
-        # options.set_val(Aircraft.Engine.NUM_ENGINES, [2], units='unitless')
-        # options.set_val(Aircraft.Engine.TYPE, [GASPEngineType.TURBOJET], units='unitless')
-        # options.set_val(Aircraft.Wing.HAS_FOLD, val=False, units='unitless')
-        # options.set_val(Aircraft.Wing.HAS_STRUT, val=False, units='unitless')
-        # options.set_val(Aircraft.Design.COMPUTE_HTAIL_VOLUME_COEFF, val=False, units='unitless')
-        # options.set_val(Aircraft.Design.COMPUTE_VTAIL_VOLUME_COEFF, val=False, units='unitless')
-        # options.set_val(Aircraft.Electrical.HAS_HYBRID_SYSTEM, val=False, units='unitless')
-        # options.set_val(Aircraft.Design.TYPE, AircraftTypes.TRANSPORT, units='unitless')
-        # options.set_val(Aircraft.Design.PART25_STRUCTURAL_CATEGORY, 3, units='unitless')
-        # options.set_val(Aircraft.Wing.LOADING_ABOVE_20, True, units='unitless')
-        # options.set_val(Aircraft.Propulsion.TOTAL_NUM_WING_ENGINES, 2, units='unitless')
-        # options.set_val(Aircraft.Propulsion.TOTAL_NUM_ENGINES, 2, units='unitless')
-        # options.set_val(Aircraft.Design.SMOOTH_MASS_DISCONTINUITIES, False, units='unitless')
+
+        options.set_val(
+            Aircraft.HorizontalTail.VOLUME_COEFFICIENT, val=1.189, units='unitless'
+        )
+        options.set_val(
+            Aircraft.VerticalTail.VOLUME_COEFFICIENT, 0.145, units='unitless'
+        )
+        options.set_val(
+            Settings.VERBOSITY, 0,
+        )
 
         prob = om.Problem()
         prob.model.add_subsystem(
