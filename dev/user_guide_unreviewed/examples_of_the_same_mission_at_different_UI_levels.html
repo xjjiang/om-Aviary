@@ -626,7 +626,9 @@ If you want to make minor modifications to <code class="docutils literal notrans
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The following variables have been overridden by the aircraft definition:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1791993837.678060] [runnervm8k3b6:5093 :0]        ib_iface.c:1269 UCX  ERROR mana_0: iface 0x5590702c85a0 failed to create UD QP TX wr:256 sge:6 inl:64 resp:0 RX wr:4096 sge:1 resp:0 failed: Operation not supported
+[1791993837.678377] [runnervm8k3b6:5093 :0]      ucp_worker.c:1412 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Input/output error
+The following variables have been overridden by the aircraft definition:
   &#39;aircraft:design:touchdown_mass_max  152800.0  lbm
   &#39;aircraft:engine:mass  [7400.]  lbm
   &#39;aircraft:fins:mass  0.0  lbm
@@ -644,6 +646,9 @@ If you want to make minor modifications to <code class="docutils literal notrans
   &#39;aircraft:wing:control_surface_area  137.0  ft**2
   &#39;aircraft:wing:wetted_area  2396.56  ft**2
   &#39;mission:takeoff:lift_over_drag  17.354  unitless
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[runnervm8k3b6:05093] pml_ucx.c:313  Error: Failed to create UCP worker
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration limit reached    (Exit mode 9)
@@ -1209,7 +1214,6 @@ You have supreme control over every part of the model and mission definition, bu
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.wetted_area.nacelles_swet&#39; &lt;class NacelleWettedArea&gt;: input variable &#39;aircraft:nacelle:avg_diameter&#39;, promoted using &#39;aircraft:nacelle:avg_diameter&#39;, was already promoted using &#39;aircraft*&#39;.
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.wetted_area.nacelles_swet&#39; &lt;class NacelleWettedArea&gt;: input variable &#39;aircraft:nacelle:avg_length&#39;, promoted using &#39;aircraft:nacelle:avg_length&#39;, was already promoted using &#39;aircraft*&#39;.
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.wetted_area.nacelles_swet&#39; &lt;class NacelleWettedArea&gt;: input variable &#39;aircraft:nacelle:wetted_area_scaler&#39;, promoted using &#39;aircraft:nacelle:wetted_area_scaler&#39;, was already promoted using &#39;aircraft*&#39;.
-/home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.wetted_area.nacelles_swet&#39; &lt;class NacelleWettedArea&gt;: input variable &#39;aircraft:engine:scale_factor&#39;, promoted using &#39;aircraft:engine:scale_factor&#39;, was already promoted using &#39;aircraft*&#39;.
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.wetted_area.tail&#39; &lt;class TailWettedArea&gt;: input variable &#39;aircraft:horizontal_tail:area&#39;, promoted using &#39;aircraft:horizontal_tail:area&#39;, was already promoted using &#39;aircraft*&#39;.
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.wetted_area.tail&#39; &lt;class TailWettedArea&gt;: input variable &#39;aircraft:horizontal_tail:vertical_tail_mount_location&#39;, promoted using &#39;aircraft:horizontal_tail:vertical_tail_mount_location&#39;, was already promoted using &#39;aircraft*&#39;.
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.wetted_area.tail&#39; &lt;class TailWettedArea&gt;: input variable &#39;aircraft:horizontal_tail:wetted_area_scaler&#39;, promoted using &#39;aircraft:horizontal_tail:wetted_area_scaler&#39;, was already promoted using &#39;aircraft*&#39;.
@@ -1224,10 +1228,11 @@ You have supreme control over every part of the model and mission definition, bu
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.fus_ratios&#39; &lt;class _FuselageRatios&gt;: input variable &#39;aircraft:wing:area&#39;, promoted using &#39;aircraft:wing:area&#39;, was already promoted using &#39;aircraft*&#39;.
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.fus_ratios&#39; &lt;class _FuselageRatios&gt;: input variable &#39;aircraft:wing:aspect_ratio&#39;, promoted using &#39;aircraft:wing:aspect_ratio&#39;, was already promoted using &#39;aircraft*&#39;.
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.fus_ratios&#39; &lt;class _FuselageRatios&gt;: input variable &#39;aircraft:wing:glove_and_bat&#39;, promoted using &#39;aircraft:wing:glove_and_bat&#39;, was already promoted using &#39;aircraft*&#39;.
-/home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.nacelle_characteristic_lengths&#39; &lt;class NacelleCharacteristicLength&gt;: input variable &#39;aircraft:engine:reference_sls_thrust&#39;, promoted using &#39;aircraft:engine:reference_sls_thrust&#39;, was already promoted using &#39;aircraft*&#39;.
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.nacelle_characteristic_lengths&#39; &lt;class NacelleCharacteristicLength&gt;: input variable &#39;aircraft:nacelle:avg_diameter&#39;, promoted using &#39;aircraft:nacelle:avg_diameter&#39;, was already promoted using &#39;aircraft*&#39;.
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.nacelle_characteristic_lengths&#39; &lt;class NacelleCharacteristicLength&gt;: input variable &#39;aircraft:nacelle:avg_length&#39;, promoted using &#39;aircraft:nacelle:avg_length&#39;, was already promoted using &#39;aircraft*&#39;.
-/home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.nacelle_characteristic_lengths&#39; &lt;class NacelleCharacteristicLength&gt;: input variable &#39;aircraft:engine:scaled_sls_thrust&#39;, promoted using &#39;aircraft:engine:scaled_sls_thrust&#39;, was already promoted using &#39;aircraft*&#39;.
+/home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.nacelle_prelim&#39; &lt;class NacellePrelim&gt;: input variable &#39;aircraft:engine:scale_factor&#39;, promoted using &#39;aircraft:engine:scale_factor&#39;, was already promoted using &#39;aircraft*&#39;.
+/home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.nacelle_prelim&#39; &lt;class NacellePrelim&gt;: input variable &#39;aircraft:nacelle:reference_avg_diameter&#39;, promoted using &#39;aircraft:nacelle:reference_avg_diameter&#39;, was already promoted using &#39;aircraft*&#39;.
+/home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.nacelle_prelim&#39; &lt;class NacellePrelim&gt;: input variable &#39;aircraft:nacelle:reference_avg_length&#39;, promoted using &#39;aircraft:nacelle:reference_avg_length&#39;, was already promoted using &#39;aircraft*&#39;.
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.wing_characteristic_lengths&#39; &lt;class WingCharacteristicLength&gt;: input variable &#39;aircraft:wing:area&#39;, promoted using &#39;aircraft:wing:area&#39;, was already promoted using &#39;aircraft*&#39;.
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.wing_characteristic_lengths&#39; &lt;class WingCharacteristicLength&gt;: input variable &#39;aircraft:wing:aspect_ratio&#39;, promoted using &#39;aircraft:wing:aspect_ratio&#39;, was already promoted using &#39;aircraft*&#39;.
 /home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/system.py:2681: PromotionWarning:&#39;pre_mission.geometry.wing_characteristic_lengths&#39; &lt;class WingCharacteristicLength&gt;: input variable &#39;aircraft:wing:glove_and_bat&#39;, promoted using &#39;aircraft:wing:glove_and_bat&#39;, was already promoted using &#39;aircraft*&#39;.
@@ -1257,7 +1262,7 @@ You have supreme control over every part of the model and mission definition, bu
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration limit reached    (Exit mode 9)
-            Current function value: 2.9247548982260096
+            Current function value: 2.924754898223249
             Iterations: 1
             Function evaluations: 3
             Gradient evaluations: 2
@@ -1270,11 +1275,11 @@ Iteration limit reached
 Driver:  ScipyOptimizeDriver
   success     : False
   iterations  : 4
-  runtime     : 1.3185E+00 s
+  runtime     : 9.2735E-01 s
   model_evals : 5
-  model_time  : 8.6992E-01 s
+  model_time  : 6.8081E-01 s
   deriv_evals : 2
-  deriv_time  : 3.8660E-01 s
+  deriv_time  : 2.1260E-01 s
   exit_status : FAIL
 </pre></div>
 </div>
