@@ -704,9 +704,7 @@ Angle of Attack (deg) [-2.  0.  2.  4.  6.  8. 10.]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1791993984.143692] [runnervm8k3b6:5455 :0]        ib_iface.c:1269 UCX  ERROR mana_0: iface 0x55e54aba6b30 failed to create UD QP TX wr:256 sge:6 inl:64 resp:0 RX wr:4096 sge:1 resp:0 failed: Operation not supported
-[1791993984.144050] [runnervm8k3b6:5455 :0]      ucp_worker.c:1412 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Input/output error
-The following variables have been overridden by the aircraft definition:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The following variables have been overridden by the aircraft definition:
   &#39;aircraft:anti_icing:mass  551.0  lbm
   &#39;aircraft:apu:mass  928.0  lbm
   &#39;aircraft:avionics:mass  1959.0  lbm
@@ -720,9 +718,6 @@ The following variables have been overridden by the aircraft definition:
   &#39;aircraft:vertical_tail:moment_ratio  2.362  unitless
   &#39;aircraft:vertical_tail:volume_coefficient  0.145  unitless
   &#39;mission:takeoff:lift_over_drag  17.354  unitless
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[runnervm8k3b6:05455] pml_ucx.c:313  Error: Failed to create UCP worker
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================
@@ -785,7 +780,9 @@ NL: Newton Converged
 traj.phases.climb.rhs_all.solver_sub
 ====================================
 NL: Newton 0 ; 0.0742113916 1
-NL: Newton 1 ; 1.44200747e-05 0.000194310798
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NL: Newton 1 ; 1.44200747e-05 0.000194310798
 NL: Newton 2 ; 7.27595761e-18 9.80436758e-17
 NL: Newton Converged
 
@@ -828,7 +825,9 @@ traj.phases.descent.rhs_all.solver_sub
 ======================================
 NL: Newton 0 ; 0.123936174 1
 NL: Newton 1 ; 0.00368329355 0.0297192776
-NL: Newton 2 ; 1.81425003e-05 0.000146385836
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NL: Newton 2 ; 1.81425003e-05 0.000146385836
 NL: Newton 3 ; 1.11462393e-18 8.9935319e-18
 NL: Newton Converged
 </pre></div>
