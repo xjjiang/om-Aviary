@@ -37,8 +37,8 @@
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/version_switcher.css?v=516df71e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=3683e473" />
+    <link rel="stylesheet" type="text/css" href="../../_static/version_switcher.css?v=516df71e" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -920,7 +920,12 @@ Wall<span class="w"> </span>clock<span class="w"> </span>time:<span class="w">  
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>test_check_constraints (__main__.TestBattery.test_check_constraints) ... 
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1793148379.367037] [runnervm48cm3:5660 :0]        ib_iface.c:1269 UCX  ERROR mana_0: iface 0x55b6337c59f0 failed to create UD QP TX wr:256 sge:6 inl:64 resp:0 RX wr:4096 sge:1 resp:0 failed: Operation not supported
+[1793148379.367346] [runnervm48cm3:5660 :0]      ucp_worker.c:1412 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Input/output error
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[runnervm48cm3:05660] pml_ucx.c:313  Error: Failed to create UCP worker
+ok
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>test_check_design_variables (__main__.TestBattery.test_check_design_variables) ... 
@@ -1164,12 +1169,12 @@ TypeError: BatteryBuilder.build_pre_mission() got an unexpected keyword argument
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------------------------------------
-Ran 38 tests in 1.915s
+Ran 38 tests in 1.474s
 
 FAILED (errors=3)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;unittest.main.TestProgram at 0x7f32596c4440&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;unittest.main.TestProgram at 0x7fe8ff4a0ad0&gt;
 </pre></div>
 </div>
 </div>
@@ -1394,12 +1399,12 @@ AssertionError: 6 is not an instance of &lt;class &#39;dict&#39;&gt; : the value
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------------------------------------------
-Ran 38 tests in 0.299s
+Ran 38 tests in 0.152s
 
 FAILED (failures=3, errors=3)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;unittest.main.TestProgram at 0x7f3214147890&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;unittest.main.TestProgram at 0x7fe8e7f64910&gt;
 </pre></div>
 </div>
 </div>

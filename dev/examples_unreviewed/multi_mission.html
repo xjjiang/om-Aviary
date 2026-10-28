@@ -37,8 +37,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/version_switcher.css?v=516df71e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3683e473" />
+    <link rel="stylesheet" type="text/css" href="../_static/version_switcher.css?v=516df71e" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -776,6 +776,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1793148058.828230] [runnervm48cm3:4866 :0]        ib_iface.c:1269 UCX  ERROR mana_0: iface 0x555861ca56f0 failed to create UD QP TX wr:256 sge:6 inl:64 resp:0 RX wr:4096 sge:1 resp:0 failed: Operation not supported
+[1793148058.828540] [runnervm48cm3:4866 :0]      ucp_worker.c:1412 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Input/output error
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[runnervm48cm3:04866] pml_ucx.c:313  Error: Failed to create UCP worker
+Warning: Design range 2960.0 differs from target_range 1906.0 (NM).
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The following variables have been overridden by the aircraft definition:
   &#39;aircraft:design:landing_to_takeoff_mass_ratio  0.84  unitless
   &#39;aircraft:engine:mass  [8071.35]  lbm
@@ -792,9 +800,9 @@
   &#39;aircraft:wing:mass  15288.0  lbm
   &#39;aircraft:wing:wetted_area  2423.02  ft**2
   &#39;mission:takeoff:lift_over_drag  17.35  unitless
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The following variables have been overridden by the aircraft definition:
+
+
+The following variables have been overridden by the aircraft definition:
   &#39;aircraft:design:landing_to_takeoff_mass_ratio  0.84  unitless
   &#39;aircraft:engine:mass  [8071.35]  lbm
   &#39;aircraft:fuel:auxiliary_fuel_mass_capacity  0.0  lbm
@@ -823,25 +831,25 @@ Total number of inequality constraints...............:      124
         inequality constraints with only upper bounds:        0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations....: 44
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations....: 45
 
                                    (scaled)                 (unscaled)
-Objective...............:   1.7361570207613289e+02    2.5517140287013332e+04
-Dual infeasibility......:   2.1877088865017633e-07    3.2153816674675885e-05
-Constraint violation....:   4.2395307096020882e-14    4.2395307096020882e-14
-Variable bound violation:   2.2268743293807347e-08    2.2268743293807347e-08
-Complementarity.........:   6.9384994184382794e-08    1.0197848519715736e-05
-Overall NLP error.......:   2.1877088865017633e-07    3.2153816674675885e-05
+Objective...............:   1.7361570208899707e+02    2.5517140288904044e+04
+Dual infeasibility......:   8.2072058295257998e-10    1.2062527755961149e-07
+Constraint violation....:   1.0521250064508104e-11    1.0521250064508104e-11
+Variable bound violation:   2.1964623897474667e-08    2.1964623897474667e-08
+Complementarity.........:   6.1853509164820381e-08    9.0909097030329036e-06
+Overall NLP error.......:   6.1853509164820381e-08    9.0909097030329036e-06
 
 
-Number of objective function evaluations             = 70
-Number of objective gradient evaluations             = 36
-Number of equality constraint evaluations            = 70
-Number of inequality constraint evaluations          = 70
-Number of equality constraint Jacobian evaluations   = 49
-Number of inequality constraint Jacobian evaluations = 49
+Number of objective function evaluations             = 85
+Number of objective gradient evaluations             = 38
+Number of equality constraint evaluations            = 85
+Number of inequality constraint evaluations          = 85
+Number of equality constraint Jacobian evaluations   = 50
+Number of inequality constraint Jacobian evaluations = 50
 Number of Lagrangian Hessian evaluations             = 0
-Total seconds in IPOPT                               = 27.737
+Total seconds in IPOPT                               = 18.648
 
 EXIT: Optimal Solution Found.
 </pre></div>
@@ -858,17 +866,17 @@ EXIT: Optimal Solution Found.
             allowfullscreen
             
         ></iframe>
-        </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mission1.aircraft:design:gross_mass (lbm), [157259.59382508]
-mission2.aircraft:design:gross_mass (lbm), [157259.59382508]
+        </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mission1.aircraft:design:gross_mass (lbm), [157259.59382963]
+mission2.aircraft:design:gross_mass (lbm), [157259.59382963]
  
-mission1.aircraft:design:empty_mass (lbm), [87407.23912288]
-mission2.aircraft:design:empty_mass (lbm), [87407.23912288]
+mission1.aircraft:design:empty_mass (lbm), [87407.23912309]
+mission2.aircraft:design:empty_mass (lbm), [87407.23912309]
  
-mission1.aircraft:landing_gear:main_gear_mass (lbm), [5760.73063569]
-mission2.aircraft:landing_gear:main_gear_mass (lbm), [5760.73063569]
+mission1.aircraft:landing_gear:main_gear_mass (lbm), [5760.73063584]
+mission2.aircraft:landing_gear:main_gear_mass (lbm), [5760.73063584]
  
-mission1.aircraft:landing_gear:nose_gear_mass (lbm), [746.57612866]
-mission2.aircraft:landing_gear:nose_gear_mass (lbm), [746.57612866]
+mission1.aircraft:landing_gear:nose_gear_mass (lbm), [746.57612867]
+mission2.aircraft:landing_gear:nose_gear_mass (lbm), [746.57612867]
  
 mission1.aircraft:design:landing_to_takeoff_mass_ratio (unitless), [0.84]
 mission2.aircraft:design:landing_to_takeoff_mass_ratio (unitless), [0.84]
@@ -882,11 +890,11 @@ mission2.aircraft:furnishings:mass (lbm), [14690.33988]
 mission1.aircraft:crew_and_payload:passenger_service_mass (lbm), [2524.47559296]
 mission2.aircraft:crew_and_payload:passenger_service_mass (lbm), [2524.47559296]
  
-mission1.mission:gross_mass (lbm), [157259.59295078]
-mission2.mission:gross_mass (lbm), [119927.78078176]
+mission1.mission:gross_mass (lbm), [157259.59295316]
+mission2.mission:gross_mass (lbm), [119927.78078329]
  
-mission1.mission:fuel_mass (lbm), [26877.74434335]
-mission2.mission:fuel_mass (lbm), [22795.93217433]
+mission1.mission:fuel_mass (lbm), [26877.74434553]
+mission2.mission:fuel_mass (lbm), [22795.93217566]
  
 mission1.aircraft:crew_and_payload:passenger_mass_total (lbm), [26730.]
 mission2.aircraft:crew_and_payload:passenger_mass_total (lbm), [165.]
@@ -900,8 +908,8 @@ mission2.aircraft:crew_and_payload:cargo_mass (lbm), [4077.]
 mission1.aircraft:crew_and_payload:total_payload_mass (lbm), [36477.]
 mission2.aircraft:crew_and_payload:total_payload_mass (lbm), [4277.]
  
-Objective Value (unitless):  [25517.14028701]
-Aircraft1:GROSS_MASS (lbm) [157259.59382508]
+Objective Value (unitless):  [25517.1402889]
+Aircraft1:GROSS_MASS (lbm) [157259.59382963]
 Aircraft1:SWEEP (deg) [22.99999998]
 </pre></div>
 </div>
@@ -1054,6 +1062,9 @@ prob.model.mission2.list_vars(val=True, units=True, print_arrays=False)
   &#39;mission:takeoff:lift_over_drag  17.35  unitless
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Design range 2960.0 differs from target_range 1906.0 (NM).
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The following variables have been overridden by the aircraft definition:
   &#39;aircraft:design:landing_to_takeoff_mass_ratio  0.84  unitless
   &#39;aircraft:engine:mass  [8071.35]  lbm
@@ -1103,25 +1114,25 @@ Total number of inequality constraints...............:      124
         inequality constraints with only upper bounds:        0
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations....: 44
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations....: 45
 
                                    (scaled)                 (unscaled)
-Objective...............:   1.7361570207613261e+02    2.5517140287013292e+04
-Dual infeasibility......:   2.1871531266192044e-07    3.2145648402613182e-05
-Constraint violation....:   3.8012583551836333e-14    3.8012583551836333e-14
-Variable bound violation:   2.2268743293807347e-08    2.2268743293807347e-08
-Complementarity.........:   6.9384994183730301e-08    1.0197848519619835e-05
-Overall NLP error.......:   2.1871531266192044e-07    3.2145648402613182e-05
+Objective...............:   1.7361570208899730e+02    2.5517140288904076e+04
+Dual infeasibility......:   8.2075388964331873e-10    1.2063017280520226e-07
+Constraint violation....:   1.0521977393562309e-11    1.0521977393562309e-11
+Variable bound violation:   2.1964623897474667e-08    2.1964623897474667e-08
+Complementarity.........:   6.1853509164825397e-08    9.0909097030336423e-06
+Overall NLP error.......:   6.1853509164825397e-08    9.0909097030336423e-06
 
 
-Number of objective function evaluations             = 70
-Number of objective gradient evaluations             = 36
-Number of equality constraint evaluations            = 70
-Number of inequality constraint evaluations          = 70
-Number of equality constraint Jacobian evaluations   = 49
-Number of inequality constraint Jacobian evaluations = 49
+Number of objective function evaluations             = 85
+Number of objective gradient evaluations             = 38
+Number of equality constraint evaluations            = 85
+Number of inequality constraint evaluations          = 85
+Number of equality constraint Jacobian evaluations   = 50
+Number of inequality constraint Jacobian evaluations = 50
 Number of Lagrangian Hessian evaluations             = 0
-Total seconds in IPOPT                               = 27.190
+Total seconds in IPOPT                               = 18.529
 
 EXIT: Optimal Solution Found.
 </pre></div>
@@ -1186,17 +1197,17 @@ EXIT: Optimal Solution Found.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mission1.aircraft:design:gross_mass (lbm), [157259.59382508]
-mission2.aircraft:design:gross_mass (lbm), [157259.59382508]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mission1.aircraft:design:gross_mass (lbm), [157259.59382963]
+mission2.aircraft:design:gross_mass (lbm), [157259.59382963]
  
-mission1.aircraft:design:empty_mass (lbm), [87407.23912288]
-mission2.aircraft:design:empty_mass (lbm), [87407.23912288]
+mission1.aircraft:design:empty_mass (lbm), [87407.23912309]
+mission2.aircraft:design:empty_mass (lbm), [87407.23912309]
  
-mission1.aircraft:landing_gear:main_gear_mass (lbm), [5760.73063569]
-mission2.aircraft:landing_gear:main_gear_mass (lbm), [5760.73063569]
+mission1.aircraft:landing_gear:main_gear_mass (lbm), [5760.73063584]
+mission2.aircraft:landing_gear:main_gear_mass (lbm), [5760.73063584]
  
-mission1.aircraft:landing_gear:nose_gear_mass (lbm), [746.57612866]
-mission2.aircraft:landing_gear:nose_gear_mass (lbm), [746.57612866]
+mission1.aircraft:landing_gear:nose_gear_mass (lbm), [746.57612867]
+mission2.aircraft:landing_gear:nose_gear_mass (lbm), [746.57612867]
  
 mission1.aircraft:design:landing_to_takeoff_mass_ratio (unitless), [0.84]
 mission2.aircraft:design:landing_to_takeoff_mass_ratio (unitless), [0.84]
@@ -1210,11 +1221,11 @@ mission2.aircraft:furnishings:mass (lbm), [14690.33988]
 mission1.aircraft:crew_and_payload:passenger_service_mass (lbm), [2524.47559296]
 mission2.aircraft:crew_and_payload:passenger_service_mass (lbm), [2524.47559296]
  
-mission1.mission:gross_mass (lbm), [157259.59295078]
-mission2.mission:gross_mass (lbm), [119927.78078176]
+mission1.mission:gross_mass (lbm), [157259.59295316]
+mission2.mission:gross_mass (lbm), [119927.78078329]
  
-mission1.mission:fuel_mass (lbm), [26877.74434335]
-mission2.mission:fuel_mass (lbm), [22795.93217433]
+mission1.mission:fuel_mass (lbm), [26877.74434553]
+mission2.mission:fuel_mass (lbm), [22795.93217566]
  
 mission1.aircraft:crew_and_payload:passenger_mass_total (lbm), [26730.]
 mission2.aircraft:crew_and_payload:passenger_mass_total (lbm), [165.]
@@ -1228,8 +1239,8 @@ mission2.aircraft:crew_and_payload:cargo_mass (lbm), [4077.]
 mission1.aircraft:crew_and_payload:total_payload_mass (lbm), [36477.]
 mission2.aircraft:crew_and_payload:total_payload_mass (lbm), [4277.]
  
-Objective Value (unitless):  [25517.14028701]
-Aircraft1:GROSS_MASS (lbm) [157259.59382508]
+Objective Value (unitless):  [25517.1402889]
+Aircraft1:GROSS_MASS (lbm) [157259.59382963]
 Aircraft1:SWEEP (deg) [22.99999998]
 </pre></div>
 </div>

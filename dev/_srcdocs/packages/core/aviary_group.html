@@ -37,8 +37,8 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/version_switcher.css?v=516df71e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=3683e473" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/version_switcher.css?v=516df71e" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -587,13 +587,13 @@ type:
 - the initial altitude of the aircraft with gear extended is constrained to be 50 ft
 - the initial altitude of the aircraft with flaps extended is constrained to be 400 ft</p>
 <p>If solving a sizing problem, a design variable is added for the gross mass of the aircraft,
-and another for the gross mass of the aircraft computed during the mission. A constraint is
-also added to ensure that the residual range is zero.</p>
+and another for the gross mass of the aircraft computed during the mission.</p>
 <p>If solving an OFF_DESIGN_MIN_FUEL problem, only a design variable for the gross mass of the aircraft
-computed during the mission is added. A constraint is also added to ensure that the residual
-range is zero.</p>
+computed during the mission is added.</p>
 <p>In all cases, a design variable is added for the final cruise mass of the aircraft, with no
 upper bound, and a residual mass constraint is added to ensure that the mass balances.</p>
+<p>In all cases, except for OFF_DESIGN_MAX_RANGE, the final Mission.RANGE is constrained to the
+value specified in ‘target_range’ in the phase_info.</p>
 </dd></dl>
 
 <dl class="py method">

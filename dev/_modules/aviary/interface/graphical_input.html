@@ -36,8 +36,8 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/version_switcher.css?v=516df71e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=3683e473" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/version_switcher.css?v=516df71e" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -2342,7 +2342,6 @@
 
     <span class="n">phase_info</span><span class="p">[</span><span class="s1">&#39;post_mission&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;include_landing&#39;</span><span class="p">:</span> <span class="n">user_choices</span><span class="p">[</span><span class="s1">&#39;include_landing&#39;</span><span class="p">],</span>
-        <span class="s1">&#39;constrain_range&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
         <span class="s1">&#39;target_range&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;nmi&#39;</span><span class="p">),</span>
     <span class="p">}</span>
 
@@ -2355,9 +2354,6 @@
                 <span class="s1">&#39;distance_solve_segments&#39;</span><span class="p">:</span> <span class="n">user_choices</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;distance_solve_segments&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
             <span class="p">}</span>
         <span class="p">)</span>
-
-    <span class="c1"># Apply global settings if required</span>
-    <span class="n">phase_info</span><span class="p">[</span><span class="s1">&#39;post_mission&#39;</span><span class="p">][</span><span class="s1">&#39;constrain_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_choices</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;constrain_range&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
     <span class="c1"># Calculate the total range</span>
     <span class="n">total_range</span><span class="p">,</span> <span class="n">range_unit</span> <span class="o">=</span> <span class="n">estimate_total_range_trapezoidal</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">mach_values</span><span class="p">,</span> <span class="n">units</span><span class="p">)</span>
