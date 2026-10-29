@@ -1348,8 +1348,17 @@ They can use the complete set of Aviary’s methods, functionalities, and classe
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1793147958.985726] [runnervm48cm3:4776 :0]        ib_iface.c:1269 UCX  ERROR mana_0: iface 0x560d25ecd750 failed to create UD QP TX wr:256 sge:6 inl:64 resp:0 RX wr:4096 sge:1 resp:0 failed: Operation not supported
-[1793147958.986040] [runnervm48cm3:4776 :0]      ucp_worker.c:1412 UCX  ERROR uct_iface_open(ud_verbs/mana_0:1) failed: Input/output error
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Invalid options for non-optimal control &#39;mach&#39; in phase &#39;climb&#39;: lower, upper, ref
+
+Warning: Invalid options for non-optimal control &#39;altitude&#39; in phase &#39;climb&#39;: lower, upper, ref
+
+Warning: Invalid options for non-optimal control &#39;mach&#39; in phase &#39;cruise&#39;: lower, upper, ref
+
+Warning: Invalid options for non-optimal control &#39;altitude&#39; in phase &#39;cruise&#39;: lower, upper, ref
+
+Warning: Invalid options for non-optimal control &#39;mach&#39; in phase &#39;descent&#39;: lower, upper, ref
+
+Warning: Invalid options for non-optimal control &#39;altitude&#39; in phase &#39;descent&#39;: lower, upper, ref
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The following variables have been overridden by the aircraft definition:
@@ -1369,21 +1378,13 @@ They can use the complete set of Aviary’s methods, functionalities, and classe
   &#39;aircraft:wing:wetted_area  2210.280228  ft**2
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[runnervm48cm3:04776] pml_ucx.c:313  Error: Failed to create UCP worker
-Warning: Invalid options for non-optimal control &#39;mach&#39; in phase &#39;climb&#39;: lower, upper, ref
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception of type: TOO_FEW_DOF in file &quot;../../src/Interfaces/IpIpoptApplication.cpp&quot; at line 662:
+ Exception message: status != TOO_FEW_DEGREES_OF_FREEDOM evaluated false: Too few degrees of freedom (rethrown)!
 
-Warning: Invalid options for non-optimal control &#39;altitude&#39; in phase &#39;climb&#39;: lower, upper, ref
+EXIT: Problem has too few degrees of freedom.
 
-Warning: Invalid options for non-optimal control &#39;mach&#39; in phase &#39;cruise&#39;: lower, upper, ref
 
-Warning: Invalid options for non-optimal control &#39;altitude&#39; in phase &#39;cruise&#39;: lower, upper, ref
-
-Warning: Invalid options for non-optimal control &#39;mach&#39; in phase &#39;descent&#39;: lower, upper, ref
-
-Warning: Invalid options for non-optimal control &#39;altitude&#39; in phase &#39;descent&#39;: lower, upper, ref
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization Problem -- Optimization using pyOpt_sparse
+Optimization Problem -- Optimization using pyOpt_sparse
 ================================================================================
     Objective Function: _objfunc
 
@@ -1563,10 +1564,6 @@ Warning: Invalid options for non-optimal control &#39;altitude&#39; in phase &#3
         170  traj.descent.throttle[path]                             i   0.000000E+00   -5.902633E-02    1.000000E+00         L    9.00000E+100
         171  traj.descent.throttle[path]                             i   0.000000E+00   -7.601254E-02    1.000000E+00         L    9.00000E+100
         172  traj.descent.throttle[path]                             i   0.000000E+00   -8.093719E-02    1.000000E+00         L    9.00000E+100
-Exception of type: TOO_FEW_DOF in file &quot;../../src/Interfaces/IpIpoptApplication.cpp&quot; at line 662:
- Exception message: status != TOO_FEW_DEGREES_OF_FREEDOM evaluated false: Too few degrees of freedom (rethrown)!
-
-EXIT: Problem has too few degrees of freedom.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/total_jac.py:1953: DerivativesWarning:The following design variables have no impact on the constraints or objective at the current design point:
