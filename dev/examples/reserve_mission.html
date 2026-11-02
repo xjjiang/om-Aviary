@@ -700,11 +700,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/om-Aviary/om-Aviary/.openmdao-pixi/.pixi/envs/py313/lib/python3.13/site-packages/openmdao/core/constants.py:16: OMDeprecationWarning:The INF_BOUND sentinel in OpenMDAO is deprecated. Infinite bounds should now be specified using None or +/-np.inf.
-</pre></div>
-</div>
-</div>
 </div>
 <p>Four unique phases were created as part of this reserve mission. An climb segment, two cruises with different restrictions, and a descent segment. Note how they all have the <code class="docutils literal notranslate"><span class="pre">reserve</span></code> option set to True. The climb and descent segments are not noteworthy, and are configured very similar to the main mission.</p>
 <p>For the first cruise phase, the range is fixed to 300 km. This is done by adding <code class="docutils literal notranslate"><span class="pre">&quot;target_distance&quot;:</span> <span class="pre">(300,</span> <span class="pre">'km')</span></code> to that phase’s options.</p>
@@ -759,12 +754,12 @@ Total number of inequality constraints...............:      105
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations....: 30
 
                                    (scaled)                 (unscaled)
-Objective...............:   1.9306323772840290e+00    1.9306323772840290e+00
-Dual infeasibility......:   4.0185536013612466e-08    4.0185536013612466e-08
-Constraint violation....:   2.3173409611049485e-11    2.3173409611049485e-11
+Objective...............:   1.9306323772840275e+00    1.9306323772840275e+00
+Dual infeasibility......:   4.0185538789173429e-08    4.0185538789173429e-08
+Constraint violation....:   2.3173051931610232e-11    2.3173051931610232e-11
 Variable bound violation:   0.0000000000000000e+00    0.0000000000000000e+00
-Complementarity.........:   9.0920529875010005e-08    9.0920529875010005e-08
-Overall NLP error.......:   9.0920529875010005e-08    9.0920529875010005e-08
+Complementarity.........:   9.0920529875026112e-08    9.0920529875026112e-08
+Overall NLP error.......:   9.0920529875026112e-08    9.0920529875026112e-08
 
 
 Number of objective function evaluations             = 42
@@ -774,7 +769,7 @@ Number of inequality constraint evaluations          = 42
 Number of equality constraint Jacobian evaluations   = 32
 Number of inequality constraint Jacobian evaluations = 32
 Number of Lagrangian Hessian evaluations             = 0
-Total seconds in IPOPT                               = 20.427
+Total seconds in IPOPT                               = 20.522
 
 EXIT: Optimal Solution Found.
 </pre></div>
