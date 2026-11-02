@@ -609,11 +609,11 @@ There are two main ways that off-design missions can be run: immediately followi
 <span class="c1"># We will size the aircraft in this example for a longer design range than specified in the default</span>
 <span class="c1"># phase_info</span>
 <span class="n">phase_info</span> <span class="o">=</span> <span class="n">av</span><span class="o">.</span><span class="n">default_energy_state_phase_info</span>
-<span class="n">phase_info</span><span class="p">[</span><span class="s1">&#39;post_mission&#39;</span><span class="p">][</span><span class="s1">&#39;target_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2500.0</span><span class="p">,</span> <span class="s1">&#39;nmi&#39;</span><span class="p">)</span>
+<span class="n">phase_info</span><span class="p">[</span><span class="s1">'post_mission'</span><span class="p">][</span><span class="s1">'target_range'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2500.0</span><span class="p">,</span> <span class="s1">'nmi'</span><span class="p">)</span>
 
 <span class="c1"># Sizing Mission</span>
 <span class="n">design_prob</span> <span class="o">=</span> <span class="n">av</span><span class="o">.</span><span class="n">run_aviary</span><span class="p">(</span>
-    <span class="n">aircraft_data</span><span class="o">=</span><span class="s1">&#39;models/aircraft/advanced_single_aisle/advanced_single_aisle_FLOPS.csv&#39;</span><span class="p">,</span>
+    <span class="n">aircraft_data</span><span class="o">=</span><span class="s1">'models/aircraft/advanced_single_aisle/advanced_single_aisle_FLOPS.csv'</span><span class="p">,</span>
     <span class="n">phase_info</span><span class="o">=</span><span class="n">phase_info</span><span class="p">,</span>
     <span class="n">verbosity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="p">)</span>
@@ -639,14 +639,14 @@ There are two main ways that off-design missions can be run: immediately followi
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># OFF_DESIGN_MAX_RANGE Mission - fixed mass, solve for max range</span>
 <span class="n">off_design_max_range_prob</span> <span class="o">=</span> <span class="n">design_prob</span><span class="o">.</span><span class="n">run_off_design_mission</span><span class="p">(</span>
-    <span class="n">problem_type</span><span class="o">=</span><span class="s1">&#39;off_design_max_range&#39;</span><span class="p">,</span>
+    <span class="n">problem_type</span><span class="o">=</span><span class="s1">'off_design_max_range'</span><span class="p">,</span>
     <span class="n">mission_gross_mass</span><span class="o">=</span><span class="mi">115000</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;off_design_max_range_mission&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'off_design_max_range_mission'</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1"># OFF_DESIGN_MIN_FUEL Mission - fixed range, solve for min fuel</span>
 <span class="n">off_design_min_fuel_prob</span> <span class="o">=</span> <span class="n">design_prob</span><span class="o">.</span><span class="n">run_off_design_mission</span><span class="p">(</span>
-    <span class="n">problem_type</span><span class="o">=</span><span class="s1">&#39;off_design_min_fuel&#39;</span><span class="p">,</span> <span class="n">mission_range</span><span class="o">=</span><span class="mi">1250</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;off_design_min_fuel_mission&#39;</span>
+    <span class="n">problem_type</span><span class="o">=</span><span class="s1">'off_design_min_fuel'</span><span class="p">,</span> <span class="n">mission_range</span><span class="o">=</span><span class="mi">1250</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'off_design_min_fuel_mission'</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -679,31 +679,31 @@ There are two main ways that off-design missions can be run: immediately followi
 --------------
 Design Range = 3500.0 nmi
 Mission Range = 2500.0 nmi
-Fuel Mass = 17778.418654026987 lbm
+Fuel Mass = 17778.418654027002 lbm
 Operating Empty Mass = 72076.71523850303 lbm
 Payload Mass = 30800.0 lbm
-Design Gross Mass = 120655.13389253002 lbm
-Mission Gross Mass = 120655.13389253002 lbm
+Design Gross Mass = 120655.13389253004 lbm
+Mission Gross Mass = 120655.13389253004 lbm
 
 OFF_DESIGN_MAX_RANGE Results
 ---------------
 Design Range = 3500.0 nmi
-Mission Range = 1645.8540302550723 nmi
+Mission Range = 1645.8540302550728 nmi
 Fuel Mass = 12123.284761496965 lbm
 Operating Empty Mass = 72076.71523850303 lbm
 Payload Mass = 30800.0 lbm
-Design Gross Mass = 120655.13389253002 lbm
+Design Gross Mass = 120655.13389253004 lbm
 Mission Gross Mass = 115000.0 lbm
 
 OFF_DESIGN_MIN_FUEL Results
 -----------------
 Design Range = 3500.0 nmi
 Mission Range = 1250.0 nmi
-Fuel Mass = 9548.431203755637 lbm
+Fuel Mass = 9548.431203755623 lbm
 Operating Empty Mass = 72076.71523850303 lbm
 Payload Mass = 30800.0 lbm
-Design Gross Mass = 120655.13389253002 lbm
-Mission Gross Mass = 112425.14644225867 lbm
+Design Gross Mass = 120655.13389253004 lbm
+Mission Gross Mass = 112425.14644225866 lbm
 </pre></div>
 </div>
 </div>
@@ -717,13 +717,13 @@ Mission Gross Mass = 112425.14644225867 lbm
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reloaded_problem</span> <span class="o">=</span> <span class="n">av</span><span class="o">.</span><span class="n">reload_aviary_problem</span><span class="p">(</span>
-    <span class="s1">&#39;advanced_single_aisle_FLOPS_out/reports/sizing_results.json&#39;</span><span class="p">,</span> <span class="n">phase_info</span>
+    <span class="s1">'advanced_single_aisle_FLOPS_out/reports/sizing_results.json'</span><span class="p">,</span> <span class="n">phase_info</span>
 <span class="p">)</span>
 
 <span class="n">new_off_design_max_range_prob</span> <span class="o">=</span> <span class="n">design_prob</span><span class="o">.</span><span class="n">run_off_design_mission</span><span class="p">(</span>
-    <span class="n">problem_type</span><span class="o">=</span><span class="s1">&#39;off_design_max_range&#39;</span><span class="p">,</span>
+    <span class="n">problem_type</span><span class="o">=</span><span class="s1">'off_design_max_range'</span><span class="p">,</span>
     <span class="n">mission_gross_mass</span><span class="o">=</span><span class="mi">115000</span><span class="p">,</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;off_design_max_range_mission&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'off_design_max_range_mission'</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -745,11 +745,11 @@ Mission Gross Mass = 112425.14644225867 lbm
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>New OFF_DESIGN_MAX_RANGE Results
 ---------------
 Design Range = 3500.0 nmi
-Mission Range = 1645.8540302550723 nmi
+Mission Range = 1645.8540302550728 nmi
 Fuel Mass = 12123.284761496965 lbm
 Operating Empty Mass = 72076.71523850303 lbm
 Payload Mass = 30800.0 lbm
-Design Gross Mass = 120655.13389253002 lbm
+Design Gross Mass = 120655.13389253004 lbm
 Mission Gross Mass = 115000.0 lbm
 </pre></div>
 </div>
