@@ -3394,7 +3394,7 @@ add_meta_data(
 )
 
 # TODO the GASP use of this variable is misleading (optional coefficient for additional
-#      furnishing mass, which is activated by Aircraft.Furnishings.USE_EMPERICAL_EQUATION). Create
+#      furnishing mass, which is activated by Aircraft.Furnishings.USE_EMPIRICAL_EQUATION). Create
 #      new variable (Aircraft.Furnishings.MASS_COEFFICIENT?) for GASP side
 add_meta_data(
     Aircraft.Furnishings.MASS_SCALER,
