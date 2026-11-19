@@ -661,12 +661,14 @@
 <span class="c1"># can accept meta_data = merged_meta_data</span>
 
 <span class="n">prob</span><span class="o">.</span><span class="n">add_aviary_group</span><span class="p">(</span><span class="s1">'mission1'</span><span class="p">,</span> <span class="n">aircraft</span><span class="o">=</span><span class="n">aviary_inputs_mission1</span><span class="p">,</span> <span class="n">phase_info</span><span class="o">=</span><span class="n">phase_info_mission1</span><span class="p">)</span>
-<span class="c1"># This method calls load_inputs(), check_and_preprocess_inputs(), and combines meta data.</span>
-<span class="c1"># This can only accept an AviaryValues, .csv are not accepted. You can pass problem_configurator</span>
-<span class="c1"># as an input.</span>
+<span class="c1"># This method calls load_inputs().</span>
+<span class="c1"># You can pass problem_configurator as an input.</span>
 
 <span class="n">prob</span><span class="o">.</span><span class="n">add_aviary_group</span><span class="p">(</span><span class="s1">'mission2'</span><span class="p">,</span> <span class="n">aircraft</span><span class="o">=</span><span class="n">aviary_inputs_mission2</span><span class="p">,</span> <span class="n">phase_info</span><span class="o">=</span><span class="n">phase_info_mission2</span><span class="p">)</span>
 <span class="c1"># Load aircraft in second configuration for same mission</span>
+
+<span class="c1"># Check and run pre-processors.</span>
+<span class="n">prob</span><span class="o">.</span><span class="n">check_and_preprocess_inputs</span><span class="p">()</span>
 
 <span class="n">prob</span><span class="o">.</span><span class="n">build_model</span><span class="p">()</span>
 <span class="c1"># combines four basic commands</span>
@@ -829,12 +831,12 @@ Total number of inequality constraints...............:      124
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations....: 45
 
                                    (scaled)                 (unscaled)
-Objective...............:   1.7361570208899727e+02    2.5517140288904073e+04
-Dual infeasibility......:   8.2079652220746434e-10    1.2063643871955846e-07
-Constraint violation....:   1.0521612351518059e-11    1.0521612351518059e-11
+Objective...............:   1.7361570208899721e+02    2.5517140288904062e+04
+Dual infeasibility......:   8.2077387365776198e-10    1.2063310995255673e-07
+Constraint violation....:   1.0521247309473807e-11    1.0521247309473807e-11
 Variable bound violation:   2.1964623897474667e-08    2.1964623897474667e-08
-Complementarity.........:   6.1853509164810177e-08    9.0909097030314044e-06
-Overall NLP error.......:   6.1853509164810177e-08    9.0909097030314044e-06
+Complementarity.........:   6.1853509164813657e-08    9.0909097030319160e-06
+Overall NLP error.......:   6.1853509164813657e-08    9.0909097030319160e-06
 
 
 Number of objective function evaluations             = 85
@@ -844,7 +846,7 @@ Number of inequality constraint evaluations          = 85
 Number of equality constraint Jacobian evaluations   = 50
 Number of inequality constraint Jacobian evaluations = 50
 Number of Lagrangian Hessian evaluations             = 0
-Total seconds in IPOPT                               = 24.801
+Total seconds in IPOPT                               = 30.962
 
 EXIT: Optimal Solution Found.
 </pre></div>
@@ -914,7 +916,7 @@ Aircraft1:SWEEP (deg) [22.99999998]
 <h2>Theory<a class="headerlink" href="#theory" title="Link to this heading">#</a></h2>
 <p>Each of the two missions in the example are instantiated as a single aviary problems with two AviaryGroups inside of it. Each AviaryGroup has it’s own pre-missions, mission, and post-mission elements. Two get the pre-missions to have the same aircraft design, <code class="docutils literal notranslate"><span class="pre">Aircraft.Design.GROSS_MASS</span></code>, <code class="docutils literal notranslate"><span class="pre">Aircraft.Design.RANGE</span></code>, <code class="docutils literal notranslate"><span class="pre">Aircraft.Wing.SWEEP</span></code>, are promoted out of the pre-missions to a single values. This ensures that the aircrafts in both pre-missions have the same design even though their passenger count and fuel mass are different. There is no post-mission for the example, but if one was required for calculating cost or acoustic constraints, there would need to be two post-mission systems as well.</p>
 <p>Graphs for each mission are created and stored in the run_multimission_example folder. A custom print functions were added to display some important information. The user can see detailed info of each mission result using the <code class="docutils literal notranslate"><span class="pre">prob.model.mission1.list_vars()</span></code> commands listed in the comments at the bottom of the example.</p>
-<p>A number of checks exist in <code class="docutils literal notranslate"><span class="pre">add_aviary_group</span></code> which under the hood calls <code class="docutils literal notranslate"><span class="pre">check_and_preprocess_inputs</span></code> to help the user in the case that incomplete as-flow or design passenger information is provided. This was done to provide backward compatability for older aircraft models which only specify design passenger information.</p>
+<p>After adding all of your Aviary groups, it is important to call <code class="docutils literal notranslate"><span class="pre">check_and_preprocess_inputs</span></code>, which performs a number of checks to help the user in the case that incomplete as-flown or design passenger information is provided. This was done to provide backward compatability for older aircraft models which only specify design passenger information.</p>
 <p>In this example we wanted to compare the same aircraft flying a mission with full passengers vs. a mission with no passengers. However, there are limitations in Aviary’s ability to detect user input vs. default values. So we set the passenger count to one instead. Right now, the only way to set an aircraft to exactly zero passengers is by setting <code class="docutils literal notranslate"><span class="pre">Aircraft.CrewPayload.TOTAL_PAYLOAD_MASS</span></code> to zero plus any <code class="docutils literal notranslate"><span class="pre">Aircraft.CrewPayload.CARGO_MASS</span></code> being carried. This zeros out passenger and baggage mass regardless of what value is input to <code class="docutils literal notranslate"><span class="pre">Aircraft.CrewPayload.NUM_PASSENGERS</span></code>, <code class="docutils literal notranslate"><span class="pre">Aircraft.CrewPayload.NUM_ECONOMY_CLASS</span></code>, <code class="docutils literal notranslate"><span class="pre">Aircraft.CrewPayload.NUM_BUSINESS_CLASS</span></code>, and <code class="docutils literal notranslate"><span class="pre">Aircraft.CrewPayload.NUM_FIRST_CLASS</span></code>. Once issue #610 is resolved the user should be able to set passenger and bags mass to exactly zero by setting <code class="docutils literal notranslate"><span class="pre">Aircraft.CrewPayload.PASSENGER_PAYLOAD_MASS</span></code> to zero.</p>
 </section>
 <section id="best-pratices">
@@ -976,6 +978,8 @@ prob.model.mission2.list_vars(val=True, units=True, print_arrays=False)
 <span class="n">prob</span><span class="o">.</span><span class="n">add_aviary_group</span><span class="p">(</span><span class="s1">'mission1'</span><span class="p">,</span> <span class="n">aircraft</span><span class="o">=</span><span class="n">aviary_inputs_mission1</span><span class="p">,</span> <span class="n">phase_info</span><span class="o">=</span><span class="n">phase_info_mission1</span><span class="p">)</span>
 
 <span class="n">prob</span><span class="o">.</span><span class="n">add_aviary_group</span><span class="p">(</span><span class="s1">'mission2'</span><span class="p">,</span> <span class="n">aircraft</span><span class="o">=</span><span class="n">aviary_inputs_mission2</span><span class="p">,</span> <span class="n">phase_info</span><span class="o">=</span><span class="n">phase_info_mission2</span><span class="p">)</span>
+
+<span class="n">prob</span><span class="o">.</span><span class="n">check_and_preprocess_inputs</span><span class="p">()</span>
 
 <span class="n">prob</span><span class="o">.</span><span class="n">build_model</span><span class="p">()</span>
 </pre></div>
@@ -1112,12 +1116,12 @@ Total number of inequality constraints...............:      124
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Iterations....: 45
 
                                    (scaled)                 (unscaled)
-Objective...............:   1.7361570208899738e+02    2.5517140288904087e+04
-Dual infeasibility......:   8.2073479380729518e-10    1.2062736619773022e-07
-Constraint violation....:   1.0521971883493716e-11    1.0521971883493716e-11
+Objective...............:   1.7361570208899718e+02    2.5517140288904058e+04
+Dual infeasibility......:   8.2080273945640224e-10    1.2063735249873538e-07
+Constraint violation....:   1.0521978771079458e-11    1.0521978771079458e-11
 Variable bound violation:   2.1964623897474667e-08    2.1964623897474667e-08
-Complementarity.........:   6.1853509164821903e-08    9.0909097030331273e-06
-Overall NLP error.......:   6.1853509164821903e-08    9.0909097030331273e-06
+Complementarity.........:   6.1853509164823359e-08    9.0909097030333424e-06
+Overall NLP error.......:   6.1853509164823359e-08    9.0909097030333424e-06
 
 
 Number of objective function evaluations             = 85
@@ -1127,7 +1131,7 @@ Number of inequality constraint evaluations          = 85
 Number of equality constraint Jacobian evaluations   = 50
 Number of inequality constraint Jacobian evaluations = 50
 Number of Lagrangian Hessian evaluations             = 0
-Total seconds in IPOPT                               = 24.734
+Total seconds in IPOPT                               = 30.740
 
 EXIT: Optimal Solution Found.
 </pre></div>
