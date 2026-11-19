@@ -555,28 +555,20 @@
 <span class="sd">    historical_name : dict or None</span>
 <span class="sd">        dictionary of names that the variable held in prior codes</span>
 
-<span class="sd">        Example: {"FLOPS":"WTIN.WNGWT", "GASP":</span>
-<span class="sd">        "INGASP.WWGHT"}</span>
+<span class="sd">        Example: {'GASP': 'INGASP.SWP_FB', 'FLOPS': 'FUSEIN.SWPLE',}</span>
 
-<span class="sd">        NAMELIST naming convention</span>
-<span class="sd">        &amp;&lt;function_name&gt;.&lt;namelist_name&gt;.&lt;var_name&gt;</span>
+<span class="sd">        NAMELIST naming convention:</span>
+<span class="sd">            &lt;namelist_name&gt;.&lt;var_name&gt;</span>
 
-<span class="sd">        Example: &amp;DEFINE.CONFIN.GW</span>
-<span class="sd">            represents the GW variable of the CONFIN namelist as defined in</span>
-<span class="sd">            the DEFINE subroutine</span>
+<span class="sd">        Example: FUSEIN.SWPLE</span>
+<span class="sd">            represents the SWPLE variable of the FUSEIN namelist as defined in</span>
+<span class="sd">            the DEFINE subroutine of FLOPS</span>
 
-<span class="sd">        COMMON block naming convention, including aliases:</span>
-<span class="sd">        &lt;block_name&gt;.&lt;var_name&gt;</span>
+<span class="sd">        All other variables:</span>
+<span class="sd">            &lt;var_name&gt;</span>
 
-<span class="sd">        Example: CONFIG.GW</span>
-<span class="sd">            represents the GW variable of the CONFIG common block</span>
-
-<span class="sd">        Local variable naming convention, including equivalence statements, parameters,</span>
-<span class="sd">        and other local declarations:</span>
-<span class="sd">        ~&lt;function_name&gt;.&lt;var_name&gt;</span>
-
-<span class="sd">        Example: ~ANALYS.GWTOL</span>
-<span class="sd">            represents the GWTOL variable of the ANALYS subroutine</span>
+<span class="sd">        Example: WCAN</span>
+<span class="sd">            represents the WCAN variable in FLOPS</span>
 
 <span class="sd">    _check_unique : bool</span>
 <span class="sd">        private use only flag that tells whether to check the meta_data for the</span>
